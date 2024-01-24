@@ -1,0 +1,7 @@
+@charName=kokomi
+defaultTouchCursor=./pic_icon/kokomi_fish_icon.png
+defaultClickCursor=./pic_icon/kokomi_water_icon.png
+buttonStyle=background:#BFFFFF;font:18px '微軟正黑體';border-radius:35px;
+buttonStyle2=background:#E4BFFF;font:18px '微軟正黑體';border-radius:35px;
+defaultTableImage=./pic_kokomi/kokomi_serious_01.png
+defaultMoveImage=./pic_kokomi/kokomi_tired_01.png
