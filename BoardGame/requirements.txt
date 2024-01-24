@@ -10,9 +10,6 @@ BasicHttpServer==1.0.0
 beautifulsoup4==4.9.3
 cached-property==1.5.2
 cachetools==4.2.0
-Cconv==0.1
-Cconv112==0.1
-Cconvolution==0.1
 certifi==2020.12.5
 cffi==1.14.4
 chardet==3.0.4
