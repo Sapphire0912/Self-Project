@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Question/國語文能力測驗/QuestionData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Question/教育理念與實務/QuestionData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Question/數學能力測驗/QuestionData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Question/課程教學與評量/QuestionData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_handleAnswerPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handleAnswerPDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +41,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Question/課程教學與評量" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\課程教學與評量" />
+      <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\數學能力測驗" />
+      <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\教育理念與實務" />
+    </key>
   </component>
   <component name="RunManager" selected="Python._handleAnswerPDF (1)">
     <configuration name="QuestionData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -206,16 +211,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
