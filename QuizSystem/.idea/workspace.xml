@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Answer/國語文能力測驗/Answers_國語文能力測驗.json" beforeDir="false" afterPath="$PROJECT_DIR$/Answer/國語文能力測驗/Answers_國語文能力測驗.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Answer/學習者發展與適性輔導/Answers_學習者發展與適性輔導.json" beforeDir="false" afterPath="$PROJECT_DIR$/Answer/學習者發展與適性輔導/Answers_學習者發展與適性輔導.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Answer/教育理念與實務/Answers_教育理念與實務.json" beforeDir="false" afterPath="$PROJECT_DIR$/Answer/教育理念與實務/Answers_教育理念與實務.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Answer/數學能力測驗/Answers_數學能力測驗.json" beforeDir="false" afterPath="$PROJECT_DIR$/Answer/數學能力測驗/Answers_數學能力測驗.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/課程教學與評量/Answers_課程教學與評量.json" beforeDir="false" afterPath="$PROJECT_DIR$/Answer/課程教學與評量/Answers_課程教學與評量.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
