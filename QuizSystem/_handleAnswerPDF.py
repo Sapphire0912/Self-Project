@@ -29,7 +29,6 @@ subjectsPath = [AnswerDir + path + "/" for path in os.listdir(AnswerDir)]
 #     jsonFile = open(subject + "Answers.json", 'w')
 #     json.dump(answerDict, jsonFile)
 
-
 targetPath = "./Question/學習者發展與適性輔導/112_學習者發展與適性輔導.pdf"
 pdf = pdfplumber.open(targetPath)
 page = pdf.pages[5]

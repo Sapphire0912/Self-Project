@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Question/學習者發展與適性輔導/QuestionData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QuizUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Question/國語文能力測驗/QuestionData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Question/教育理念與實務/QuestionData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Question/數學能力測驗/QuestionData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Question/課程教學與評量/QuestionData.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_handleAnswerPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handleAnswerPDF.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +41,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Question/課程教學與評量" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python._handleAnswerPDF (1)">
@@ -200,6 +202,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
