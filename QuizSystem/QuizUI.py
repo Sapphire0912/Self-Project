@@ -26,6 +26,9 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 設定輸入框的變數
         self.description = QtWidgets.QTextEdit(self)
+
+        # 設定測驗科目的標籤
+        self.subject_title = QtWidgets.QLabel(self)
         # -----
 
         self._windows_setting()
@@ -67,7 +70,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.large.setGeometry(start_x, start_y + group_h * 3, group_w, group_h)
         self.label_size.setStyleSheet('''
             border: solid black;
-            border-width: 0px 3px 0px 0px;
+            border-width: 3px 3px 3px 3px;
         ''')
 
         self.label_size.setFont(QFont('DFkai-sb', 18))
@@ -82,6 +85,20 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setGeometry(int(start_x // 2), desc_y, desc_w, desc_h)
 
         self.description.setFont(QFont('DFkai-sb', 14))
+        self.description.setStyleSheet('''
+            border: solid black;
+            border-width: 3px 3px 3px 3px;
+        ''')
+
+        # 4. 設定測驗科目的標籤
+        subject_x = int(self.width() // 2)
+        subject_h = 30
+        self.subject_title.setGeometry(subject_x - int(start_x // 2), desc_y, subject_x, subject_h)
+        self.subject_title.setFont(QFont('DFkai-sb', 18))
+        self.subject_title.setStyleSheet('''
+            border: solid black;
+            border-width: 3px 3px 3px 3px;
+        ''')
 
     def ui(self):
         # 設定初始畫面的標題
@@ -105,6 +122,9 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setPlainText('''操作說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選開始測驗的按鈕\n\n版本說明：\n''')
         pass
+
+        # subject title text
+        self.subject_title.setText('測驗科目：')
 
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
