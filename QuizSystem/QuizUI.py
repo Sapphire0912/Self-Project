@@ -41,6 +41,21 @@ class InitialWindow(QtWidgets.QWidget):
         # 設定選擇年份的下拉式選單 & 標籤變數
         self.years_label = QtWidgets.QLabel(self)
         self.years_menu = QtWidgets.QComboBox(self)
+
+        # 設定進入測驗的按鈕
+        self.enter_test_btn = QtWidgets.QPushButton(self)
+
+        # 顯示考試資訊的標籤
+        self.test_info = QtWidgets.QLabel(self)
+
+        # 各項科目的數值設定 (key 等於 subjects_group.checkedId())
+        self.values = {
+            10: {"subject": "國語文能力測驗", "time": '100'},
+            20: {"subject": "數學能力測驗", "time": '80'},
+            30: {"subject": "教育理念與實務", "time": '80'},
+            40: {"subject": "學習者發展與適性輔導", "time": '80'},
+            50: {"subject": "課程教學與評量", "time": '80'}
+        }
         # -----
 
         self._windows_setting()
@@ -140,6 +155,18 @@ class InitialWindow(QtWidgets.QWidget):
         self.years_menu.setGeometry(subject_w + subject_x, subject_btn_y + 10, int(subject_w * 3 // 4), subject_h)
         self.years_menu.setFont(QFont('Times New Roman', 14))
 
+        # 8. 設定進入測驗按鈕位置
+        test_btn_x = subject_w + subject_x + int(subject_w * 1 // 4)
+        test_btn_h = 40
+        self.enter_test_btn.setGeometry(test_btn_x, self.height() - test_btn_h * 3, int(subject_w // 2), test_btn_h)
+        self.enter_test_btn.setFont(ch_font)
+
+        # 9. 顯示測驗考卷資訊
+        test_info_y = int(self.height() * 0.7)
+        test_info_w = int(subject_x * 3 // 4)
+        self.test_info.setGeometry(subject_x, test_info_y, test_info_w, self.height() - test_info_y)
+        self.test_info.setFont(ch_font)
+
     def ui(self):
         # 設定初始畫面的標題
         self.init_title.setText('教  檢  歷  屆  試  題  測  驗  系  統')
@@ -188,6 +215,11 @@ class InitialWindow(QtWidgets.QWidget):
         # years menu item
         # 數學僅從 103 年開始考 和 subject 選擇相關, 因此直接在 _subject_select_event 設定
 
+        # enter test button
+        self.enter_test_btn.setText("進入測驗")
+
+        # test information label(和 subject 有關係, 在 _subject_select_event 設定)
+
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
         if select_id == 1:
@@ -197,17 +229,22 @@ class InitialWindow(QtWidgets.QWidget):
         elif select_id == 3:
             self.setFixedSize(1440, 960)
 
-        self._windows_setting()
+        self._windows_setting()  # 重新整理視窗介面
+
+    def _year_select_event(self):
+        select_id = self.subjects_group.checkedId()
+
+        # test information label
+        test_subject, test_time = self.values[select_id]["subject"], self.values[select_id]["time"]
+        if self.years_menu.currentIndex == 0:
+            test_range = " "
+        else:
+            test_range = self.years_menu.currentText()
+        self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗範圍：{test_range} 年')
+        pass
 
     def _subject_select_event(self):
         select_id = self.subjects_group.checkedId()
-        _value = {
-            10: "國語文能力測驗",
-            20: "數學能力測驗",
-            30: "教育理念與實務",
-            40: "學習者發展與適性輔導",
-            50: "課程教學與評量"
-        }
 
         # 設定選擇範圍下拉式選單的值, 數學僅從 103 年開始
         if select_id == 20:
@@ -222,7 +259,7 @@ class InitialWindow(QtWidgets.QWidget):
 
         self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
         self.years_menu.addItems(lst)
-        pass
+        self.years_menu.currentIndexChanged.connect(self._year_select_event)
 
 
 if __name__ == '__main__':
