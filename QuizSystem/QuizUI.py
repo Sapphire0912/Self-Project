@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5.QtGui import QFont
 import sys
 import cv2
 
@@ -42,10 +43,11 @@ class InitialWindow(QtWidgets.QWidget):
         # - 標題背景
         # - Style
         self.init_title.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignJustify)
+        self.init_title.setFont(QFont('標楷體'))
         self.init_title.setStyleSheet(
             '''
             color: black;
-            font-size: 72px;
+            font-size: 76px;
             font-weight: bold;
             border: solid black;
             border-width: 0px 0px 2px 0px;
@@ -56,25 +58,24 @@ class InitialWindow(QtWidgets.QWidget):
         start_x = int(self.width() * 0.05)
         start_y = int(self.height() * 0.8)
         group_w = int(self.width() // 2) - start_x
-        group_h = 50
+        group_h = int(self.height() - start_y) // 5
 
-        self.small.setGeometry(start_x, start_y, group_w, group_h)
-        self.median.setGeometry(start_x, start_y + group_h, group_w, group_h)
-        self.large.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
+        self.label_size.setGeometry(int(start_x // 2), start_y, group_w, group_h)
+        self.small.setGeometry(start_x, start_y + group_h, group_w, group_h)
+        self.median.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
+        self.large.setGeometry(start_x, start_y + group_h * 3, group_w, group_h)
 
-        style = '''
-            font-size: 16px;
-        '''
-
-        self.small.setStyleSheet(style)
-        self.median.setStyleSheet(style)
-        self.large.setStyleSheet(style)
+        self.label_size.setFont(QFont('DFkai-sb', 18))
+        self.small.setFont(QFont('Times New Roman', 14))
+        self.median.setFont(QFont('Times New Roman', 14))
+        self.large.setFont(QFont('Times New Roman', 14))
 
     def ui(self):
         # 設定初始畫面的標題
-        self.init_title.setText('教檢測驗系統')
+        self.init_title.setText('教  檢  測  驗  系  統')
 
         # windows size select
+        self.label_size.setText('選擇視窗大小：')
         self.small.setChecked(True)
         self.small.setText('1200x768')
         self.median.setText('1600x900')
