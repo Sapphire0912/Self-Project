@@ -29,6 +29,14 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 設定測驗科目的標籤
         self.subject_title = QtWidgets.QLabel(self)
+
+        # 設定 5 個科目的按鈕變數
+        self.subjects_group = QtWidgets.QButtonGroup(self)
+        self.chinese_btn = QtWidgets.QRadioButton(self)
+        self.math_btn = QtWidgets.QRadioButton(self)
+        self.espr_btn = QtWidgets.QRadioButton(self)   # 教育理念與實務
+        self.esdng_btn = QtWidgets.QRadioButton(self)  # 學習者發展與適性輔導
+        self.escnt_btn = QtWidgets.QRadioButton(self)  # 課程教學與評量
         # -----
 
         self._windows_setting()
@@ -40,6 +48,10 @@ class InitialWindow(QtWidgets.QWidget):
         screen_width, screen_height = screen.width(), screen.height()
         width, height = self.width(), self.height()
         self.move((screen_width - width) // 2, (screen_height - height) // 2)
+
+        # QSS 設定
+        ch_font = QFont('標楷體', 14)
+        num_font = QFont('Times New Roman', 14)
 
         # 利用視窗大小, 計算每個元件的相對位置 & 設定 CSS 樣式
         # 1. 初始畫面標題
@@ -68,15 +80,15 @@ class InitialWindow(QtWidgets.QWidget):
         self.small.setGeometry(start_x, start_y + group_h, group_w, group_h)
         self.median.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
         self.large.setGeometry(start_x, start_y + group_h * 3, group_w, group_h)
-        self.label_size.setStyleSheet('''
-            border: solid black;
-            border-width: 3px 3px 3px 3px;
-        ''')
+        # self.label_size.setStyleSheet('''
+        #     border: solid black;
+        #     border-width: 3px 3px 3px 3px;
+        # ''')
 
         self.label_size.setFont(QFont('DFkai-sb', 18))
-        self.small.setFont(QFont('Times New Roman', 14))
-        self.median.setFont(QFont('Times New Roman', 14))
-        self.large.setFont(QFont('Times New Roman', 14))
+        self.small.setFont(num_font)
+        self.median.setFont(num_font)
+        self.large.setFont(num_font)
 
         # 3. 設定輸入框的大小和位置
         desc_y = init_title_h + 20  # 在標題底下的 20 px
@@ -84,21 +96,37 @@ class InitialWindow(QtWidgets.QWidget):
         desc_h = int(self.height() * 2 // 4)
         self.description.setGeometry(int(start_x // 2), desc_y, desc_w, desc_h)
 
-        self.description.setFont(QFont('DFkai-sb', 14))
-        self.description.setStyleSheet('''
-            border: solid black;
-            border-width: 3px 3px 3px 3px;
-        ''')
+        self.description.setFont(ch_font)
+        # self.description.setStyleSheet('''
+        #     border: solid black;
+        #     border-width: 3px 3px 3px 3px;
+        # ''')
 
         # 4. 設定測驗科目的標籤
-        subject_x = int(self.width() // 2)
+        subject_x = int(self.width() // 2) - int(start_x // 4)
         subject_h = 30
-        self.subject_title.setGeometry(subject_x - int(start_x // 2), desc_y, subject_x, subject_h)
+        self.subject_title.setGeometry(subject_x, desc_y, subject_x // 2, subject_h)
         self.subject_title.setFont(QFont('DFkai-sb', 18))
-        self.subject_title.setStyleSheet('''
-            border: solid black;
-            border-width: 3px 3px 3px 3px;
-        ''')
+        # self.subject_title.setStyleSheet('''
+        #     border: solid black;
+        #     border-width: 3px 3px 3px 3px;
+        # ''')
+
+        # 5. 設定測驗科目選單的位置
+        subject_btn_w = int(subject_x // 2)
+        subject_btn_y = init_title_h + 50
+        self.chinese_btn.setGeometry(subject_x, subject_btn_y, subject_btn_w, subject_h)
+        self.math_btn.setGeometry(subject_x, subject_btn_y + subject_h, subject_btn_w, subject_h)
+        self.espr_btn.setGeometry(subject_x, subject_btn_y + 2 * subject_h, subject_btn_w, subject_h)
+        self.esdng_btn.setGeometry(subject_x, subject_btn_y + 3 * subject_h, subject_btn_w, subject_h)
+        self.escnt_btn.setGeometry(subject_x, subject_btn_y + 4 * subject_h, subject_btn_w, subject_h)
+
+        self.chinese_btn.setFont(ch_font)
+        self.math_btn.setFont(ch_font)
+        self.espr_btn.setFont(ch_font)
+        self.esdng_btn.setFont(ch_font)
+        self.escnt_btn.setFont(ch_font)
+
 
     def ui(self):
         # 設定初始畫面的標題
@@ -126,6 +154,21 @@ class InitialWindow(QtWidgets.QWidget):
         # subject title text
         self.subject_title.setText('測驗科目：')
 
+        # subjects select
+        self.chinese_btn.setText('國語文能力測驗')
+        self.math_btn.setText('數學能力測驗')
+        self.espr_btn.setText('教育理念與實務')
+        self.esdng_btn.setText('學習者發展與適性輔導')
+        self.escnt_btn.setText('課程教學與評量')
+
+        self.subjects_group.addButton(self.chinese_btn, id=10)
+        self.subjects_group.addButton(self.math_btn, id=20)
+        self.subjects_group.addButton(self.espr_btn, id=30)
+        self.subjects_group.addButton(self.esdng_btn, id=40)
+        self.subjects_group.addButton(self.escnt_btn, id=50)
+
+        self.subjects_group.buttonClicked.connect(self._subject_select_event)
+
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
         if select_id == 1:
@@ -136,6 +179,9 @@ class InitialWindow(QtWidgets.QWidget):
             self.setFixedSize(1600, 900)
 
         self._windows_setting()
+
+    def _subject_select_event(self):
+        pass
 
 
 if __name__ == '__main__':
