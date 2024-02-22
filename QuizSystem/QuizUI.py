@@ -165,7 +165,7 @@ class InitialWindow(QtWidgets.QWidget):
         test_info_y = int(self.height() * 0.7)
         test_info_w = int(subject_x * 3 // 4)
         self.test_info.setGeometry(subject_x, test_info_y, test_info_w, self.height() - test_info_y)
-        self.test_info.setFont(ch_font)
+        self.test_info.setFont(QFont('標楷體', 13))
 
     def ui(self):
         # 設定初始畫面的標題
