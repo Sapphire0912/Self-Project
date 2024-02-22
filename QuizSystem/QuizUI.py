@@ -35,13 +35,11 @@ class InitialWindow(QtWidgets.QWidget):
         width, height = self.width(), self.height()
         self.move((screen_width - width) // 2, (screen_height - height) // 2)
 
-        # 利用視窗大小, 計算每個元件的相對位置
+        # 利用視窗大小, 計算每個元件的相對位置 & 設定 CSS 樣式
         # 1. 初始畫面標題
         init_title_h = int(height // 4)
         self.init_title.setGeometry(0, 0, width, init_title_h)
 
-        # - 標題背景
-        # - Style
         self.init_title.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignJustify)
         self.init_title.setFont(QFont('標楷體'))
         self.init_title.setStyleSheet(
@@ -54,7 +52,7 @@ class InitialWindow(QtWidgets.QWidget):
             '''
         )
 
-        # 調整螢幕尺寸大小的按鈕 & 標籤
+        # 2. 調整螢幕尺寸大小的按鈕 & 標籤
         start_x = int(self.width() * 0.05)
         start_y = int(self.height() * 0.8)
         group_w = int(self.width() // 2) - start_x
