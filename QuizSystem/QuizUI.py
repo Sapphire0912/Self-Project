@@ -12,7 +12,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
 
         # 初始螢幕視窗大小(固定)
-        self.setFixedSize(1200, 768)
+        self.setFixedSize(960, 720)
 
         # ----- 參數設定 -----
         self.init_title = QtWidgets.QLabel(self)
@@ -23,6 +23,9 @@ class InitialWindow(QtWidgets.QWidget):
         self.median = QtWidgets.QRadioButton(self)
         self.large = QtWidgets.QRadioButton(self)
         self.label_size = QtWidgets.QLabel(self)
+
+        # 設定輸入框的變數
+        self.description = QtWidgets.QTextEdit(self)
         # -----
 
         self._windows_setting()
@@ -55,18 +58,30 @@ class InitialWindow(QtWidgets.QWidget):
         # 2. 調整螢幕尺寸大小的按鈕 & 標籤
         start_x = int(self.width() * 0.05)
         start_y = int(self.height() * 0.8)
-        group_w = int(self.width() // 2) - start_x
+        group_w = int(self.width() // 4) - start_x
         group_h = int(self.height() - start_y) // 5
 
         self.label_size.setGeometry(int(start_x // 2), start_y, group_w, group_h)
         self.small.setGeometry(start_x, start_y + group_h, group_w, group_h)
         self.median.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
         self.large.setGeometry(start_x, start_y + group_h * 3, group_w, group_h)
+        self.label_size.setStyleSheet('''
+            border: solid black;
+            border-width: 0px 3px 0px 0px;
+        ''')
 
         self.label_size.setFont(QFont('DFkai-sb', 18))
         self.small.setFont(QFont('Times New Roman', 14))
         self.median.setFont(QFont('Times New Roman', 14))
         self.large.setFont(QFont('Times New Roman', 14))
+
+        # 3. 設定輸入框的大小和位置
+        desc_y = init_title_h + 20  # 在標題底下的 20 px
+        desc_w = int(self.width() // 2) - start_x  # 和 btn group 對齊
+        desc_h = int(self.height() * 2 // 4)
+        self.description.setGeometry(int(start_x // 2), desc_y, desc_w, desc_h)
+
+        self.description.setFont(QFont('DFkai-sb', 14))
 
     def ui(self):
         # 設定初始畫面的標題
@@ -75,25 +90,30 @@ class InitialWindow(QtWidgets.QWidget):
         # windows size select
         self.label_size.setText('選擇視窗大小：')
         self.small.setChecked(True)
-        self.small.setText('1200x768')
-        self.median.setText('1600x900')
-        self.large.setText('1920x1080')
+        self.small.setText('960x720')
+        self.median.setText('1200x768')
+        self.large.setText('1600x900')
 
         self.winsize_group.addButton(self.small, id=1)
         self.winsize_group.addButton(self.median, id=2)
         self.winsize_group.addButton(self.large, id=3)
 
         self.winsize_group.buttonClicked.connect(self._win_select_event)
+
+        # description text
+        self.description.setReadOnly(True)  # Read Only
+        self.description.setPlainText('''操作說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
+3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選開始測驗的按鈕\n\n版本說明：\n''')
         pass
 
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
         if select_id == 1:
-            self.setFixedSize(1280, 800)
+            self.setFixedSize(960, 720)
         elif select_id == 2:
-            self.setFixedSize(1600, 900)
+            self.setFixedSize(1200, 768)
         elif select_id == 3:
-            self.setFixedSize(1920, 1080)
+            self.setFixedSize(1600, 900)
 
         self._windows_setting()
 
