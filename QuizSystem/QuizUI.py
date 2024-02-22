@@ -37,6 +37,10 @@ class InitialWindow(QtWidgets.QWidget):
         self.espr_btn = QtWidgets.QRadioButton(self)   # 教育理念與實務
         self.esdng_btn = QtWidgets.QRadioButton(self)  # 學習者發展與適性輔導
         self.escnt_btn = QtWidgets.QRadioButton(self)  # 課程教學與評量
+
+        # 設定選擇年份的下拉式選單 & 標籤變數
+        self.years_label = QtWidgets.QLabel(self)
+        self.years_menu = QtWidgets.QComboBox(self)
         # -----
 
         self._windows_setting()
@@ -63,7 +67,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.init_title.setStyleSheet(
             '''
             color: black;
-            font-size: 76px;
+            font-size: 48px;
             font-weight: bold;
             border: solid black;
             border-width: 0px 0px 2px 0px;
@@ -104,8 +108,9 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 4. 設定測驗科目的標籤
         subject_x = int(self.width() // 2) - int(start_x // 4)
+        subject_w = int(subject_x // 2)
         subject_h = 30
-        self.subject_title.setGeometry(subject_x, desc_y, subject_x // 2, subject_h)
+        self.subject_title.setGeometry(subject_x, desc_y, subject_w, subject_h)
         self.subject_title.setFont(QFont('DFkai-sb', 18))
         # self.subject_title.setStyleSheet('''
         #     border: solid black;
@@ -127,17 +132,24 @@ class InitialWindow(QtWidgets.QWidget):
         self.esdng_btn.setFont(ch_font)
         self.escnt_btn.setFont(ch_font)
 
+        # 6. 設定選擇範圍的標籤
+        self.years_label.setGeometry(subject_w + subject_x, desc_y, subject_w, subject_h)
+        self.years_label.setFont(QFont('DFkai-sb', 18))
+
+        # 7. 設定下拉式選單位置
+        self.years_menu.setGeometry(subject_w + subject_x, subject_btn_y + 10, int(subject_w * 3 // 4), subject_h)
+        self.years_menu.setFont(QFont('Times New Roman', 14))
 
     def ui(self):
         # 設定初始畫面的標題
-        self.init_title.setText('教  檢  測  驗  系  統')
+        self.init_title.setText('教  檢  歷  屆  試  題  測  驗  系  統')
 
         # windows size select
         self.label_size.setText('選擇視窗大小：')
         self.small.setChecked(True)
         self.small.setText('960x720')
         self.median.setText('1200x768')
-        self.large.setText('1600x900')
+        self.large.setText('1440x960')
 
         self.winsize_group.addButton(self.small, id=1)
         self.winsize_group.addButton(self.median, id=2)
@@ -147,7 +159,7 @@ class InitialWindow(QtWidgets.QWidget):
 
         # description text
         self.description.setReadOnly(True)  # Read Only
-        self.description.setPlainText('''操作說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
+        self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選開始測驗的按鈕\n\n版本說明：\n''')
         pass
 
@@ -168,6 +180,13 @@ class InitialWindow(QtWidgets.QWidget):
         self.subjects_group.addButton(self.escnt_btn, id=50)
 
         self.subjects_group.buttonClicked.connect(self._subject_select_event)
+        # print(self.subjects_group.checkedId())  # 全部都沒選擇 checkedId 的值 = -1
+
+        # years title text
+        self.years_label.setText('選擇範圍：')
+
+        # years menu item
+        # 數學僅從 103 年開始考 和 subject 選擇相關, 因此直接在 _subject_select_event 設定
 
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
@@ -176,11 +195,33 @@ class InitialWindow(QtWidgets.QWidget):
         elif select_id == 2:
             self.setFixedSize(1200, 768)
         elif select_id == 3:
-            self.setFixedSize(1600, 900)
+            self.setFixedSize(1440, 960)
 
         self._windows_setting()
 
     def _subject_select_event(self):
+        select_id = self.subjects_group.checkedId()
+        _value = {
+            10: "國語文能力測驗",
+            20: "數學能力測驗",
+            30: "教育理念與實務",
+            40: "學習者發展與適性輔導",
+            50: "課程教學與評量"
+        }
+
+        # 設定選擇範圍下拉式選單的值, 數學僅從 103 年開始
+        if select_id == 20:
+            lst = [str(i) for i in range(103, 113)]
+        else:
+            lst = [str(i) for i in range(94, 113)]
+            lst.append("103 ~ 112")
+
+        lst.insert(0, "請選擇年份")
+        lst.append("94 ~ 102")
+        lst.append("全選")
+
+        self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
+        self.years_menu.addItems(lst)
         pass
 
 
