@@ -236,7 +236,7 @@ class InitialWindow(QtWidgets.QWidget):
 
         # test information label
         test_subject, test_time = self.values[select_id]["subject"], self.values[select_id]["time"]
-        if self.years_menu.currentIndex == 0:
+        if self.years_menu.currentIndex() == 0:
             test_range = " "
         else:
             test_range = self.years_menu.currentText()
