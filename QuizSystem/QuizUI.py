@@ -15,11 +15,13 @@ class InitialWindow(QtWidgets.QWidget):
 
         # ----- 參數設定 -----
         self.init_title = QtWidgets.QLabel(self)
+
         # 調整視窗大小按鈕變數
         self.winsize_group = QtWidgets.QButtonGroup(self)
         self.small = QtWidgets.QRadioButton(self)
         self.median = QtWidgets.QRadioButton(self)
         self.large = QtWidgets.QRadioButton(self)
+        self.label_size = QtWidgets.QLabel(self)
         # -----
 
         self._windows_setting()
@@ -50,6 +52,7 @@ class InitialWindow(QtWidgets.QWidget):
             '''
         )
 
+        # 調整螢幕尺寸大小的按鈕 & 標籤
         start_x = int(self.width() * 0.05)
         start_y = int(self.height() * 0.8)
         group_w = int(self.width() // 2) - start_x
@@ -58,6 +61,14 @@ class InitialWindow(QtWidgets.QWidget):
         self.small.setGeometry(start_x, start_y, group_w, group_h)
         self.median.setGeometry(start_x, start_y + group_h, group_w, group_h)
         self.large.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
+
+        style = '''
+            font-size: 16px;
+        '''
+
+        self.small.setStyleSheet(style)
+        self.median.setStyleSheet(style)
+        self.large.setStyleSheet(style)
 
     def ui(self):
         # 設定初始畫面的標題
