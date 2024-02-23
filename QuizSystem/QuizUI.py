@@ -176,6 +176,7 @@ class InitialWindow(QtWidgets.QWidget):
         # ''')
 
         # 10. 設定 QMessageBox 位置
+        self.test_msgbox.setStyleSheet('''font-size: 16px;''')
 
     def ui(self):
         # 設定初始畫面的標題
@@ -229,6 +230,13 @@ class InitialWindow(QtWidgets.QWidget):
         # enter test button
         self.enter_test_btn.setText("進入測驗")
         self.enter_test_btn.setEnabled(False)  # 預設按鈕不可點
+
+        # 新增自訂義按鈕
+        sure = QtWidgets.QPushButton("確定")
+        cancel = QtWidgets.QPushButton("取消")
+        self.test_msgbox.addButton(sure, QtWidgets.QMessageBox.AcceptRole)
+        self.test_msgbox.addButton(cancel, QtWidgets.QMessageBox.RejectRole)
+
         self.enter_test_btn.clicked.connect(self._enter_test_event)
 
     def _win_select_event(self):
@@ -275,12 +283,14 @@ class InitialWindow(QtWidgets.QWidget):
         self.years_menu.currentIndexChanged.connect(self._year_select_event)
 
     def _enter_test_event(self):
-        select_id = self.subjects_group.checkedId()
-        test_subject, test_time = self.values[select_id]["subject"], self.values[select_id]["time"]
-        test_range = self.years_menu.currentText()
+        text = self.test_info.text()
 
-        text = f'''作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗範圍：{test_range} 年'''
-        self.test_msgbox.information(self, '測驗資訊', text)
+        self.test_msgbox.setWindowTitle('測驗資訊')
+        self.test_msgbox.setIcon(QtWidgets.QMessageBox.Information)
+        self.test_msgbox.setText(text)
+
+        result = self.test_msgbox.exec_()
+        print(result)
         pass
 
 
