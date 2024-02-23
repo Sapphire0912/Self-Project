@@ -164,6 +164,9 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 設定 Message Box 變數
         self.test_msgbox = QtWidgets.QMessageBox(self)
+
+        # 新視窗的變數
+        self.quiz_windows = None
         # -----
 
         self._windows_setting()
@@ -404,13 +407,37 @@ class InitialWindow(QtWidgets.QWidget):
 
         result = self.test_msgbox.exec_()
 
-        # 在這邊會銜接開啟測驗視窗,
+        # 在這邊會銜接開啟測驗視窗
         if result == 0:
-            pass
-        pass
+            # 將初始視窗設定的參數傳給第二個視窗
+            self.quiz_windows = QuizWindows(
+                windows_size=(self.width(), self.height()),
+                subject_info=self.values[self.subjects_group.checkedId()],
+                test_year=self.years_menu.currentText()
+            )
+            self.quiz_windows.show()
 
 
 class QuizWindows(QtWidgets.QWidget):
+    def __init__(self, **kwargs):
+        super(QuizWindows, self).__init__()
+
+        self.setWindowTitle("教師資格考試測驗系統")
+        self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
+
+        self.parameters = kwargs
+        self._window_setting()
+        self.ui()
+
+    def _window_setting(self):
+        # 設定視窗大小並固定在螢幕正中間出現
+        windows = self.parameters['windows_size']
+        width, height = windows
+        self.setFixedSize(width, height)
+        pass
+
+    def ui(self):
+        pass
     pass
 
 
