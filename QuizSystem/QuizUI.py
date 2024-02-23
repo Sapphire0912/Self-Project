@@ -117,7 +117,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
 
         # 初始螢幕視窗大小(固定)
-        self.setFixedSize(960, 720)
+        self.setFixedSize(1200, 768)
 
         # ----- 參數設定 -----
         self.init_title = QtWidgets.QLabel(self)
@@ -289,7 +289,7 @@ class InitialWindow(QtWidgets.QWidget):
 
         # windows size select
         self.label_size.setText('選擇視窗大小：')
-        self.small.setChecked(True)
+        self.median.setChecked(True)
         self.small.setText('960x720')
         self.median.setText('1200x768')
         self.large.setText('1440x960')
@@ -303,7 +303,7 @@ class InitialWindow(QtWidgets.QWidget):
         # description text
         self.description.setReadOnly(True)  # Read Only
         self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
-3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選開始測驗的按鈕\n\n版本說明：\n''')
+3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選進入測驗的按鈕\n5. 再次確認考試資訊無誤後, 點選確認進入正式測驗\n\n版本說明：\n''')
         pass
 
         # subject title text
@@ -403,10 +403,15 @@ class InitialWindow(QtWidgets.QWidget):
         self.test_msgbox.setText(text)
 
         result = self.test_msgbox.exec_()
-        # print(result)
 
         # 在這邊會銜接開啟測驗視窗,
+        if result == 0:
+            pass
         pass
+
+
+class QuizWindows(QtWidgets.QWidget):
+    pass
 
 
 if __name__ == '__main__':
