@@ -362,7 +362,7 @@ class InitialWindow(QtWidgets.QWidget):
             test_range = " "
         else:
             test_range = self.years_menu.currentText()
-        self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗範圍(年)：{test_range}')
+        self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗試卷：{test_range}')
 
         self.enter_test_btn.setEnabled(True)  # 上面資訊都填完時, 進入測驗的按鈕才可以按下
         pass
@@ -375,11 +375,15 @@ class InitialWindow(QtWidgets.QWidget):
             lst = [str(i) for i in range(103, 113)]
         else:
             lst = [str(i) for i in range(94, 113)]
-            lst.append("103 ~ 112")
+            # lst.append("103 ~ 112")
 
         lst.insert(0, "請選擇年份")
-        lst.append("94 ~ 102")
-        lst.append("全選")
+        # lst.append("94 ~ 102")  # 複數考題功能以後新增
+        # lst.append("全選")
+
+        # 去除 107 題目, 和區分 108 年兩份試卷
+        lst[lst.index('107')] = '108-1'
+        lst[lst.index('108')] = '108-2'
 
         self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
         self.years_menu.addItems(lst)
