@@ -6,105 +6,107 @@ import cv2
 # 各年各科目的測驗題數(去除 107 年)
 # 去除作文
 Chinese = {
-    "94": {"選擇題": 35},
-    "95": {"選擇題": 35},
-    "96": {"選擇題": 35},
-    "97": {"選擇題": 35},
-    "98": {"選擇題": 35},
-    "99": {"選擇題": 30},
-    "100": {"選擇題": 30},
-    "101": {"選擇題": 30},
-    "102": {"選擇題": 30},
-    "103": {"選擇題": 30},
-    "104": {"選擇題": 30},
-    "105": {"選擇題": 30},
-    "106": {"選擇題": 30},
-    "108-1": {"選擇題": 30},
-    "108-2": {"選擇題": 30},
-    "109": {"選擇題": 30},
-    "110": {"選擇題": 25, "綜合題": 10},
-    "111": {"選擇題": 25, "綜合題": 6},
-    "112": {"選擇題": 25, "綜合題": 4}
+    "94": {"ChooseQ": 35},
+    "95": {"ChooseQ": 35},
+    "96": {"ChooseQ": 35},
+    "97": {"ChooseQ": 35},
+    "98": {"ChooseQ": 35},
+    "99": {"ChooseQ": 30},
+    "100": {"ChooseQ": 30},
+    "101": {"ChooseQ": 30},
+    "102": {"ChooseQ": 30},
+    "103": {"ChooseQ": 30},
+    "104": {"ChooseQ": 30},
+    "105": {"ChooseQ": 30},
+    "106": {"ChooseQ": 30},
+    "108-1": {"ChooseQ": 30},
+    "108-2": {"ChooseQ": 30},
+    "109": {"ChooseQ": 30},
+    "110": {"ChooseQ": 25, "MultiQ": 10},
+    "111": {"ChooseQ": 25, "MultiQ": 6},
+    "112": {"ChooseQ": 25, "MultiQ": 4}
 }
 
 Math = {
-    "103": {"選擇題": 30, "非選擇題": 11},
-    "104": {"選擇題": 30, "非選擇題": 11},
-    "105": {"選擇題": 30, "非選擇題": 8},
-    "106": {"選擇題": 30, "非選擇題": 8},
-    "108-1": {"選擇題": 30, "非選擇題": 8},
-    "108-2": {"選擇題": 30, "非選擇題": 8},
-    "109": {"選擇題": 30, "非選擇題": 8},
-    "110": {"選擇題": 26, "非選擇題": 6, "綜合題": 8},
-    "111": {"選擇題": 26, "非選擇題": 6, "綜合題": 8},
-    "112": {"選擇題": 26, "非選擇題": 6, "綜合題": 4}
+    "103": {"ChooseQ": 30, "NotChooseQ": 11},
+    "104": {"ChooseQ": 30, "NotChooseQ": 11},
+    "105": {"ChooseQ": 30, "NotChooseQ": 8},
+    "106": {"ChooseQ": 30, "NotChooseQ": 8},
+    "108-1": {"ChooseQ": 30, "NotChooseQ": 8},
+    "108-2": {"ChooseQ": 30, "NotChooseQ": 8},
+    "109": {"ChooseQ": 30, "NotChooseQ": 8},
+    "110": {"ChooseQ": 26, "NotChooseQ": 6, "MultiQ": 8},
+    "111": {"ChooseQ": 26, "NotChooseQ": 6, "MultiQ": 8},
+    "112": {"ChooseQ": 26, "NotChooseQ": 6, "MultiQ": 4}
 }
 
 Espr = {
-    "94": {"選擇題": 40, "問答題": 4},
-    "95": {"選擇題": 40, "問答題": 4},
-    "96": {"選擇題": 40, "問答題": 4},
-    "97": {"選擇題": 40, "問答題": 4},
-    "98": {"選擇題": 40, "問答題": 4},
-    "99": {"選擇題": 40, "問答題": 4},
-    "100": {"選擇題": 40, "問答題": 4},
-    "101": {"選擇題": 40, "問答題": 4},
-    "102": {"選擇題": 40, "問答題": 4},
-    "103": {"選擇題": 40, "問答題": 4},
-    "104": {"選擇題": 40, "問答題": 4},
-    "105": {"選擇題": 40, "問答題": 4},
-    "106": {"選擇題": 40, "問答題": 4},
-    "108-1": {"選擇題": 40, "問答題": 4},
-    "108-2": {"選擇題": 40, "問答題": 4},
-    "109": {"選擇題": 40, "問答題": 4},
-    "110": {"選擇題": 25, "問答題": 3, "綜合題": 4},
-    "111": {"選擇題": 25, "問答題": 3, "綜合題": 6},
-    "112": {"選擇題": 25, "問答題": 3, "綜合題": 3}
+    "94": {"ChooseQ": 40, "QA": 4},
+    "95": {"ChooseQ": 40, "QA": 4},
+    "96": {"ChooseQ": 40, "QA": 4},
+    "97": {"ChooseQ": 40, "QA": 4},
+    "98": {"ChooseQ": 40, "QA": 4},
+    "99": {"ChooseQ": 40, "QA": 4},
+    "100": {"ChooseQ": 40, "QA": 4},
+    "101": {"ChooseQ": 40, "QA": 4},
+    "102": {"ChooseQ": 40, "QA": 4},
+    "103": {"ChooseQ": 40, "QA": 4},
+    "104": {"ChooseQ": 40, "QA": 4},
+    "105": {"ChooseQ": 40, "QA": 4},
+    "106": {"ChooseQ": 40, "QA": 4},
+    "108-1": {"ChooseQ": 40, "QA": 4},
+    "108-2": {"ChooseQ": 40, "QA": 4},
+    "109": {"ChooseQ": 40, "QA": 4},
+    "110": {"ChooseQ": 25, "QA": 3, "MultiQ": 4},
+    "111": {"ChooseQ": 25, "QA": 3, "MultiQ": 6},
+    "112": {"ChooseQ": 25, "QA": 3, "MultiQ": 3}
 }
 
 Esdng = {
-    "94": {"選擇題": 50, "問答題": 3},
-    "95": {"選擇題": 35, "問答題": 3},
-    "96": {"選擇題": 35, "問答題": 3},
-    "97": {"選擇題": 35, "問答題": 3},
-    "98": {"選擇題": 35, "問答題": 3},
-    "99": {"選擇題": 35, "問答題": 3},
-    "100": {"選擇題": 35, "問答題": 3},
-    "101": {"選擇題": 35, "問答題": 3},
-    "102": {"選擇題": 35, "問答題": 3},
-    "103": {"選擇題": 30, "問答題": 4},
-    "104": {"選擇題": 30, "問答題": 4},
-    "105": {"選擇題": 30, "問答題": 4},
-    "106": {"選擇題": 30, "問答題": 4},
-    "108-1": {"選擇題": 30, "問答題": 4},
-    "108-2": {"選擇題": 30, "問答題": 4},
-    "109": {"選擇題": 30, "問答題": 4},
-    "110": {"選擇題": 25, "問答題": 3, "綜合題": 5},
-    "111": {"選擇題": 25, "問答題": 3, "綜合題": 7},
-    "112": {"選擇題": 25, "問答題": 3, "綜合題": 4}
+    "94": {"ChooseQ": 50, "QA": 3},
+    "95": {"ChooseQ": 35, "QA": 3},
+    "96": {"ChooseQ": 35, "QA": 3},
+    "97": {"ChooseQ": 35, "QA": 3},
+    "98": {"ChooseQ": 35, "QA": 3},
+    "99": {"ChooseQ": 35, "QA": 3},
+    "100": {"ChooseQ": 35, "QA": 3},
+    "101": {"ChooseQ": 35, "QA": 3},
+    "102": {"ChooseQ": 35, "QA": 3},
+    "103": {"ChooseQ": 30, "QA": 4},
+    "104": {"ChooseQ": 30, "QA": 4},
+    "105": {"ChooseQ": 30, "QA": 4},
+    "106": {"ChooseQ": 30, "QA": 4},
+    "108-1": {"ChooseQ": 30, "QA": 4},
+    "108-2": {"ChooseQ": 30, "QA": 4},
+    "109": {"ChooseQ": 30, "QA": 4},
+    "110": {"ChooseQ": 25, "QA": 3, "MultiQ": 5},
+    "111": {"ChooseQ": 25, "QA": 3, "MultiQ": 7},
+    "112": {"ChooseQ": 25, "QA": 3, "MultiQ": 4}
 }
 
 Escnt = {
-    "94": {"選擇題": 36, "問答題": 4},
-    "95": {"選擇題": 36, "問答題": 4},
-    "96": {"選擇題": 36, "問答題": 4},
-    "97": {"選擇題": 36, "問答題": 4},
-    "98": {"選擇題": 35, "問答題": 3},
-    "99": {"選擇題": 35, "問答題": 3},
-    "100": {"選擇題": 35, "問答題": 3},
-    "101": {"選擇題": 35, "問答題": 3},
-    "102": {"選擇題": 35, "問答題": 3},
-    "103": {"選擇題": 30, "問答題": 4},
-    "104": {"選擇題": 30, "問答題": 4},
-    "105": {"選擇題": 30, "問答題": 4},
-    "106": {"選擇題": 30, "問答題": 4},
-    "108-1": {"選擇題": 30, "問答題": 4},
-    "108-2": {"選擇題": 30, "問答題": 4},
-    "109": {"選擇題": 30, "問答題": 4},
-    "110": {"選擇題": 25, "問答題": 3, "綜合題": 5},
-    "111": {"選擇題": 25, "問答題": 3, "綜合題": 5},
-    "112": {"選擇題": 25, "問答題": 3, "綜合題": 5}
+    "94": {"ChooseQ": 36, "QA": 4},
+    "95": {"ChooseQ": 36, "QA": 4},
+    "96": {"ChooseQ": 36, "QA": 4},
+    "97": {"ChooseQ": 36, "QA": 4},
+    "98": {"ChooseQ": 35, "QA": 3},
+    "99": {"ChooseQ": 35, "QA": 3},
+    "100": {"ChooseQ": 35, "QA": 3},
+    "101": {"ChooseQ": 35, "QA": 3},
+    "102": {"ChooseQ": 35, "QA": 3},
+    "103": {"ChooseQ": 30, "QA": 4},
+    "104": {"ChooseQ": 30, "QA": 4},
+    "105": {"ChooseQ": 30, "QA": 4},
+    "106": {"ChooseQ": 30, "QA": 4},
+    "108-1": {"ChooseQ": 30, "QA": 4},
+    "108-2": {"ChooseQ": 30, "QA": 4},
+    "109": {"ChooseQ": 30, "QA": 4},
+    "110": {"ChooseQ": 25, "QA": 3, "MultiQ": 5},
+    "111": {"ChooseQ": 25, "QA": 3, "MultiQ": 5},
+    "112": {"ChooseQ": 25, "QA": 3, "MultiQ": 5}
 }
+
+TEST_SUBJECTS = [Chinese, Math, Espr, Esdng, Escnt]
 
 
 class InitialWindow(QtWidgets.QWidget):
@@ -153,11 +155,11 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 各項科目的數值設定 (key 等於 subjects_group.checkedId())
         self.values = {
-            10: {"subject": "國語文能力測驗", "time": '100'},
-            20: {"subject": "數學能力測驗", "time": '80'},
-            30: {"subject": "教育理念與實務", "time": '80'},
-            40: {"subject": "學習者發展與適性輔導", "time": '80'},
-            50: {"subject": "課程教學與評量", "time": '80'}
+            0: {"subject": "國語文能力測驗", "time": '100'},
+            1: {"subject": "數學能力測驗", "time": '80'},
+            2: {"subject": "教育理念與實務", "time": '80'},
+            3: {"subject": "學習者發展與適性輔導", "time": '80'},
+            4: {"subject": "課程教學與評量", "time": '80'}
         }
 
         # 設定 Message Box 變數
@@ -314,11 +316,11 @@ class InitialWindow(QtWidgets.QWidget):
         self.esdng_btn.setText('學習者發展與適性輔導')
         self.escnt_btn.setText('課程教學與評量')
 
-        self.subjects_group.addButton(self.chinese_btn, id=10)
-        self.subjects_group.addButton(self.math_btn, id=20)
-        self.subjects_group.addButton(self.espr_btn, id=30)
-        self.subjects_group.addButton(self.esdng_btn, id=40)
-        self.subjects_group.addButton(self.escnt_btn, id=50)
+        self.subjects_group.addButton(self.chinese_btn, id=0)
+        self.subjects_group.addButton(self.math_btn, id=1)
+        self.subjects_group.addButton(self.espr_btn, id=2)
+        self.subjects_group.addButton(self.esdng_btn, id=3)
+        self.subjects_group.addButton(self.escnt_btn, id=4)
 
         self.subjects_group.buttonClicked.connect(self._subject_select_event)
         # print(self.subjects_group.checkedId())  # 全部都沒選擇 checkedId 的值 = -1
@@ -358,20 +360,24 @@ class InitialWindow(QtWidgets.QWidget):
 
         # test information label
         test_subject, test_time = self.values[select_id]["subject"], self.values[select_id]["time"]
-        if self.years_menu.currentIndex() == 0:
+        if self.years_menu.currentIndex() <= 0:
             test_range = " "
+            choice_num = " "
+            self.enter_test_btn.setEnabled(False)
+
         else:
             test_range = self.years_menu.currentText()
-        self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗試卷：{test_range}')
+            choice_num = TEST_SUBJECTS[select_id][test_range]['ChooseQ']
+            self.enter_test_btn.setEnabled(True)  # 上面資訊都填完時, 進入測驗的按鈕才可以按下
 
-        self.enter_test_btn.setEnabled(True)  # 上面資訊都填完時, 進入測驗的按鈕才可以按下
+        self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗試卷：{test_range}\n選擇題數：{choice_num} 題')
         pass
 
     def _subject_select_event(self):
         select_id = self.subjects_group.checkedId()
 
         # 設定選擇範圍下拉式選單的值, 數學僅從 103 年開始
-        if select_id == 20:
+        if select_id == 1:
             lst = [str(i) for i in range(103, 113)]
         else:
             lst = [str(i) for i in range(94, 113)]
