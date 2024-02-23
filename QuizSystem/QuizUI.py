@@ -155,11 +155,11 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 各項科目的數值設定 (key 等於 subjects_group.checkedId())
         self.values = {
-            0: {"subject": "國語文能力測驗", "time": '100'},
-            1: {"subject": "數學能力測驗", "time": '80'},
-            2: {"subject": "教育理念與實務", "time": '80'},
-            3: {"subject": "學習者發展與適性輔導", "time": '80'},
-            4: {"subject": "課程教學與評量", "time": '80'}
+            0: {"subject": "國語文能力測驗", "time": 100},
+            1: {"subject": "數學能力測驗", "time": 80},
+            2: {"subject": "教育理念與實務", "time": 80},
+            3: {"subject": "學習者發展與適性輔導", "time": 80},
+            4: {"subject": "課程教學與評量", "time": 80}
         }
 
         # 設定 Message Box 變數
@@ -417,6 +417,7 @@ class InitialWindow(QtWidgets.QWidget):
             self.quiz_windows = QuizWindows(
                 windows_size=(self.width(), self.height()),
                 subject_info=self.values[self.subjects_group.checkedId()],
+                subject_select_id=self.subjects_group.checkedId(),
                 test_year=self.years_menu.currentText(),
                 font_size=10 + self.winsize_group.checkedId() * 2
             )
@@ -452,8 +453,14 @@ class QuizWindows(QtWidgets.QWidget):
         self.text_C = QtWidgets.QLabel(self)
         self.text_D = QtWidgets.QLabel(self)
 
+        # 設定可以快速跳轉到某一頁的選單
+        self.page_goto = QtWidgets.QComboBox(self)
+
         # 顯示剩餘時間的變數
-        self.
+        # - 測驗時間
+        self.quiz_time = kwargs["subject_info"]["time"]
+        self.timer = QtCore.QTimer()
+        self.timer_label = QtWidgets.QLabel(self)
         # -----
 
         self._window_setting()
@@ -539,6 +546,8 @@ class QuizWindows(QtWidgets.QWidget):
         self.text_D.setStyleSheet('''
             border: 1px solid black;
         ''')
+
+        # 設定 timer 的標籤文字位置
         pass
 
     def ui(self):
@@ -567,6 +576,15 @@ class QuizWindows(QtWidgets.QWidget):
         self.text_B.setText('選項B的內容')
         self.text_C.setText('選項C的內容')
         self.text_D.setText('選項D的內容')
+
+        # 設定 page_goto 下拉式選單
+        subject_id, years = self.parameters["subject_select_id"], self.parameters["test_year"]
+        pages = TEST_SUBJECTS[subject_id][years]["ChooseQ"]
+
+        self.page_goto.clear()
+        self.page_goto.addItems([str(i) for i in range(1, pages + 1)])
+
+        # 設定 timer 定時和顯示標籤文字
 
     def _option_choice_event(self):
         pass
