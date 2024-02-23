@@ -456,6 +456,10 @@ class QuizWindows(QtWidgets.QWidget):
         # 設定可以快速跳轉到某一頁的選單
         self.page_goto = QtWidgets.QComboBox(self)
 
+        # 設定前/後一頁的按鈕
+        self.previous_btn = QtWidgets.QPushButton(self)
+        self.next_btn = QtWidgets.QPushButton(self)
+
         # 顯示剩餘時間的變數
         # - 測驗時間
         self.quiz_time = kwargs["subject_info"]["time"]
@@ -547,7 +551,21 @@ class QuizWindows(QtWidgets.QWidget):
             border: 1px solid black;
         ''')
 
-        # 設定 timer 的標籤文字位置
+        # 3. 設定前/後一頁按鈕位置
+        page_btn_x = btnB_x + textA_w + 2 * btn_w
+        page_btn_w = int(width * 0.08)
+        page_btn_h = int(height * 0.05)
+        self.previous_btn.setGeometry(page_btn_x, btnA_y, page_btn_w, page_btn_h)
+        self.next_btn.setGeometry(page_btn_x + page_btn_w + 10, btnA_y, page_btn_w, page_btn_h)
+
+        # 4. 設定下拉式選單位置
+        page_goto_x = page_btn_x + page_btn_w // 2 - 10
+        page_goto_w = int(width * 0.11)
+        page_goto_y = btnA_y + int(page_btn_h * 1.2)
+
+        self.page_goto.setGeometry(page_goto_x, page_goto_y, page_goto_w, page_btn_h)
+
+        # 5. 設定 timer 的標籤文字位置
         pass
 
     def ui(self):
@@ -577,11 +595,16 @@ class QuizWindows(QtWidgets.QWidget):
         self.text_C.setText('選項C的內容')
         self.text_D.setText('選項D的內容')
 
+        # 設定 previous/next page 的按鈕
+        self.previous_btn.setText('上一頁')
+        self.next_btn.setText('下一頁')
+
         # 設定 page_goto 下拉式選單
         subject_id, years = self.parameters["subject_select_id"], self.parameters["test_year"]
         pages = TEST_SUBJECTS[subject_id][years]["ChooseQ"]
 
         self.page_goto.clear()
+        self.page_goto.addItem('請選擇頁面')
         self.page_goto.addItems([str(i) for i in range(1, pages + 1)])
 
         # 設定 timer 定時和顯示標籤文字

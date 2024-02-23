@@ -237,7 +237,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>489</line>
+          <line>493</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
