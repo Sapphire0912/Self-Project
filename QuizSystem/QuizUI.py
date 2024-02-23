@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPalette, QColor
 import sys
 import cv2
 
@@ -188,7 +188,7 @@ class InitialWindow(QtWidgets.QWidget):
         init_title_h = int(height // 4)
         self.init_title.setGeometry(0, 0, width, init_title_h)
 
-        self.init_title.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignJustify)
+        self.init_title.setAlignment(QtCore.Qt.AlignCenter)
         self.init_title.setFont(QFont('標楷體'))
         self.init_title.setStyleSheet(
             '''
@@ -227,10 +227,14 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setGeometry(int(start_x // 2), desc_y, desc_w, desc_h)
 
         self.description.setFont(ch_font)
-        # self.description.setStyleSheet('''
-        #     border: solid black;
-        #     border-width: 3px 3px 3px 3px;
-        # ''')
+        # - 設定 輸入框的背景是透明的
+        palette = self.palette()
+        palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.description.setPalette(palette)
+
+        self.description.setStyleSheet('''
+            border: 1px solid gray;
+        ''')
 
         # 4. 設定測驗科目的標籤
         subject_x = int(self.width() // 2) - int(start_x // 4)
@@ -413,8 +417,10 @@ class InitialWindow(QtWidgets.QWidget):
             self.quiz_windows = QuizWindows(
                 windows_size=(self.width(), self.height()),
                 subject_info=self.values[self.subjects_group.checkedId()],
-                test_year=self.years_menu.currentText()
+                test_year=self.years_menu.currentText(),
+                font_size=10 + self.winsize_group.checkedId() * 2
             )
+            self.hide()
             self.quiz_windows.show()
 
 
@@ -425,7 +431,31 @@ class QuizWindows(QtWidgets.QWidget):
         self.setWindowTitle("教師資格考試測驗系統")
         self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
 
+        # 初始視窗的參數
         self.parameters = kwargs
+        self.setFont(QFont('細明體', kwargs["font_size"]))
+
+        # ----- 參數設定 -----
+        # 設定題目內容的變數
+        self.question_text = QtWidgets.QTextEdit(self)
+        self.question_image = QtWidgets.QLabel(self)
+
+        # 設定選項內容的變數(文字/圖片放在 Label 裡面呈現)
+        self.option_group = QtWidgets.QButtonGroup(self)
+        self.btn_A = QtWidgets.QRadioButton(self)
+        self.btn_B = QtWidgets.QRadioButton(self)
+        self.btn_C = QtWidgets.QRadioButton(self)
+        self.btn_D = QtWidgets.QRadioButton(self)
+
+        self.text_A = QtWidgets.QLabel(self)
+        self.text_B = QtWidgets.QLabel(self)
+        self.text_C = QtWidgets.QLabel(self)
+        self.text_D = QtWidgets.QLabel(self)
+
+        # 顯示剩餘時間的變數
+        self.
+        # -----
+
         self._window_setting()
         self.ui()
 
@@ -434,10 +464,113 @@ class QuizWindows(QtWidgets.QWidget):
         windows = self.parameters['windows_size']
         width, height = windows
         self.setFixedSize(width, height)
+
+        screen = QtWidgets.QApplication.desktop()
+        screen_width, screen_height = screen.width(), screen.height()
+        self.move((screen_width - width) // 2, (screen_height - height) // 2)
+
+        # @@ 所有元件會因為該題目/選項中是否有圖片去調整位置, 下面先設定無圖片版本的
+        # 1. 設定題目文字位置
+        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小
+        q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
+        q_text_y, q_text_h = int(height * 0.02), int(height * 0.23)
+        self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
+
+        palette = self.palette()
+        palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.question_text.setPalette(palette)
+
+        self.question_text.setStyleSheet('''
+            border: solid black;
+            border-width: 3px 3px 3px 3px;
+        ''')
+        self.question_text.setAlignment(QtCore.Qt.AlignLeft)
+
+        # 2. 設定題目圖片/表格位置
+        q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
+        self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
+        self.question_image.setAlignment(QtCore.Qt.AlignCenter)
+        self.question_image.setStyleSheet('''
+            border: solid red;
+            border-width: 3px 3px 3px 3px;
+        ''')
+
+        # 3. 設定選項 A, B, C, D & 各 Label 的位置(若有圖片, 盡量找可以 resize image 的方法)
+        btnA_y, btn_w, btn_h = int(height * 0.6), 50, 20
+        self.btn_A.setGeometry(q_text_x, btnA_y, btn_w, btn_h)
+        self.btn_A.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+        textA_w, textA_h = int(width * 0.3), int(height * 0.18)
+        self.text_A.setGeometry(q_text_x + btn_w + 5, btnA_y, textA_w, textA_h)
+        self.text_A.setAlignment(QtCore.Qt.AlignLeft)
+        self.text_A.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+
+        btnB_x = int(width * 0.4)
+        self.btn_B.setGeometry(btnB_x, btnA_y, btn_w, btn_h)
+        self.btn_B.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+        self.text_B.setGeometry(btnB_x + btn_w + 5, btnA_y, textA_w, textA_h)
+        self.text_B.setAlignment(QtCore.Qt.AlignLeft)
+        self.text_B.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+
+        btnC_y = int(height * 0.78)
+        self.btn_C.setGeometry(q_text_x, btnC_y + btn_h, btn_w, btn_h)
+        self.btn_C.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+        self.text_C.setGeometry(q_text_x + btn_w + 5, btnA_y + textA_h + btn_h, textA_w, textA_h)
+        self.text_C.setAlignment(QtCore.Qt.AlignLeft)
+        self.text_C.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+
+        self.btn_D.setGeometry(btnB_x, btnC_y + btn_h, btn_w, btn_h)
+        self.btn_D.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+        self.text_D.setGeometry(btnB_x + btn_w + 5, btnA_y + textA_h + btn_h, textA_w, textA_h)
+        self.text_D.setAlignment(QtCore.Qt.AlignLeft)
+        self.text_D.setStyleSheet('''
+            border: 1px solid black;
+        ''')
         pass
 
     def ui(self):
+        # 設定 question_text & image 內容(未來要抓題目的資料)
+        self.question_text.setText("1. 題目區域......")
+        self.question_text.setReadOnly(True)
+
+        img_example = QtGui.QImage('img_exam.PNG')
+        self.question_image.setPixmap(QtGui.QPixmap.fromImage(img_example))
+
+        # 設定 option btn A, B, C, D
+        self.btn_A.setText('(A)')
+        self.btn_B.setText('(B)')
+        self.btn_C.setText('(C)')
+        self.btn_D.setText('(D)')
+
+        self.option_group.addButton(self.btn_A, id=1)
+        self.option_group.addButton(self.btn_B, id=2)
+        self.option_group.addButton(self.btn_C, id=3)
+        self.option_group.addButton(self.btn_D, id=4)
+
+        # self.option_group.buttonClicked.connent(self._option_choice_event)
+
+        # 設定 option text A, B, C, D
+        self.text_A.setText('選項A的內容')
+        self.text_B.setText('選項B的內容')
+        self.text_C.setText('選項C的內容')
+        self.text_D.setText('選項D的內容')
+
+    def _option_choice_event(self):
         pass
+
     pass
 
 
