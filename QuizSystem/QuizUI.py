@@ -56,6 +56,9 @@ class InitialWindow(QtWidgets.QWidget):
             40: {"subject": "學習者發展與適性輔導", "time": '80'},
             50: {"subject": "課程教學與評量", "time": '80'}
         }
+
+        # 設定 Message Box 變數
+        self.test_msgbox = QtWidgets.QMessageBox(self)
         # -----
 
         self._windows_setting()
@@ -156,16 +159,23 @@ class InitialWindow(QtWidgets.QWidget):
         self.years_menu.setFont(QFont('Times New Roman', 14))
 
         # 8. 設定進入測驗按鈕位置
-        test_btn_x = subject_w + subject_x + int(subject_w * 1 // 4)
+        test_btn_x = int(subject_w * 1.25) + subject_x
         test_btn_h = 40
+
         self.enter_test_btn.setGeometry(test_btn_x, self.height() - test_btn_h * 3, int(subject_w // 2), test_btn_h)
         self.enter_test_btn.setFont(ch_font)
 
-        # 9. 顯示測驗考卷資訊
+        # 9. 顯示測驗考卷資訊的位置
         test_info_y = int(self.height() * 0.7)
-        test_info_w = int(subject_x * 3 // 4)
+        test_info_w = int(subject_x * 3 // 5)
         self.test_info.setGeometry(subject_x, test_info_y, test_info_w, self.height() - test_info_y)
         self.test_info.setFont(QFont('標楷體', 13))
+        # self.test_info.setStyleSheet('''
+        #     border: solid black;
+        #     border-width: 3px 3px 3px 3px;
+        # ''')
+
+        # 10. 設定 QMessageBox 位置
 
     def ui(self):
         # 設定初始畫面的標題
@@ -214,11 +224,12 @@ class InitialWindow(QtWidgets.QWidget):
 
         # years menu item
         # 數學僅從 103 年開始考 和 subject 選擇相關, 因此直接在 _subject_select_event 設定
+        # test information label(和 subject 有關係, 在 _subject_select_event 設定)
 
         # enter test button
         self.enter_test_btn.setText("進入測驗")
-
-        # test information label(和 subject 有關係, 在 _subject_select_event 設定)
+        self.enter_test_btn.setEnabled(False)  # 預設按鈕不可點
+        self.enter_test_btn.clicked.connect(self._enter_test_event)
 
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
@@ -241,6 +252,8 @@ class InitialWindow(QtWidgets.QWidget):
         else:
             test_range = self.years_menu.currentText()
         self.test_info.setText(f'作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗範圍：{test_range} 年')
+
+        self.enter_test_btn.setEnabled(True)  # 上面資訊都填完時, 進入測驗的按鈕才可以按下
         pass
 
     def _subject_select_event(self):
@@ -260,6 +273,15 @@ class InitialWindow(QtWidgets.QWidget):
         self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
         self.years_menu.addItems(lst)
         self.years_menu.currentIndexChanged.connect(self._year_select_event)
+
+    def _enter_test_event(self):
+        select_id = self.subjects_group.checkedId()
+        test_subject, test_time = self.values[select_id]["subject"], self.values[select_id]["time"]
+        test_range = self.years_menu.currentText()
+
+        text = f'''作答科目：{test_subject}\n作答時間：{test_time} 分鐘\n測驗範圍：{test_range} 年'''
+        self.test_msgbox.information(self, '測驗資訊', text)
+        pass
 
 
 if __name__ == '__main__':
