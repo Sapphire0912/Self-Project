@@ -210,10 +210,6 @@ class InitialWindow(QtWidgets.QWidget):
         self.small.setGeometry(start_x, start_y + group_h, group_w, group_h)
         self.median.setGeometry(start_x, start_y + group_h * 2, group_w, group_h)
         self.large.setGeometry(start_x, start_y + group_h * 3, group_w, group_h)
-        # self.label_size.setStyleSheet('''
-        #     border: solid black;
-        #     border-width: 3px 3px 3px 3px;
-        # ''')
 
         self.label_size.setFont(QFont('DFkai-sb', 18))
         self.small.setFont(num_font)
@@ -242,14 +238,11 @@ class InitialWindow(QtWidgets.QWidget):
         subject_h = 30
         self.subject_title.setGeometry(subject_x, desc_y, subject_w, subject_h)
         self.subject_title.setFont(QFont('DFkai-sb', 18))
-        # self.subject_title.setStyleSheet('''
-        #     border: solid black;
-        #     border-width: 3px 3px 3px 3px;
-        # ''')
 
         # 5. 設定測驗科目選單的位置
         subject_btn_w = int(subject_x // 2)
         subject_btn_y = init_title_h + 50
+
         self.chinese_btn.setGeometry(subject_x, subject_btn_y, subject_btn_w, subject_h)
         self.math_btn.setGeometry(subject_x, subject_btn_y + subject_h, subject_btn_w, subject_h)
         self.espr_btn.setGeometry(subject_x, subject_btn_y + 2 * subject_h, subject_btn_w, subject_h)
@@ -282,10 +275,6 @@ class InitialWindow(QtWidgets.QWidget):
         test_info_w = int(subject_x * 3 // 5)
         self.test_info.setGeometry(subject_x, test_info_y, test_info_w, self.height() - test_info_y)
         self.test_info.setFont(QFont('標楷體', 13))
-        # self.test_info.setStyleSheet('''
-        #     border: solid black;
-        #     border-width: 3px 3px 3px 3px;
-        # ''')
 
         # 10. 設定 QMessageBox 位置
         self.test_msgbox.setStyleSheet('''font-size: 16px;''')
@@ -659,9 +648,6 @@ class QuizWindows(QtWidgets.QWidget):
     def _timer_start(self):
         self.timer.start(1000)  # 計時器
 
-    def _timer_reset(self):
-        pass
-
     def _timer_pause(self):
         self.timer.stop()
 
@@ -694,7 +680,6 @@ class QuizWindows(QtWidgets.QWidget):
         # 到對答案的新視窗(但要把參數傳給新視窗)
         self.close()
         pass
-
     pass
 
 
