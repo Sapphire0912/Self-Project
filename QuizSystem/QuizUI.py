@@ -419,7 +419,8 @@ class InitialWindow(QtWidgets.QWidget):
                 subject_info=self.values[self.subjects_group.checkedId()],
                 subject_select_id=self.subjects_group.checkedId(),
                 test_year=self.years_menu.currentText(),
-                font_size=10 + self.winsize_group.checkedId() * 2
+                font_size=10 + self.winsize_group.checkedId() * 2,
+                initWindow=self
             )
             self.hide()
             self.quiz_windows.show()
@@ -435,6 +436,9 @@ class QuizWindows(QtWidgets.QWidget):
         # 初始視窗的參數
         self.parameters = kwargs
         self.setFont(QFont('細明體', kwargs["font_size"]))
+
+        # -- 初始視窗
+        # self.initWindow = kwargs["initWindow"]
 
         # ----- 參數設定 -----
         # 設定題目內容的變數
@@ -572,7 +576,8 @@ class QuizWindows(QtWidgets.QWidget):
         self.page_goto.setGeometry(page_btn_x, page_goto_y, page_goto_w, page_btn_h)
 
         # 5. 設定 timer 的標籤文字位置
-        self.timer_label.setGeometry(page_btn_x, page_goto_y + page_btn_h, page_btn_w * 2, page_btn_h)
+        timer_label_y = page_goto_y + page_btn_h + 20
+        self.timer_label.setGeometry(page_btn_x, timer_label_y, page_btn_w * 2, page_btn_h)
         # self.timer_label.setStyleSheet('''
         #     border: 1px solid black;
         # ''')
@@ -581,8 +586,14 @@ class QuizWindows(QtWidgets.QWidget):
         pixmap = QtGui.QPixmap('./image/icon_pause.png')
         icon = QtGui.QIcon(pixmap)
         self.timer_pause_btn.setIcon(icon)
-        self.timer_pause_btn.setGeometry(page_btn_x, page_goto_y + page_btn_h * 2, pixmap.width(), pixmap.height())
+        self.timer_pause_btn.setGeometry(page_btn_x, timer_label_y + page_btn_h, pixmap.width(), pixmap.height())
         pass
+
+        # 7. 交卷按鈕位置
+        send_btn_x, send_btn_y = page_btn_x + page_btn_w + 10, page_goto_y + page_btn_h * 5
+        send_btn_w, send_btn_h = int(width * 0.1), int(height * 0.05)
+        self.send_answer_btn.setFont(QFont('細明體', 14))
+        self.send_answer_btn.setGeometry(send_btn_x, send_btn_y, send_btn_w, send_btn_h)
 
     def ui(self):
         # 設定 question_text & image 內容(未來要抓題目的資料)
@@ -627,6 +638,10 @@ class QuizWindows(QtWidgets.QWidget):
         self.timer.start(1000)  # 計時器
         self.timer_pause_btn.clicked.connect(self._timer_pause)
 
+        # 設定交卷按鈕
+        self.send_answer_btn.setText('交卷')
+        self.send_answer_btn.clicked.connect(self._timer_pause)
+
     def _option_choice_event(self):
         pass
 
@@ -643,7 +658,6 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _timer_start(self):
         self.timer.start(1000)  # 計時器
-        pass
 
     def _timer_reset(self):
         pass
@@ -652,6 +666,8 @@ class QuizWindows(QtWidgets.QWidget):
         self.timer.stop()
 
         # 創建一個 msg box 視窗, 用來讓時間繼續或交卷
+        # - 在暫停測驗期間, 將測驗視窗隱藏
+        self.hide()
         _hint_box = QtWidgets.QMessageBox(self)
 
         _hint_box.setWindowTitle("暫停測驗")
@@ -668,11 +684,17 @@ class QuizWindows(QtWidgets.QWidget):
 
         isExitTest = _hint_box.exec_()
         if isExitTest == 0:
+            self.show()
             self._timer_start()
+
         elif isExitTest == 1:
-            # 到對答案的視窗
-            pass
+            self._send_answer_event()
+
+    def _send_answer_event(self):
+        # 到對答案的新視窗(但要把參數傳給新視窗)
+        self.close()
         pass
+
     pass
 
 
