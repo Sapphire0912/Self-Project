@@ -430,7 +430,7 @@ class QuizWindows(QtWidgets.QWidget):
         super(QuizWindows, self).__init__()
 
         self.setWindowTitle("教師資格考試測驗系統")
-        self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
+        self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
 
         # 初始視窗的參數
         self.parameters = kwargs
@@ -572,13 +572,16 @@ class QuizWindows(QtWidgets.QWidget):
         self.page_goto.setGeometry(page_btn_x, page_goto_y, page_goto_w, page_btn_h)
 
         # 5. 設定 timer 的標籤文字位置
-        self.timer_label.setGeometry(page_btn_x, page_goto_y + page_btn_h, page_btn_w * 2, page_btn_h * 2)
-        self.timer_label.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        self.timer_label.setGeometry(page_btn_x, page_goto_y + page_btn_h, page_btn_w * 2, page_btn_h)
+        # self.timer_label.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
 
         # 6. 設定 timer pause btn 的樣式
-
+        pixmap = QtGui.QPixmap('./image/icon_pause.png')
+        icon = QtGui.QIcon(pixmap)
+        self.timer_pause_btn.setIcon(icon)
+        self.timer_pause_btn.setGeometry(page_btn_x, page_goto_y + page_btn_h * 2, pixmap.width(), pixmap.height())
         pass
 
     def ui(self):
@@ -647,7 +650,28 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _timer_pause(self):
         self.timer.stop()
-        # 創建一個 msg box 視窗, 用來讓時間繼續
+
+        # 創建一個 msg box 視窗, 用來讓時間繼續或交卷
+        _hint_box = QtWidgets.QMessageBox(self)
+
+        _hint_box.setWindowTitle("暫停測驗")
+        text = "當前" + self.timer_label.text() + "\n" + "剩餘題數：" + "{reducingQ}\n確認是否交卷？\n"
+        _hint_box.setFont(QFont('細明體', 12))
+        _hint_box.setText(text)
+        _hint_box.setIcon(QtWidgets.QMessageBox.Information)
+
+        back = QtWidgets.QPushButton("返回測驗")
+        send = QtWidgets.QPushButton("交卷")
+
+        _hint_box.addButton(back, QtWidgets.QMessageBox.AcceptRole)  # AcceptRole = 0, RejectRole = 1
+        _hint_box.addButton(send, QtWidgets.QMessageBox.RejectRole)  # 交卷會開新的視窗
+
+        isExitTest = _hint_box.exec_()
+        if isExitTest == 0:
+            self._timer_start()
+        elif isExitTest == 1:
+            # 到對答案的視窗
+            pass
         pass
     pass
 
