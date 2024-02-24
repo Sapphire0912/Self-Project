@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/Answers_國語文能力測驗.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/Answers_學習者發展與適性輔導.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/Answers_教育理念與實務.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/Answers_數學能力測驗.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Answer/Answers_課程教學與評量.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/國語文能力測驗/QuestionData.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/學習者發展與適性輔導/QuestionData.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/教育理念與實務/112_教育理念與實務.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/教育理念與實務/QuestionData.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/數學能力測驗/QuestionData.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/課程教學與評量/QuestionData.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,12 +246,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>504</line>
+          <line>493</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>468</line>
+          <line>457</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
