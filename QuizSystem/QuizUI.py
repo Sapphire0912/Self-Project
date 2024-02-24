@@ -597,8 +597,6 @@ class QuizWindows(QtWidgets.QWidget):
 
     def ui(self):
         # 設定 question_text & image 內容(未來要抓題目的資料)
-        # self.question_text.setText("1. 題目區域......")
-
         self.question_text.setReadOnly(True)
         self._questions_setting()
 
@@ -615,7 +613,11 @@ class QuizWindows(QtWidgets.QWidget):
 
         # 設定 previous/next page 的按鈕
         self.previous_btn.setText('上一題')
+        self.previous_btn.clicked.connect(self._previous_question)
+        self.previous_btn.setEnabled(False)
+
         self.next_btn.setText('下一題')
+        self.next_btn.clicked.connect(self._next_question)
 
         # 設定 page_goto 下拉式選單
         subject_id, years = self.parameters["subject_select_id"], self.parameters["test_year"]
@@ -639,6 +641,7 @@ class QuizWindows(QtWidgets.QWidget):
         q, options = question["Q"], question["Option"]
 
         q = str(key) + '. ' + ''.join(q.split())
+        options = ' '.join(options.split())
         each_option = options.split(' ')
 
         self.question_text.setText(q)
@@ -651,6 +654,28 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _option_choice_event(self):
         pass
+
+    def _previous_question(self):
+        self.current_question -= 1
+
+        if self.current_question == 1:
+            self.previous_btn.setEnabled(False)
+        else:
+            self.previous_btn.setEnabled(True)
+
+        self._questions_setting()
+
+    def _next_question(self):
+        self.current_question += 1
+        if self.current_question >= self.questions_number:
+            self.next_btn.setEnabled(False)
+        else:
+            self.next_btn.setEnabled(True)
+
+        if self.current_question != 1:
+            self.previous_btn.setEnabled(True)
+
+        self._questions_setting()
 
     def _timer_count(self):
         minute = str(self.current_time // 60)
