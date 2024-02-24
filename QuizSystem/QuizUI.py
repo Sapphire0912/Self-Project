@@ -1,7 +1,14 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPalette, QColor
 import sys
-import cv2
+
+import Question.Chinese.ChineseQ as chineseQ
+import Question.Math.MathQ as mathQ
+import Question.Espr.EsprQ as esprQ
+import Question.Esdng.EsdngQ as esdngQ
+import Question.Escnt.EscntQ as escntQ
+
+# print(esdngQ.year112())
 
 # 各年各科目的測驗題數(去除 107 年)
 # 去除作文

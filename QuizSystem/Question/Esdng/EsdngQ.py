@@ -140,6 +140,6 @@ def year112():
             (D)負增強陷阱 (negativereinforcement trap)'
         }
     }
-
+    return question
 
 # print(create_template(14))
