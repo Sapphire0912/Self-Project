@@ -143,9 +143,9 @@ def year112():
     return question
 
 # print(create_template(14))
-# question = year112()
-# index = 25
-# q, options = question[index]['Q'], question[index]['Option']
-#
+question = year112()
+index = 6
+q, options = question[index]['Q'], question[index]['Option']
+
 # q = ''.join(q.split())
-# print(q, options.split(' '))
+print(q, options.split(' '))
