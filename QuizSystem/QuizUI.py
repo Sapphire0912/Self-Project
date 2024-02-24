@@ -576,6 +576,9 @@ class QuizWindows(QtWidgets.QWidget):
         self.timer_label.setStyleSheet('''
             border: 1px solid black;
         ''')
+
+        # 6. 設定 timer pause btn 的樣式
+
         pass
 
     def ui(self):
