@@ -114,7 +114,7 @@ class InitialWindow(QtWidgets.QWidget):
         super().__init__()
 
         self.setWindowTitle("教師資格考試測驗系統")
-        self.setWindowIcon(QtGui.QIcon("./windowsicon.ico"))
+        self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
 
         # 初始螢幕視窗大小(固定)
         self.setFixedSize(1200, 768)
@@ -468,6 +468,10 @@ class QuizWindows(QtWidgets.QWidget):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self._timer_count)
         self.timer_label = QtWidgets.QLabel(self)
+        self.timer_pause_btn = QtWidgets.QPushButton(self)
+
+        # 交卷的變數
+        self.send_answer_btn = QtWidgets.QPushButton(self)
         # -----
 
         self._window_setting()
@@ -613,8 +617,9 @@ class QuizWindows(QtWidgets.QWidget):
         self.page_goto.addItem('請選擇題數')
         self.page_goto.addItems([str(i) for i in range(1, pages + 1)])
 
-        # 設定 timer 定時和顯示標籤文字
+        # 設定 timer 定時, 顯示標籤文字, 暫停/開始按鈕, 以及視窗
         self.timer.start(1000)  # 計時器
+        self.timer_pause_btn.clicked.connect(self._timer_pause)
 
     def _option_choice_event(self):
         pass
@@ -638,6 +643,8 @@ class QuizWindows(QtWidgets.QWidget):
         pass
 
     def _timer_pause(self):
+        self.timer.stop()
+        # 創建一個 msg box 視窗, 用來讓時間繼續
         pass
     pass
 
