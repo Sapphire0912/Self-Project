@@ -621,7 +621,11 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _timer_count(self):
         minute = str(self.current_time // 60)
-        second = str(self.current_time % 60)
+        if self.current_time % 60 < 10:
+            second = '0' + str(self.current_time % 60)
+        else:
+            second = str(self.current_time % 60)
+
         self.timer_label.setText(f'剩餘時間：{minute}分{second}秒')
         self.current_time = self.current_time - 1
         pass
