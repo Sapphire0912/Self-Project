@@ -462,8 +462,11 @@ class QuizWindows(QtWidgets.QWidget):
 
         # 顯示剩餘時間的變數
         # - 測驗時間
-        self.quiz_time = kwargs["subject_info"]["time"]
+        self.quiz_time = kwargs["subject_info"]["time"] * 60  # 單位: 秒
+        self.current_time = kwargs["subject_info"]["time"] * 60
+
         self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self._timer_count)
         self.timer_label = QtWidgets.QLabel(self)
         # -----
 
@@ -559,13 +562,16 @@ class QuizWindows(QtWidgets.QWidget):
         self.next_btn.setGeometry(page_btn_x + page_btn_w + 10, btnA_y, page_btn_w, page_btn_h)
 
         # 4. 設定下拉式選單位置
-        page_goto_x = page_btn_x + page_btn_w // 2 - 10
         page_goto_w = int(width * 0.11)
         page_goto_y = btnA_y + int(page_btn_h * 1.2)
 
-        self.page_goto.setGeometry(page_goto_x, page_goto_y, page_goto_w, page_btn_h)
+        self.page_goto.setGeometry(page_btn_x, page_goto_y, page_goto_w, page_btn_h)
 
         # 5. 設定 timer 的標籤文字位置
+        self.timer_label.setGeometry(page_btn_x, page_goto_y + page_btn_h, page_btn_w * 2, page_btn_h * 2)
+        self.timer_label.setStyleSheet('''
+            border: 1px solid black;
+        ''')
         pass
 
     def ui(self):
@@ -604,14 +610,31 @@ class QuizWindows(QtWidgets.QWidget):
         pages = TEST_SUBJECTS[subject_id][years]["ChooseQ"]
 
         self.page_goto.clear()
-        self.page_goto.addItem('請選擇頁面')
+        self.page_goto.addItem('請選擇題數')
         self.page_goto.addItems([str(i) for i in range(1, pages + 1)])
 
         # 設定 timer 定時和顯示標籤文字
+        self.timer.start(1000)  # 計時器
 
     def _option_choice_event(self):
         pass
 
+    def _timer_count(self):
+        minute = str(self.current_time // 60)
+        second = str(self.current_time % 60)
+        self.timer_label.setText(f'剩餘時間：{minute}分{second}秒')
+        self.current_time = self.current_time - 1
+        pass
+
+    def _timer_start(self):
+        self.timer.start(1000)  # 計時器
+        pass
+
+    def _timer_reset(self):
+        pass
+
+    def _timer_pause(self):
+        pass
     pass
 
 
