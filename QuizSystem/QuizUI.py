@@ -2,13 +2,13 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPalette, QColor
 import sys
 
-import Question.Chinese.ChineseQ as chineseQ
-import Question.Math.MathQ as mathQ
-import Question.Espr.EsprQ as esprQ
+# 可以根據使用者選的選項之後, 再 import 特定的檔案和答案
+# import Question.Chinese.ChineseQ as chineseQ
+# import Question.Math.MathQ as mathQ
+# import Question.Espr.EsprQ as esprQ
 import Question.Esdng.EsdngQ as esdngQ
-import Question.Escnt.EscntQ as escntQ
+# import Question.Escnt.EscntQ as escntQ
 
-# print(esdngQ.year112())
 
 # 各年各科目的測驗題數(去除 107 年)
 # 去除作文
@@ -437,9 +437,14 @@ class QuizWindows(QtWidgets.QWidget):
         # self.initWindow = kwargs["initWindow"]
 
         # ----- 參數設定 -----
-        # 設定題目內容的變數
+        # 設定題目內容及相關的變數
         self.question_text = QtWidgets.QTextEdit(self)
         self.question_image = QtWidgets.QLabel(self)
+
+        self.questions = esdngQ.year112()  # 題目變數(先拿該卷做測試, 無圖片)
+        self.current_question = 1  # 存放當前顯示的題目
+        self.questions_number = 25  # 先按照上面的做測試
+        self.user_answers = ['X'] * self.questions_number
 
         # 設定選項內容的變數(文字/圖片放在 Label 裡面呈現)
         self.option_group = QtWidgets.QButtonGroup(self)
@@ -489,7 +494,7 @@ class QuizWindows(QtWidgets.QWidget):
 
         # @@ 所有元件會因為該題目/選項中是否有圖片去調整位置, 下面先設定無圖片版本的
         # 1. 設定題目文字位置
-        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小
+        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
         q_text_y, q_text_h = int(height * 0.02), int(height * 0.23)
         self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
@@ -499,8 +504,7 @@ class QuizWindows(QtWidgets.QWidget):
         self.question_text.setPalette(palette)
 
         self.question_text.setStyleSheet('''
-            border: solid black;
-            border-width: 3px 3px 3px 3px;
+            border: none;
         ''')
         self.question_text.setAlignment(QtCore.Qt.AlignLeft)
 
@@ -508,55 +512,55 @@ class QuizWindows(QtWidgets.QWidget):
         q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
         self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
         self.question_image.setAlignment(QtCore.Qt.AlignCenter)
-        self.question_image.setStyleSheet('''
-            border: solid red;
-            border-width: 3px 3px 3px 3px;
-        ''')
+        # self.question_image.setStyleSheet('''
+        #     border: solid red;
+        #     border-width: 3px 3px 3px 3px;
+        # ''')
 
         # 3. 設定選項 A, B, C, D & 各 Label 的位置(若有圖片, 盡量找可以 resize image 的方法)
-        btnA_y, btn_w, btn_h = int(height * 0.6), 50, 20
+        btnA_y, btn_w, btn_h = int(height * 0.6), 20, 20
         self.btn_A.setGeometry(q_text_x, btnA_y, btn_w, btn_h)
-        self.btn_A.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        # self.btn_A.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
         textA_w, textA_h = int(width * 0.3), int(height * 0.18)
-        self.text_A.setGeometry(q_text_x + btn_w + 5, btnA_y, textA_w, textA_h)
+        self.text_A.setGeometry(q_text_x + btn_w, btnA_y, textA_w, textA_h)
         self.text_A.setAlignment(QtCore.Qt.AlignLeft)
-        self.text_A.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        # self.text_A.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
 
         btnB_x = int(width * 0.4)
         self.btn_B.setGeometry(btnB_x, btnA_y, btn_w, btn_h)
-        self.btn_B.setStyleSheet('''
-            border: 1px solid black;
-        ''')
-        self.text_B.setGeometry(btnB_x + btn_w + 5, btnA_y, textA_w, textA_h)
+        # self.btn_B.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
+        self.text_B.setGeometry(btnB_x + btn_w, btnA_y, textA_w, textA_h)
         self.text_B.setAlignment(QtCore.Qt.AlignLeft)
-        self.text_B.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        # self.text_B.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
 
         btnC_y = int(height * 0.78)
         self.btn_C.setGeometry(q_text_x, btnC_y + btn_h, btn_w, btn_h)
-        self.btn_C.setStyleSheet('''
-            border: 1px solid black;
-        ''')
-        self.text_C.setGeometry(q_text_x + btn_w + 5, btnA_y + textA_h + btn_h, textA_w, textA_h)
+        # self.btn_C.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
+        self.text_C.setGeometry(q_text_x + btn_w, btnA_y + textA_h + btn_h, textA_w, textA_h)
         self.text_C.setAlignment(QtCore.Qt.AlignLeft)
-        self.text_C.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        # self.text_C.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
 
         self.btn_D.setGeometry(btnB_x, btnC_y + btn_h, btn_w, btn_h)
-        self.btn_D.setStyleSheet('''
-            border: 1px solid black;
-        ''')
-        self.text_D.setGeometry(btnB_x + btn_w + 5, btnA_y + textA_h + btn_h, textA_w, textA_h)
+        # self.btn_D.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
+        self.text_D.setGeometry(btnB_x + btn_w, btnA_y + textA_h + btn_h, textA_w, textA_h)
         self.text_D.setAlignment(QtCore.Qt.AlignLeft)
-        self.text_D.setStyleSheet('''
-            border: 1px solid black;
-        ''')
+        # self.text_D.setStyleSheet('''
+        #     border: 1px solid black;
+        # ''')
 
         # 3. 設定前/後一頁按鈕位置
         page_btn_x = btnB_x + textA_w + 2 * btn_w
@@ -593,18 +597,15 @@ class QuizWindows(QtWidgets.QWidget):
 
     def ui(self):
         # 設定 question_text & image 內容(未來要抓題目的資料)
-        self.question_text.setText("1. 題目區域......")
-        self.question_text.setReadOnly(True)
+        # self.question_text.setText("1. 題目區域......")
 
-        img_example = QtGui.QImage('img_exam.PNG')
-        self.question_image.setPixmap(QtGui.QPixmap.fromImage(img_example))
+        self.question_text.setReadOnly(True)
+        self._questions_setting()
+
+        # img_example = QtGui.QImage('img_exam.PNG')
+        # self.question_image.setPixmap(QtGui.QPixmap.fromImage(img_example))
 
         # 設定 option btn A, B, C, D
-        self.btn_A.setText('(A)')
-        self.btn_B.setText('(B)')
-        self.btn_C.setText('(C)')
-        self.btn_D.setText('(D)')
-
         self.option_group.addButton(self.btn_A, id=1)
         self.option_group.addButton(self.btn_B, id=2)
         self.option_group.addButton(self.btn_C, id=3)
@@ -612,15 +613,9 @@ class QuizWindows(QtWidgets.QWidget):
 
         # self.option_group.buttonClicked.connent(self._option_choice_event)
 
-        # 設定 option text A, B, C, D
-        self.text_A.setText('選項A的內容')
-        self.text_B.setText('選項B的內容')
-        self.text_C.setText('選項C的內容')
-        self.text_D.setText('選項D的內容')
-
         # 設定 previous/next page 的按鈕
-        self.previous_btn.setText('上一頁')
-        self.next_btn.setText('下一頁')
+        self.previous_btn.setText('上一題')
+        self.next_btn.setText('下一題')
 
         # 設定 page_goto 下拉式選單
         subject_id, years = self.parameters["subject_select_id"], self.parameters["test_year"]
@@ -637,6 +632,22 @@ class QuizWindows(QtWidgets.QWidget):
         # 設定交卷按鈕
         self.send_answer_btn.setText('交卷')
         self.send_answer_btn.clicked.connect(self._timer_pause)
+
+    def _questions_setting(self):
+        key = self.current_question
+        question = self.questions[key]
+        q, options = question["Q"], question["Option"]
+
+        q = str(key) + '. ' + ''.join(q.split())
+        each_option = options.split(' ')
+
+        self.question_text.setText(q)
+        self.text_A.setText(each_option[0])
+        self.text_B.setText(each_option[1])
+        self.text_C.setText(each_option[2])
+        self.text_D.setText(each_option[3])
+
+        pass
 
     def _option_choice_event(self):
         pass
