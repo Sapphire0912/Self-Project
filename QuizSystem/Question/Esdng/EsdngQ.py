@@ -62,10 +62,10 @@ def year112():
         5: {
             'Q': {'text': '小慧全家從北部搬到南部，因而轉學到新學校。他很快就熟悉學校周遭的環境，能跟老師及同學有不錯的互動，也能掌握導師的期許和班規。依據史坦伯格 (R.Sternberg)的智力三元論，大智展現了哪一種智力？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)情境智力 (contextual intelligence)', 'img': ''},
-                'B': {'text': '(B)經驗智力 (experiential intelligence)', 'img': ''},
-                'C': {'text': '(C)社交智力 (interpersonal intelligence)', 'img': ''},
-                'D': {'text': '(D)組合智力 (componential intelligence)', 'img': ''}
+                'A': {'text': '(A)情境智力\n   (contextual intelligence)', 'img': ''},
+                'B': {'text': '(B)經驗智力\n   (experiential intelligence)', 'img': ''},
+                'C': {'text': '(C)社交智力\n   (interpersonal intelligence)', 'img': ''},
+                'D': {'text': '(D)組合智力\n   (componential intelligence)', 'img': ''}
             },
             "isImage": ""
         },
@@ -85,7 +85,7 @@ def year112():
                 'A': {'text': '(A)確立成員須共同遵守的規範', 'img': ''},
                 'B': {'text': '(B)協助成員感到自己是團體的一份子', 'img': ''},
                 'C': {'text': '(C)協助成員深入了解、掌握與發展自我', 'img': ''},
-                'D': {'text': '(D)幫助成員建立自己參與團隊的個人目標', 'img': ''}
+                'D': {'text': '(D)幫助成員建立自己參與團隊的個人目\n   標', 'img': ''}
             },
             "isImage": ""
         },
@@ -112,40 +112,40 @@ def year112():
         10: {
             'Q': {'text': '小英這次閱讀測驗考了 65 分，遠低於全班的平均成績，所以林老師讓他放學後留下接受課後輔導。老師使用交互教學法 (reciprocal teaching) 教小英摘要與提問等閱讀策略，並逐漸將責任轉移給小英。小英在一週後重寫相同測驗的複本，得到了85分。根據以上的情境，下列敘述何者錯誤？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)老師的作法符合維高思基(L.Vygotsky)的社會文化論', 'img': ''},
-                'B': {'text': '(B)老師提供的鷹架(scaffolding)有助於提升小英的閱讀表現', 'img': ''},
-                'C': {'text': '(C)85分代表小英的近側發展區(zoneofproximal development,ZPD)', 'img': ''},
-                'D': {'text': '(D)65分可視為小英近側發展區(zoneofproximal development,ZPD)的下限', 'img': ''}
+                'A': {'text': '(A)老師的作法符合維高思基\n   (L.Vygotsky)的社會文化論', 'img': ''},
+                'B': {'text': '(B)老師提供的鷹架(scaffolding)有助於\n   提升小英的閱讀表現', 'img': ''},
+                'C': {'text': '(C)85分代表小英的近側發展區\n   (zoneofproximal development,ZPD)', 'img': ''},
+                'D': {'text': '(D)65分可視為小英近側發展區\n   (zoneofproximal development,ZPD)的\n   下限', 'img': ''}
             },
             "isImage": ""
         },
         11: {
             'Q': {'text': '老師給小元看兩個盒子，一個盒子有泡芙圖案，另一個則有糖果圖案。老師在小元面前把泡芙放入糖果圖案的盒子。這時，老師問小元：「等一下小華進來後，會到哪個盒子找泡芙吃？」老師主要想測試小元的哪一種能力？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)自我調節(self-regulating)', 'img': ''},
-                'B': {'text': '(B)道德推理(moral reasoning)', 'img': ''},
-                'C': {'text': '(C)語言組成(language making)', 'img': ''},
-                'D': {'text': '(D)觀點取替(perspectivetaking)', 'img': ''}
+                'A': {'text': '(A)自我調節 (self-regulating)', 'img': ''},
+                'B': {'text': '(B)道德推理 (moral reasoning)', 'img': ''},
+                'C': {'text': '(C)語言組成 (language making)', 'img': ''},
+                'D': {'text': '(D)觀點取替 (perspective taking)', 'img': ''}
             },
             "isImage": ""
         },
         12: {
             'Q': {'text': '下列敘述何者不符合柯柏格 (L.Kohlberg) 道德發展階段論的觀點？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)發展階段的前後順序會因不同文化而異', 'img': ''},
-                'B': {'text': '(B)道德發展可依俗例(convention)分為三期(levels)', 'img': ''},
-                'C': {'text': '(C)發展階段所提供的道德思考架構，可應用至各種情境', 'img': ''},
-                'D': {'text': '(D)除了第一階段之外，各階段的發展都建立在前一階段的推理之上', 'img': ''}
+                'A': {'text': '(A)發展階段的前後順序會因不同文化而\n   異', 'img': ''},
+                'B': {'text': '(B)道德發展可依俗例(convention)分為\n   三期(levels)', 'img': ''},
+                'C': {'text': '(C)發展階段所提供的道德思考架構，可\n   應用至各種情境', 'img': ''},
+                'D': {'text': '(D)除了第一階段之外，各階段的發展都建\n   立在前一階段的推理之上', 'img': ''}
             },
             "isImage": ""
         },
         13: {
             'Q': {'text': '教師應依據學生不同的需求與情境來安排座位。下列何種座位安排方式較為不妥？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)為增加學生互動機會與提升教學效果，將桌椅排成ㄇ字型', 'img': ''},
-                'B': {'text': '(B)為激勵學生更加精進，按照成績高低依序安排全班的座位', 'img': ''},
-                'C': {'text': '(C)運用匿名方式了解學生的人際關係，作為安排座位的參考', 'img': ''},
-                'D': {'text': '(D)為維護其他同學的受教權，把嚴重違反紀律的學生暫時安排在教室角落', 'img': ''}
+                'A': {'text': '(A)為增加學生互動機會與提升教學效果\n   ，將桌椅排成ㄇ字型', 'img': ''},
+                'B': {'text': '(B)為激勵學生更加精進，按照成績高低\n   依序安排全班的座位', 'img': ''},
+                'C': {'text': '(C)運用匿名方式了解學生的人際關係，\n   作為安排座位的參考', 'img': ''},
+                'D': {'text': '(D)為維護其他同學的受教權，把嚴重違\n   反紀律的學生暫時安排在教室角落', 'img': ''}
             },
             "isImage": ""
         },
@@ -154,18 +154,18 @@ def year112():
             'Option': {
                 'A': {'text': '(A)當學生進步時，提高增強的頻率', 'img': ''},
                 'B': {'text': '(B)整個過程皆應使用立即與持續的增強', 'img': ''},
-                'C': {'text': '(C)一開始先持續性增強，之後再間歇性增強', 'img': ''},
-                'D': {'text': '(D)一開始先間歇性增強，之後再持續性增強', 'img': ''}
+                'C': {'text': '(C)一開始先持續性增強，之後再間歇性\n   增強', 'img': ''},
+                'D': {'text': '(D)一開始先間歇性增強，之後再持續性\n   增強', 'img': ''}
             },
             "isImage": ""
         },
         15: {
             'Q': {'text': '老師在前兩週的數學課教了最大公因數的概念及算法，小柏做了很多練習才終於學會。這週開始，老師開始教最小公倍數的概念及算法，結果小柏覺得很混淆，原本之前已經學會的最大公因數算法反而不會了。下列心理歷程何者較能解釋前述現象？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)順攝抑制 (proactive inhibition)', 'img': ''},
-                'B': {'text': '(B)順攝助長 (proactive facilitation)', 'img': ''},
-                'C': {'text': '(C)倒攝抑制 (retroactive inhibition)', 'img': ''},
-                'D': {'text': '(D)倒攝助長 (retroactive facilitation)', 'img': ''}
+                'A': {'text': '(A)順攝抑制\n   (proactive inhibition)', 'img': ''},
+                'B': {'text': '(B)順攝助長\n   (proactive facilitation)', 'img': ''},
+                'C': {'text': '(C)倒攝抑制\n   (retroactive inhibition)', 'img': ''},
+                'D': {'text': '(D)倒攝助長\n   (retroactive facilitation)', 'img': ''}
             },
             "isImage": ""
         },
@@ -184,8 +184,8 @@ def year112():
             'Option': {
                 'A': {'text': '(A)學習障礙不會伴隨知覺動作障礙', 'img': ''},
                 'B': {'text': '(B)學習障礙不是由智力影響而造成', 'img': ''},
-                'C': {'text': '(C)學習障礙主要是由心理社會不利因素所造成', 'img': ''},
-                'D': {'text': '(D)學習障礙在臺灣的盛行率介於10%至20%之間', 'img': ''}
+                'C': {'text': '(C)學習障礙主要是由心理社會不利因素\n   所造成', 'img': ''},
+                'D': {'text': '(D)學習障礙在臺灣的盛行率介於10%至\n   20%之間', 'img': ''}
             },
             "isImage": ""
         },
@@ -205,7 +205,7 @@ def year112():
                 'A': {'text': '(A)透過運動放鬆心情', 'img': ''},
                 'B': {'text': '(B)鼓勵自己把握下次的機會', 'img': ''},
                 'C': {'text': '(C)向老師或同學請教學習方法', 'img': ''},
-                'D': {'text': '(D)告訴自己想開一點，分數不是最重要的事', 'img': ''}
+                'D': {'text': '(D)告訴自己想開一點，分數不是最重要\n   的事', 'img': ''}
             },
             "isImage": ""
         },
@@ -222,9 +222,9 @@ def year112():
         21: {
             'Q': {'text': '輔導教師協助來談者明確地表達個人的感覺、經驗與行為，聚焦於來談者自己的故事，而非漫無目標的談話。這屬於何種諮商技術？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)澄清 (clarification)', 'img': ''},
-                'B': {'text': '(B)面質 (confrontation)', 'img': ''},
-                'C': {'text': '(C)摘要 (summarization)', 'img': ''},
+                'A': {'text': '(A)澄清(clarification)', 'img': ''},
+                'B': {'text': '(B)面質(confrontation)', 'img': ''},
+                'C': {'text': '(C)摘要(summarization)', 'img': ''},
                 'D': {'text': '(D)具體化(concreteness)', 'img': ''}
             },
             "isImage": ""
@@ -255,17 +255,17 @@ def year112():
                 'A': {'text': '(A)怡君能夠清楚意識到自己的情緒', 'img': ''},
                 'B': {'text': '(B)怡君對於自己的情緒調節掌握得很好', 'img': ''},
                 'C': {'text': '(C)怡君非常遵守文化中情緒表達的規則', 'img': ''},
-                'D': {'text': '(D)怡君能根據過去經驗預測並理解妹妹的情緒', 'img': ''}
+                'D': {'text': '(D)怡君能根據過去經驗預測並理解妹妹\n   的情緒', 'img': ''}
             },
             "isImage": ""
         },
         25: {
             'Q': {'text': '五年級的小貞和小惠是好朋友，他們常常聊天分享生活點滴。最近小貞的父母發生一些爭吵，小貞和小惠每天談論父母的問題，他們的心情也因此跟著低落下來。此一現象符應下列哪一個概念？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)同儕壓力(peerpressure)', 'img': ''},
-                'B': {'text': '(B)共同反芻(co-rumination)', 'img': ''},
-                'C': {'text': '(C)替代學習(vicarious learning)', 'img': ''},
-                'D': {'text': '(D)負增強陷阱(negativereinforcement trap)', 'img': ''}
+                'A': {'text': '(A)同儕壓力\n   (peerpressure)', 'img': ''},
+                'B': {'text': '(B)共同反芻\n   (co-rumination)', 'img': ''},
+                'C': {'text': '(C)替代學習\n   (vicarious learning)', 'img': ''},
+                'D': {'text': '(D)負增強陷阱\n   (negativereinforcement trap)', 'img': ''}
             },
             "isImage": ""
         }
