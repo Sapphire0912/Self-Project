@@ -640,7 +640,7 @@ class QuizWindows(QtWidgets.QWidget):
         key = self.current_question
         question = self.questions[key]
 
-        if len(question["isImage"]) == 0:
+        if question["isImage"] == "":
             q, options = question["Q"]["text"], question["Option"]
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
 
@@ -655,6 +655,7 @@ class QuizWindows(QtWidgets.QWidget):
         else:
             pass
 
+        # format setting
 
         pass
 
