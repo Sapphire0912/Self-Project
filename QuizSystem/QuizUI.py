@@ -657,8 +657,7 @@ class QuizWindows(QtWidgets.QWidget):
         index = self.current_question - 1
         choose = self.option_group.checkedId()
         self.user_answers[index] = choose
-        print(self.user_answers)
-        pass
+        # print(self.user_answers)
 
     def _update_option_state(self):
         # 更新 4 個選項按鈕狀態, 使其變成未選取
