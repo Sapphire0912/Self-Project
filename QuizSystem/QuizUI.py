@@ -3,11 +3,11 @@ from PyQt5.QtGui import QFont, QPalette, QColor
 import sys
 
 # 可以根據使用者選的選項之後, 再 import 特定的檔案和答案
-# import Question.Chinese.ChineseQ as chineseQ
-# import Question.Math.MathQ as mathQ
-# import Question.Espr.EsprQ as esprQ
+import Question.Chinese.ChineseQ as chineseQ
+import Question.Math.MathQ as mathQ
+import Question.Espr.EsprQ as esprQ
 import Question.Esdng.EsdngQ as esdngQ
-# import Question.Escnt.EscntQ as escntQ
+import Question.Escnt.EscntQ as escntQ
 
 
 # 各年各科目的測驗題數(去除 107 年)
@@ -415,6 +415,7 @@ class InitialWindow(QtWidgets.QWidget):
                 subject_info=self.values[self.subjects_group.checkedId()],
                 subject_select_id=self.subjects_group.checkedId(),
                 test_year=self.years_menu.currentText(),
+                test_year_id=self.years_menu.currentIndex(),
                 font_size=10 + self.winsize_group.checkedId() * 2,
                 initWindow=self
             )
@@ -470,10 +471,29 @@ class QuizWindows(QtWidgets.QWidget):
         self.question_text = QtWidgets.QTextEdit(self)
         self.question_image = QtWidgets.QLabel(self)
 
-        self.questions = esdngQ.YEARS[0]
-        # self.questions = esdngQ.year112()  # 題目變數(先拿該卷做測試, 無圖片)
+        # 處理 import 試卷的區域
+        index, years, year_id = kwargs["subject_select_id"], kwargs["test_year"], kwargs["test_year_id"]
+        # TEST_SUBJECTS = [Chinese, Math, Espr, Esdng, Escnt]
+        if index == 0:
+            # 國文試卷
+            self.questions = chineseQ.YEARS[year_id - 1]
+        elif index == 1:
+            # 數學試卷
+            self.questions = mathQ.YEARS[year_id - 1]
+        elif index == 2:
+            # espr 試卷, 教育理念與實務
+            self.questions = esprQ.YEARS[year_id - 1]
+
+        elif index == 3:
+            # esdng 試卷, 學習者發展與適性輔導
+            self.questions = esdngQ.YEARS[year_id - 1]
+
+        elif index == 4:
+            # escnt 試卷, 課程教學與評量
+            self.questions = escntQ.YEARS[year_id - 1]
+
         self.current_question = 1  # 存放當前顯示的題目
-        self.questions_number = 25  # 先按照上面的做測試
+        self.questions_number = TEST_SUBJECTS[index][years]["ChooseQ"]
         self.user_answers = ['X'] * self.questions_number
 
         # 交卷的變數
@@ -590,8 +610,7 @@ class QuizWindows(QtWidgets.QWidget):
         self.next_btn.clicked.connect(self._next_question)
 
         # 設定 page_goto 下拉式選單
-        subject_id, years = self.parameters["subject_select_id"], self.parameters["test_year"]
-        pages = TEST_SUBJECTS[subject_id][years]["ChooseQ"]
+        pages = self.questions_number
 
         self.page_goto.clear()
         self.page_goto.addItem('請選擇題數')

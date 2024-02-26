@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question/Espr/112_教育理念與實務.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question/Espr/EsprQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/Espr/EsprQ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_handleAnswerPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handleAnswerPDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,52 +236,52 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>506</line>
+          <line>522</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>460</line>
+          <line>461</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>662</line>
+          <line>678</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>598</line>
+          <line>614</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>593</line>
+          <line>609</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>592</line>
+          <line>608</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>473</line>
+          <line>489</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>475</line>
+          <line>491</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>474</line>
+          <line>490</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>476</line>
+          <line>492</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
