@@ -102,10 +102,10 @@ def year112():
         9: {
             'Q': {'text': '在網路化時代，人們可以隨時透過各種網路平台學習知識技能、交換資訊及結識學習夥伴。這樣的情形較接近下列哪一部教育著作的主張？', 'img': ''},
             'Option': {
-                'A': {'text': '(A)伊利希(I. Illich)的《非學校化社會》', 'img': ''},
-                'B': {'text': '(B)格拉塞(W.Glasser)的《沒有失敗的學校》', 'img': ''},
+                'A': {'text': '(A)伊利希(I. Illich)的\n   《非學校化社會》', 'img': ''},
+                'B': {'text': '(B)格拉塞(W.Glasser)的\n   《沒有失敗的學校》', 'img': ''},
                 'C': {'text': '(C)康茲(G.S.Counts)的\n   《學校敢勇於建立新的社會秩序嗎？》', 'img': ''},
-                'D': {'text': '(D)赫西(E.D. Hirsch)的\n   《我們所需要的學校以及為何我們\n   沒有這些學校》', 'img': ''}
+                'D': {'text': '(D)赫西(E.D. Hirsch)的《我們所需要的\n   學校以及為何我們沒有這些學校》', 'img': ''}
             },
             'isImage': ''
         },
@@ -264,7 +264,7 @@ def year112():
             'Option': {
                 'A': {'text': '(A)自我效能\n   (self-efficacy)', 'img': ''},
                 'B': {'text': '(B)學術樂觀\n   (academic optimism)', 'img': ''},
-                'C': {'text': '(C)幸福感\n   psychological well-being)', 'img': ''},
+                'C': {'text': '(C)幸福感\n   (psychological well-being)', 'img': ''},
                 'D': {'text': '(D)組織承諾\n   (organizational commitment)', 'img': ''}
             },
             'isImage': ''

@@ -483,14 +483,13 @@ class QuizWindows(QtWidgets.QWidget):
         elif index == 2:
             # espr 試卷, 教育理念與實務
             self.questions = esprQ.YEARS[year_id - 1]
-
         elif index == 3:
             # esdng 試卷, 學習者發展與適性輔導
             self.questions = esdngQ.YEARS[year_id - 1]
-
         elif index == 4:
             # escnt 試卷, 課程教學與評量
             self.questions = escntQ.YEARS[year_id - 1]
+        # print("Current import: ", index, years, year_id)
 
         self.current_question = 1  # 存放當前顯示的題目
         self.questions_number = TEST_SUBJECTS[index][years]["ChooseQ"]
