@@ -626,6 +626,7 @@ class QuizWindows(QtWidgets.QWidget):
         self.page_goto.clear()
         self.page_goto.addItem('請選擇題數')
         self.page_goto.addItems([str(i) for i in range(1, pages + 1)])
+        self.page_goto.currentIndexChanged.connect(self._page_goto_event)
 
         # 設定 timer 定時, 顯示標籤文字, 暫停/開始按鈕, 以及視窗
         self.timer.start(1000)  # 計時器
@@ -655,7 +656,6 @@ class QuizWindows(QtWidgets.QWidget):
             pass
 
 
-
         pass
 
     def _option_choice_event(self):
@@ -682,6 +682,9 @@ class QuizWindows(QtWidgets.QWidget):
             self.previous_btn.setEnabled(True)
 
         self._questions_setting()
+
+    def _page_goto_event(self):
+        pass
 
     def _timer_count(self):
         minute = str(self.current_time // 60)
