@@ -429,6 +429,7 @@ class QuizWindows(QtWidgets.QWidget):
 
         self.setWindowTitle("教師資格考試測驗系統")
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 
         # 初始視窗的參數
         self.parameters = kwargs
@@ -599,7 +600,7 @@ class QuizWindows(QtWidgets.QWidget):
         self.option_group.addButton(self.btn_C, id=3)
         self.option_group.addButton(self.btn_D, id=4)
 
-        self._update_option_state()
+        self._restore_option_choice()
         self.option_group.buttonClicked.connect(self._option_choice_event)
 
         # 設定 previous/next page 的按鈕
@@ -658,9 +659,24 @@ class QuizWindows(QtWidgets.QWidget):
         index = self.current_question - 1
         choose = self.option_group.checkedId()
         self.user_answers[index] = choose
-        # print(self.user_answers)
+        print(self.user_answers)
 
     def _restore_option_choice(self):
+        index = self.current_question - 1
+        user_answer = self.user_answers[index]
+
+        self.option_group.setExclusive(False)
+        for i, btn in enumerate(self.option_group.buttons()):
+            if user_answer == 0:
+                # 更新 4 個選項的狀態, 全部變成未選取
+                btn.setChecked(False)
+            else:
+                if i + 1 != user_answer:
+                    btn.setChecked(False)
+                else:
+                    btn.setChecked(True)
+
+        self.option_group.setExclusive(True)
         pass
 
     def _update_option_state(self):
@@ -684,19 +700,22 @@ class QuizWindows(QtWidgets.QWidget):
     def _previous_question(self):
         self.current_question -= 1
         self._update_btn_state()
-        self._update_option_state()
+        # self._update_option_state()
+        self._restore_option_choice()
         self._questions_setting()
 
     def _next_question(self):
         self.current_question += 1
         self._update_btn_state()
-        self._update_option_state()
+        # self._update_option_state()
+        self._restore_option_choice()
         self._questions_setting()
 
     def _page_goto_event(self):
         self.current_question = self.page_goto.currentIndex()
         self._update_btn_state()
-        self._update_option_state()
+        # self._update_option_state()
+        self._restore_option_choice()
         self._questions_setting()
 
     def _timer_count(self):
