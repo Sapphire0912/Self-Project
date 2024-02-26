@@ -49,7 +49,7 @@
       <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\教育理念與實務" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.EsdngQ">
+  <component name="RunManager" selected="Python.QuizUI">
     <configuration name="EsdngQ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QuizSystem" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -199,8 +199,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.EsdngQ" />
         <item itemvalue="Python.QuizUI" />
+        <item itemvalue="Python.EsdngQ" />
         <item itemvalue="Python._handleAnswerPDF (1)" />
         <item itemvalue="Python.QuestionData" />
         <item itemvalue="Python._handleAnswerPDF" />
@@ -275,11 +275,6 @@
           <url>file://$PROJECT_DIR$/QuizUI.py</url>
           <line>623</line>
           <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizUI.py</url>
-          <line>643</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

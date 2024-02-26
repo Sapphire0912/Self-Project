@@ -638,16 +638,23 @@ class QuizWindows(QtWidgets.QWidget):
     def _questions_setting(self):
         key = self.current_question
         question = self.questions[key]
-        q = question["Q"]
-        A, B, C, D = question["A"], question["B"], question["C"], question["D"]
 
-        q = str(key) + '. ' + ''.join(q.split())
+        if len(question["isImage"]) == 0:
+            q, options = question["Q"]["text"], question["Option"]
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
 
-        self.question_text.setText(q)
-        self.text_A.setText(A)
-        self.text_B.setText(B)
-        self.text_C.setText(C)
-        self.text_D.setText(D)
+            q = str(key) + '. ' + q
+
+            self.question_text.setText(q)
+            self.text_A.setText(A)
+            self.text_B.setText(B)
+            self.text_C.setText(C)
+            self.text_D.setText(D)
+
+        else:
+            pass
+
+
 
         pass
 
