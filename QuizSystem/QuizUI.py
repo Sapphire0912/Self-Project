@@ -497,6 +497,7 @@ class QuizWindows(QtWidgets.QWidget):
 
         # 交卷的變數
         self.send_answer_btn = QtWidgets.QPushButton(self)
+        self.result_window = ResultWindows()  # 新視窗的變數
         # -----
 
         self._window_setting()
@@ -659,6 +660,9 @@ class QuizWindows(QtWidgets.QWidget):
         self.user_answers[index] = choose
         # print(self.user_answers)
 
+    def _restore_option_choice(self):
+        pass
+
     def _update_option_state(self):
         # 更新 4 個選項按鈕狀態, 使其變成未選取
         self.option_group.setExclusive(False)
@@ -718,7 +722,8 @@ class QuizWindows(QtWidgets.QWidget):
         _hint_box = QtWidgets.QMessageBox(self)
 
         _hint_box.setWindowTitle("暫停測驗")
-        text = "當前" + self.timer_label.text() + "\n" + "剩餘題數：" + "{reducingQ}\n確認是否交卷？\n"
+        reducingQ = str(self.user_answers.count(0))
+        text = "當前" + self.timer_label.text() + "\n" + "剩餘未作答題數：" + reducingQ + "\n確認是否交卷？\n"
         _hint_box.setFont(QFont('細明體', 12))
         _hint_box.setText(text)
         _hint_box.setIcon(QtWidgets.QMessageBox.Information)
@@ -739,9 +744,17 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
+        # 交卷後的新視窗
         self.close()
+        self.result_window.show()
         pass
     pass
+
+
+class ResultWindows(QtWidgets.QWidget):
+    def __init__(self):
+        super(ResultWindows, self).__init__()
+        pass
 
 
 if __name__ == '__main__':
