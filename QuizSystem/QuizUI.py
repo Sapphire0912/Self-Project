@@ -437,15 +437,6 @@ class QuizWindows(QtWidgets.QWidget):
         # self.initWindow = kwargs["initWindow"]
 
         # ----- 參數設定 -----
-        # 設定題目內容及相關的變數
-        self.question_text = QtWidgets.QTextEdit(self)
-        self.question_image = QtWidgets.QLabel(self)
-
-        self.questions = esdngQ.year112()  # 題目變數(先拿該卷做測試, 無圖片)
-        self.current_question = 1  # 存放當前顯示的題目
-        self.questions_number = 25  # 先按照上面的做測試
-        self.user_answers = ['X'] * self.questions_number
-
         # 設定選項內容的變數(文字/圖片放在 Label 裡面呈現)
         self.option_group = QtWidgets.QButtonGroup(self)
         self.btn_A = QtWidgets.QRadioButton(self)
@@ -474,6 +465,16 @@ class QuizWindows(QtWidgets.QWidget):
         self.timer.timeout.connect(self._timer_count)
         self.timer_label = QtWidgets.QLabel(self)
         self.timer_pause_btn = QtWidgets.QPushButton(self)
+
+        # 設定題目內容及相關的變數
+        self.question_text = QtWidgets.QTextEdit(self)
+        self.question_image = QtWidgets.QLabel(self)
+
+        self.questions = esdngQ.YEARS[0]
+        # self.questions = esdngQ.year112()  # 題目變數(先拿該卷做測試, 無圖片)
+        self.current_question = 1  # 存放當前顯示的題目
+        self.questions_number = 25  # 先按照上面的做測試
+        self.user_answers = ['X'] * self.questions_number
 
         # 交卷的變數
         self.send_answer_btn = QtWidgets.QPushButton(self)
@@ -512,55 +513,27 @@ class QuizWindows(QtWidgets.QWidget):
         q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
         self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
         self.question_image.setAlignment(QtCore.Qt.AlignCenter)
-        # self.question_image.setStyleSheet('''
-        #     border: solid red;
-        #     border-width: 3px 3px 3px 3px;
-        # ''')
 
         # 3. 設定選項 A, B, C, D & 各 Label 的位置(若有圖片, 盡量找可以 resize image 的方法)
         btnA_y, btn_w, btn_h = int(height * 0.6), 20, 20
         self.btn_A.setGeometry(q_text_x, btnA_y, btn_w, btn_h)
-        # self.btn_A.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
         textA_w, textA_h = int(width * 0.3), int(height * 0.18)
         self.text_A.setGeometry(q_text_x + btn_w, btnA_y, textA_w, textA_h)
         self.text_A.setAlignment(QtCore.Qt.AlignLeft)
-        # self.text_A.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
 
         btnB_x = int(width * 0.4)
         self.btn_B.setGeometry(btnB_x, btnA_y, btn_w, btn_h)
-        # self.btn_B.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
         self.text_B.setGeometry(btnB_x + btn_w, btnA_y, textA_w, textA_h)
         self.text_B.setAlignment(QtCore.Qt.AlignLeft)
-        # self.text_B.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
 
         btnC_y = int(height * 0.78)
         self.btn_C.setGeometry(q_text_x, btnC_y + btn_h, btn_w, btn_h)
-        # self.btn_C.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
         self.text_C.setGeometry(q_text_x + btn_w, btnA_y + textA_h + btn_h, textA_w, textA_h)
         self.text_C.setAlignment(QtCore.Qt.AlignLeft)
-        # self.text_C.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
 
         self.btn_D.setGeometry(btnB_x, btnC_y + btn_h, btn_w, btn_h)
-        # self.btn_D.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
         self.text_D.setGeometry(btnB_x + btn_w, btnA_y + textA_h + btn_h, textA_w, textA_h)
         self.text_D.setAlignment(QtCore.Qt.AlignLeft)
-        # self.text_D.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
 
         # 3. 設定前/後一頁按鈕位置
         page_btn_x = btnB_x + textA_w + 4 * btn_w
@@ -578,9 +551,6 @@ class QuizWindows(QtWidgets.QWidget):
         # 5. 設定 timer 的標籤文字位置
         timer_label_y = page_goto_y + page_btn_h + 20
         self.timer_label.setGeometry(page_btn_x, timer_label_y, page_btn_w * 2, page_btn_h)
-        # self.timer_label.setStyleSheet('''
-        #     border: 1px solid black;
-        # ''')
 
         # 6. 設定 timer pause btn 的樣式
         pixmap = QtGui.QPixmap('./image/icon_pause.png')
@@ -652,10 +622,16 @@ class QuizWindows(QtWidgets.QWidget):
             self.text_C.setText(C)
             self.text_D.setText(D)
 
-        else:
+        elif question["isImage"] == "Q":
+            # 題目有圖片
             pass
 
-
+        elif question["isImage"] == "A":
+            # 選項有圖片
+            pass
+        elif question["isImage"] == "Q & A":
+            # 題目 & 選項都有圖片
+            pass
         pass
 
     def _option_choice_event(self):
