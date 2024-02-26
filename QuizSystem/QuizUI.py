@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPalette, QColor
+from json import load
 import sys
 
 # 可以根據使用者選的選項之後, 再 import 特定的檔案和答案
@@ -122,6 +123,7 @@ class InitialWindow(QtWidgets.QWidget):
 
         self.setWindowTitle("教師資格考試測驗系統")
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 
         # 初始螢幕視窗大小(固定)
         self.setFixedSize(1200, 768)
@@ -472,25 +474,29 @@ class QuizWindows(QtWidgets.QWidget):
         self.question_text = QtWidgets.QTextEdit(self)
         self.question_image = QtWidgets.QLabel(self)
 
-        # 處理 import 試卷的區域
+        # 處理 import 試卷的區域, 和答案的 JSON 檔案路徑(給以後需要設計練習模式時使用)
         index, years, year_id = kwargs["subject_select_id"], kwargs["test_year"], kwargs["test_year_id"]
         # TEST_SUBJECTS = [Chinese, Math, Espr, Esdng, Escnt]
         if index == 0:
             # 國文試卷
             self.questions = chineseQ.YEARS[year_id - 1]
+            self.answers_data_path = "./Answer/ChineseA.json"
         elif index == 1:
             # 數學試卷
             self.questions = mathQ.YEARS[year_id - 1]
+            self.answers_data_path = "./Answer/MathA.json"
         elif index == 2:
             # espr 試卷, 教育理念與實務
             self.questions = esprQ.YEARS[year_id - 1]
+            self.answers_data_path = "./Answer/EsprA.json"
         elif index == 3:
             # esdng 試卷, 學習者發展與適性輔導
             self.questions = esdngQ.YEARS[year_id - 1]
+            self.answers_data_path = "./Answer/EsdngA.json"
         elif index == 4:
             # escnt 試卷, 課程教學與評量
             self.questions = escntQ.YEARS[year_id - 1]
-        # print("Current import: ", index, years, year_id)
+            self.answers_data_path = "./Answer/EscntA.json"
 
         self.current_question = 1  # 存放當前顯示的題目
         self.questions_number = TEST_SUBJECTS[index][years]["ChooseQ"]
@@ -498,7 +504,7 @@ class QuizWindows(QtWidgets.QWidget):
 
         # 交卷的變數
         self.send_answer_btn = QtWidgets.QPushButton(self)
-        self.result_window = ResultWindows()  # 新視窗的變數
+        self.result_window = None  # 新視窗的變數
         # -----
 
         self._window_setting()
@@ -659,7 +665,7 @@ class QuizWindows(QtWidgets.QWidget):
         index = self.current_question - 1
         choose = self.option_group.checkedId()
         self.user_answers[index] = choose
-        print(self.user_answers)
+        # print(self.user_answers)
 
     def _restore_option_choice(self):
         index = self.current_question - 1
@@ -693,21 +699,18 @@ class QuizWindows(QtWidgets.QWidget):
     def _previous_question(self):
         self.current_question -= 1
         self._update_btn_state()
-        # self._update_option_state()
         self._restore_option_choice()
         self._questions_setting()
 
     def _next_question(self):
         self.current_question += 1
         self._update_btn_state()
-        # self._update_option_state()
         self._restore_option_choice()
         self._questions_setting()
 
     def _page_goto_event(self):
         self.current_question = self.page_goto.currentIndex()
         self._update_btn_state()
-        # self._update_option_state()
         self._restore_option_choice()
         self._questions_setting()
 
@@ -754,18 +757,43 @@ class QuizWindows(QtWidgets.QWidget):
         elif isExitTest == 1:
             self._send_answer_event()
 
+    def _correct_answer_event(self):
+        """使用者點交卷之後, 就會開始對答案, 且會在新的視窗呈現結果"""
+
+        with open(self.answers_data_path) as answer_data:
+            json = load(answer_data)
+            current_year_answer = json[self.parameters["test_year"]]
+
+        user_answer = self.user_answers
+        answer_lst = [ord(i) - 64 for i in current_year_answer]
+        pass
+
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
         # 交卷後的新視窗
-        self.close()
+        # self.hide()
+        print(self.width(), self.height())
+        self.result_window = ResultWindows(
+            window_size=(self.width(), self.height()),
+            questions=self.questions,
+            user_answer=self.user_answers,
+            answer_path=self.answers_data_path,
+        )
         self.result_window.show()
         pass
     pass
 
 
 class ResultWindows(QtWidgets.QWidget):
-    def __init__(self):
+    def __init__(self, **kwargs):
         super(ResultWindows, self).__init__()
+
+        self.setWindowTitle("教師資格考試測驗系統")
+        self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+
+        self.parameters = kwargs
+
         pass
 
 
