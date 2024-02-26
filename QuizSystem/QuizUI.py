@@ -671,19 +671,12 @@ class QuizWindows(QtWidgets.QWidget):
                 # 更新 4 個選項的狀態, 全部變成未選取
                 btn.setChecked(False)
             else:
+                # 若該題目已被作答過, 則恢復成前次作答的選項狀態
                 if i + 1 != user_answer:
                     btn.setChecked(False)
                 else:
                     btn.setChecked(True)
 
-        self.option_group.setExclusive(True)
-        pass
-
-    def _update_option_state(self):
-        # 更新 4 個選項按鈕狀態, 使其變成未選取
-        self.option_group.setExclusive(False)
-        for btn in self.option_group.buttons():
-            btn.setChecked(False)
         self.option_group.setExclusive(True)
 
     def _update_btn_state(self):
