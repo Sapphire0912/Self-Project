@@ -493,7 +493,7 @@ class QuizWindows(QtWidgets.QWidget):
 
         self.current_question = 1  # 存放當前顯示的題目
         self.questions_number = TEST_SUBJECTS[index][years]["ChooseQ"]
-        self.user_answers = ['X'] * self.questions_number
+        self.user_answers = [0] * self.questions_number
 
         # 交卷的變數
         self.send_answer_btn = QtWidgets.QPushButton(self)
@@ -598,7 +598,8 @@ class QuizWindows(QtWidgets.QWidget):
         self.option_group.addButton(self.btn_C, id=3)
         self.option_group.addButton(self.btn_D, id=4)
 
-        # self.option_group.buttonClicked.connent(self._option_choice_event)
+        self._update_option_state()
+        self.option_group.buttonClicked.connect(self._option_choice_event)
 
         # 設定 previous/next page 的按鈕
         self.previous_btn.setText('上一題')
@@ -647,38 +648,53 @@ class QuizWindows(QtWidgets.QWidget):
         elif question["isImage"] == "A":
             # 選項有圖片
             pass
-        elif question["isImage"] == "Q & A":
+        elif question["isImage"] == "Q&A":
             # 題目 & 選項都有圖片
             pass
         pass
 
     def _option_choice_event(self):
+        index = self.current_question - 1
+        choose = self.option_group.checkedId()
+        self.user_answers[index] = choose
+        print(self.user_answers)
         pass
 
-    def _previous_question(self):
-        self.current_question -= 1
+    def _update_option_state(self):
+        # 更新 4 個選項按鈕狀態, 使其變成未選取
+        self.option_group.setExclusive(False)
+        for btn in self.option_group.buttons():
+            btn.setChecked(False)
+        self.option_group.setExclusive(True)
 
+    def _update_btn_state(self):
         if self.current_question == 1:
             self.previous_btn.setEnabled(False)
         else:
             self.previous_btn.setEnabled(True)
 
-        self._questions_setting()
-
-    def _next_question(self):
-        self.current_question += 1
         if self.current_question >= self.questions_number:
             self.next_btn.setEnabled(False)
         else:
             self.next_btn.setEnabled(True)
 
-        if self.current_question != 1:
-            self.previous_btn.setEnabled(True)
+    def _previous_question(self):
+        self.current_question -= 1
+        self._update_btn_state()
+        self._update_option_state()
+        self._questions_setting()
 
+    def _next_question(self):
+        self.current_question += 1
+        self._update_btn_state()
+        self._update_option_state()
         self._questions_setting()
 
     def _page_goto_event(self):
-        pass
+        self.current_question = self.page_goto.currentIndex()
+        self._update_btn_state()
+        self._update_option_state()
+        self._questions_setting()
 
     def _timer_count(self):
         minute = str(self.current_time // 60)
