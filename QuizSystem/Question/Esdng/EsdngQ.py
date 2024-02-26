@@ -115,7 +115,7 @@ def year112():
                 'A': {'text': '(A)老師的作法符合維高思基\n   (L.Vygotsky)的社會文化論', 'img': ''},
                 'B': {'text': '(B)老師提供的鷹架(scaffolding)有助於\n   提升小英的閱讀表現', 'img': ''},
                 'C': {'text': '(C)85分代表小英的近側發展區\n   (zoneofproximal development,ZPD)', 'img': ''},
-                'D': {'text': '(D)65分可視為小英近側發展區\n   (zoneofproximal development,ZPD)的\n   下限', 'img': ''}
+                'D': {'text': '(D)65分可視為小英近側發展區\n   (zoneofproximal development,ZPD)\n   的下限', 'img': ''}
             },
             "isImage": ""
         },

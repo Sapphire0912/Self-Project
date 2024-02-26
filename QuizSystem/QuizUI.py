@@ -563,7 +563,7 @@ class QuizWindows(QtWidgets.QWidget):
         # ''')
 
         # 3. 設定前/後一頁按鈕位置
-        page_btn_x = btnB_x + textA_w + 2 * btn_w
+        page_btn_x = btnB_x + textA_w + 4 * btn_w
         page_btn_w = int(width * 0.08)
         page_btn_h = int(height * 0.05)
         self.previous_btn.setGeometry(page_btn_x, btnA_y, page_btn_w, page_btn_h)
@@ -655,7 +655,6 @@ class QuizWindows(QtWidgets.QWidget):
         else:
             pass
 
-        # format setting
 
         pass
 
