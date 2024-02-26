@@ -771,14 +771,13 @@ class QuizWindows(QtWidgets.QWidget):
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
         # 交卷後的新視窗
-        # self.hide()
-        print(self.width(), self.height())
         self.result_window = ResultWindows(
             window_size=(self.width(), self.height()),
             questions=self.questions,
             user_answer=self.user_answers,
-            answer_path=self.answers_data_path,
+            answer_path=self.answers_data_path
         )
+        # self.hide()
         self.result_window.show()
         pass
     pass
@@ -794,6 +793,12 @@ class ResultWindows(QtWidgets.QWidget):
 
         self.parameters = kwargs
 
+        self._windows_setting()
+        pass
+
+    def _windows_setting(self):
+        width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
+        self.setFixedSize(width, height)
         pass
 
 
