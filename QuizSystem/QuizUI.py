@@ -855,7 +855,7 @@ class ResultWindows(QtWidgets.QWidget):
         subject = self.parameters["subject"]
 
         self.title_label.setText(f'測驗科目：{subject}  作答時間：{minute}分{second}秒')
-        self.title_label.setStyleSheet('''border: 1px solid;''')
+        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
 
         label_list = self.labels_list
         last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
@@ -869,9 +869,9 @@ class ResultWindows(QtWidgets.QWidget):
         <font color="black">正確答案是</font>
         <font color="red">紅色文字</font>'''
         self.illustrate_label.setText(html_illustrate)
+        self.illustrate_label.setStyleSheet('''border: solid black; border-width: 0px 0px 1px 0px;''')
         self.labels_layout.addWidget(self.illustrate_label, 12, 0, 1, last_row)
 
-        self.accuracy_label.setStyleSheet('''border: 1px solid;''')
         self.labels_layout.addWidget(self.accuracy_label, 13, 0, 1, last_row)
 
         self.save_test_btn.setText('儲存本次測驗')
@@ -925,7 +925,6 @@ class ResultWindows(QtWidgets.QWidget):
         # 處理 back_first_window_btn 事件
         self.back_first_window_btn.clicked.connect(self._back_first_window)
         self.exit_system.clicked.connect(self._exit_system)
-
         pass
 
     def _mouse_cursor_enter(self, event):
