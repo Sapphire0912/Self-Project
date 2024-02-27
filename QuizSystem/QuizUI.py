@@ -421,8 +421,8 @@ class InitialWindow(QtWidgets.QWidget):
                 font_size=10 + self.winsize_group.checkedId() * 2,
                 initWindow=self
             )
-            self.hide()
             self.quiz_windows.show()
+            self.close()
 
 
 class QuizWindows(QtWidgets.QWidget):
@@ -771,10 +771,11 @@ class QuizWindows(QtWidgets.QWidget):
             user_answer=self.user_answers,
             answer_path=self.answers_data_path,
             test_year=self.parameters["test_year"],
-            using_time=(time_min, time_second)
+            using_time=(time_min, time_second),
+            first_window=self.initWindow
         )
-        # self.hide()
         self.result_window.show()
+        self.close()
         pass
     pass
 
@@ -840,6 +841,11 @@ class ResultWindows(QtWidgets.QWidget):
         # 視窗大小的基本設定
         width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
         self.setFixedSize(width, height)
+
+        # 讓視窗在螢幕正中間顯示
+        screen = QtWidgets.QApplication.desktop()
+        screen_width, screen_height = screen.width(), screen.height()
+        self.move((screen_width - width) // 2, (screen_height - height) // 2)
 
         # - 處理 labels_layout
         # 1. 設定 title label 文字, 樣式
@@ -915,6 +921,11 @@ class ResultWindows(QtWidgets.QWidget):
             label.mousePressEvent = lambda event, clicked_label=label: self._question_is_clicked(event, clicked_label)
 
         self._correct_answer_event()
+
+        # 處理 back_first_window_btn 事件
+        self.back_first_window_btn.clicked.connect(self._back_first_window)
+        self.exit_system.clicked.connect(self._exit_system)
+
         pass
 
     def _mouse_cursor_enter(self, event):
@@ -969,6 +980,13 @@ class ResultWindows(QtWidgets.QWidget):
         accuracy = "{:.2f}".format(correct / len(user_answer))
         self.accuracy_label.setText(f'正確題數/總共題數：{correct}/{len(user_answer)}\n正確率：{accuracy}%')
         pass
+
+    def _back_first_window(self):
+        self.parameters["first_window"].show()
+        self.close()
+
+    def _exit_system(self):
+        self.close()
 
 
 if __name__ == '__main__':
