@@ -909,7 +909,27 @@ class ResultWindows(QtWidgets.QWidget):
             label.setStyleSheet('''border: 1px solid;''')  # 同時設定答案框的樣式
             self.labels_layout.addWidget(label, column + 1, row)
 
+            # label 相關滑鼠事件設定
+            label.enterEvent = self._mouse_cursor_enter
+            label.leaveEvent = self._mouse_cursor_leave
+            label.mousePressEvent = lambda event, clicked_label=label: self._question_is_clicked(event, clicked_label)
+
         self._correct_answer_event()
+        pass
+
+    def _mouse_cursor_enter(self, event):
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+
+    def _mouse_cursor_leave(self, event):
+        self.setCursor(QtCore.Qt.ArrowCursor)
+
+    def _question_is_clicked(self, event, clicked_label):
+        html_text = clicked_label.text()  # 取得 HTML 的文本
+        number = html_text.split('.')[0].split('>')[-1]  # 取得題號
+        self._display_clicked_question(number)
+
+    def _display_clicked_question(self, number):
+        print('exec.')
         pass
 
     def _correct_answer_event(self):
@@ -925,6 +945,7 @@ class ResultWindows(QtWidgets.QWidget):
 
         # 若使用者答案正確就不要顯示解答的答案
         correct = self.correct
+        wrong_index = list()  # 儲存錯誤的答案
         for index, user_ans in enumerate(user_answer):
             question_number = str(index + 1) + '. '
             if user_ans != current_year_answer[index]:
@@ -932,6 +953,7 @@ class ResultWindows(QtWidgets.QWidget):
                 <font color="black">{question_number}</font>
                 <font color="blue">{user_ans}</font>
                 <font color="red">{current_year_answer[index]}</font>'''
+                wrong_index.append(index)
             else:
                 html_text_setting = f'''
                 <font color="black">{question_number}</font>
