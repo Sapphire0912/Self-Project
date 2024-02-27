@@ -665,7 +665,6 @@ class QuizWindows(QtWidgets.QWidget):
         index = self.current_question - 1
         choose = self.option_group.checkedId()
         self.user_answers[index] = choose
-        # print(self.user_answers)
 
     def _restore_option_choice(self):
         index = self.current_question - 1
@@ -773,6 +772,7 @@ class QuizWindows(QtWidgets.QWidget):
         # 交卷後的新視窗
         self.result_window = ResultWindows(
             window_size=(self.width(), self.height()),
+            font_size=self.parameters["font_size"],
             questions=self.questions,
             user_answer=self.user_answers,
             answer_path=self.answers_data_path
@@ -790,15 +790,67 @@ class ResultWindows(QtWidgets.QWidget):
         self.setWindowTitle("教師資格考試測驗系統")
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+        self.setFont(QFont('細明體', kwargs["font_size"]))
 
         self.parameters = kwargs
 
+        # ----- 參數設定 -----
+        # -- 版面布局設定 --
+        self.window_layout = QtWidgets.QGridLayout(self)
+        # - 顯示正確答案 & 使用者答案的 layout
+        self.labels_layout = QtWidgets.QGridLayout(self)
+        # - 顯示問題, 選項, 圖片的 layout
+        self.question_layout = QtWidgets.QGridLayout(self)
+        # --
+
+        # 設定顯示題號, 使用者選項, 正確答案的標籤
+        self.question_number = len(kwargs["questions"].keys())
+        self.labels_list = list()
+        for i in range(0, self.question_number):
+            label = QtWidgets.QLabel(self)
+            self.labels_list.append(label)
+
+        # 設定顯示題目, 圖片, 選項的元件
+        self.question_text = QtWidgets.QTextEdit(self)
+        self.question_image = QtWidgets.QLabel(self)
+        self.options = QtWidgets.QLabel(self)
+        # -----
+
         self._windows_setting()
+        self.ui()
         pass
 
     def _windows_setting(self):
         width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
         self.setFixedSize(width, height)
+
+        text_width, text_height = int(width * 0.6), int(height * 0.3)
+        self.question_text.setFixedSize(text_width, text_height)
+
+        pass
+
+    def ui(self):
+        label_list = self.labels_list
+        for i, label in enumerate(label_list):
+            column, row = i % 10, i // 10
+            label.setText(f'{str(i + 1)}. ')
+            label.setStyleSheet('''border: 1px solid;''')
+            self.labels_layout.addWidget(label, column, row + 1)
+
+        self.question_text.setStyleSheet('''border: 1px solid;''')
+        self.question_layout.addWidget(self.question_text, 0, 0)
+
+        self.question_image.setText('這是要放 image 的 label')
+        self.question_image.setStyleSheet('''border: 1px solid;''')
+        self.question_layout.addWidget(self.question_image, 1, 0)
+
+        self.options.setText('這是放 4 個選項的 label')
+        self.options.setStyleSheet('''border: 1px solid;''')
+        self.question_layout.addWidget(self.options, 2, 0)
+
+        self.window_layout.addLayout(self.labels_layout, 0, 0)
+        self.window_layout.addLayout(self.question_layout, 0, 1)
+
         pass
 
 
