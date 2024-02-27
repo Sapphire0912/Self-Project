@@ -438,7 +438,7 @@ class QuizWindows(QtWidgets.QWidget):
         self.setFont(QFont('細明體', kwargs["font_size"]))
 
         # -- 初始視窗
-        # self.initWindow = kwargs["initWindow"]
+        self.initWindow = kwargs["initWindow"]
 
         # ----- 參數設定 -----
         # 設定選項內容的變數(文字/圖片放在 Label 裡面呈現)
@@ -722,7 +722,6 @@ class QuizWindows(QtWidgets.QWidget):
 
         self.timer_label.setText(f'剩餘時間：{minute}分{second}秒')
         self.current_time = self.current_time - 1
-        pass
 
     def _timer_start(self):
         self.timer.start(1000)  # 計時器
@@ -756,26 +755,23 @@ class QuizWindows(QtWidgets.QWidget):
         elif isExitTest == 1:
             self._send_answer_event()
 
-    def _correct_answer_event(self):
-        """使用者點交卷之後, 就會開始對答案, 且會在新的視窗呈現結果"""
-
-        with open(self.answers_data_path) as answer_data:
-            json = load(answer_data)
-            current_year_answer = json[self.parameters["test_year"]]
-
-        user_answer = self.user_answers
-        answer_lst = [ord(i) - 64 for i in current_year_answer]
-        pass
-
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
+        # 計算作答時間
+        time_second = self.quiz_time - self.current_time
+        time_min = time_second // 60
+        time_second = time_second % 60
+
         # 交卷後的新視窗
         self.result_window = ResultWindows(
             window_size=(self.width(), self.height()),
             font_size=self.parameters["font_size"],
-            questions=self.questions,
+            subject=self.parameters["subject_info"]["subject"],
+            question=self.questions,
             user_answer=self.user_answers,
-            answer_path=self.answers_data_path
+            answer_path=self.answers_data_path,
+            test_year=self.parameters["test_year"],
+            using_time=(time_min, time_second)
         )
         # self.hide()
         self.result_window.show()
@@ -811,7 +807,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.save_test_btn = QtWidgets.QPushButton(self)
 
         # 設定顯示題號, 使用者選項, 正確答案的標籤
-        self.question_number = len(kwargs["questions"].keys())
+        self.question_number = len(kwargs["question"].keys())
         self.labels_list = list()
         for i in range(0, self.question_number):
             label = QtWidgets.QLabel(self)
@@ -826,6 +822,12 @@ class ResultWindows(QtWidgets.QWidget):
         self.back_first_window_btn = QtWidgets.QPushButton(self)
         self.history_btn = QtWidgets.QPushButton(self)
         self.exit_system = QtWidgets.QPushButton(self)
+
+        # - 批改答案相關變數
+        self.question = kwargs["question"]
+        self.year = kwargs["test_year"]
+        self.user_answer = kwargs["user_answer"]
+        self.answer_path = kwargs["answer_path"]
         # -----
 
         self._windows_setting()
@@ -833,12 +835,41 @@ class ResultWindows(QtWidgets.QWidget):
         pass
 
     def _windows_setting(self):
+        # 視窗大小的基本設定
         width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
         self.setFixedSize(width, height)
 
-        self.illustrate_label.setStyleSheet('''border: 1px solid;''')
-        self.accuracy_label.setStyleSheet('''border: 1px solid;''')
+        # - 處理 labels_layout
+        # 1. 設定 illustrate label 文字, 樣式
+        reducing_time = self.parameters["using_time"]
+        minute = str(reducing_time[0])
+        second = '0' + str(reducing_time[1]) if reducing_time[1] < 10 else str(reducing_time[1])
+        subject = self.parameters["subject"]
 
+        self.illustrate_label.setText(f'測驗科目：{subject}  作答時間：{minute}分{second}秒')
+        self.illustrate_label.setStyleSheet('''border: 1px solid;''')
+
+        label_list = self.labels_list
+        last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
+        self.labels_layout.addWidget(self.illustrate_label, 0, 0, 1, last_row)
+
+        self.accuracy_label.setStyleSheet('''border: 1px solid;''')
+        self.labels_layout.addWidget(self.accuracy_label, 12, 0, 1, last_row)
+
+        self.save_test_btn.setText('儲存本次測驗')
+        self.labels_layout.addWidget(self.save_test_btn, 12, last_row - 1)
+
+        # - 處理 button_layout 文字, 樣式
+        self.back_first_window_btn.setText('返回測驗首頁')
+        self.button_layout.addWidget(self.back_first_window_btn, 0)
+
+        self.history_btn.setText('歷史測驗紀錄')
+        self.button_layout.addWidget(self.history_btn, 0)
+
+        self.exit_system.setText('離開測驗')
+        self.button_layout.addWidget(self.exit_system, 0)
+
+        # - 處理 question_layout 的文字, 樣式
         text_width, text_height = int(width * 0.5), int(height * 0.3)
         self.question_text.setFixedSize(text_width, text_height)
 
@@ -849,7 +880,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.question_image.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.question_image, 1, 0)
 
-        self.options.setText('這是放 4 個選項的 label')
+        self.options.setText('這是放 4 個選項的 label(4個選項要分開做 label)')
         self.options.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.options, 2, 0)
 
@@ -863,30 +894,29 @@ class ResultWindows(QtWidgets.QWidget):
 
         for i, label in enumerate(label_list):
             column, row = i % 10, i // 10
-            label.setText(f'{str(i + 1)}. ')
-            label.setStyleSheet('''border: 1px solid;''')
+            label.setStyleSheet('''border: 1px solid;''')  # 同時設定答案框的樣式
             self.labels_layout.addWidget(label, column + 1, row)
 
-        last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
+        # self._correct_answer_event()
+        pass
 
-        self.illustrate_label.setText('這是 illustrate label')
-        self.labels_layout.addWidget(self.illustrate_label, 0, 0, 1, last_row)
+    def _correct_answer_event(self):
+        pass
 
-        self.accuracy_label.setText('這是 Accuracy label')
-        self.labels_layout.addWidget(self.accuracy_label, 12, 0, 1, last_row)
-
-        self.save_test_btn.setText('儲存本次測驗')
-        self.labels_layout.addWidget(self.save_test_btn, 12, last_row - 1)
-
-        self.back_first_window_btn.setText('返回測驗首頁')
-        self.button_layout.addWidget(self.back_first_window_btn, 0)
-
-        self.history_btn.setText('歷史測驗紀錄')
-        self.button_layout.addWidget(self.history_btn, 0)
-
-        self.exit_system.setText('離開測驗')
-        self.button_layout.addWidget(self.exit_system, 0)
-
+        # with open(self.answer_path) as answer_data:
+        #     json = load(answer_data)
+        #     current_year_answer = json[self.year]
+        #
+        # user_answer = self.user_answer
+        # answer_lst = [str(ord(i) - 64) for i in current_year_answer]  # 正確答案
+        #
+        # for index, user_ans in enumerate(user_answer):
+        #     question_number = str(index + 1) + '. '
+            # html_text_setting = f'''
+            # <font color="black">{question_number}</font> and
+            # <font color="black">{user_ans}</font> and
+            # <font color="red">{answer_lst[index]}</font>'''
+            # self.labels_list[index].setText(html_text_setting)
         pass
 
 
