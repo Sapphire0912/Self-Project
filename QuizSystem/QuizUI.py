@@ -829,6 +829,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.year = kwargs["test_year"]
         self.user_answer = kwargs["user_answer"]
         self.answer_path = kwargs["answer_path"]
+        self.correct = 0
         # -----
 
         self._windows_setting()
@@ -919,16 +920,32 @@ class ResultWindows(QtWidgets.QWidget):
         # 將使用者的答案, 轉換成 A, B, C, D
         user_answer = self.user_answer
         for i, ans in enumerate(user_answer):
-            option = chr(ans + 64) if ans != 0 else '&nbsp;'
+            option = chr(ans + 64) if ans != 0 else '&nbsp;'  # HTML 的空格顯示
             user_answer[i] = option
 
+        # 若使用者答案正確就不要顯示解答的答案
+        correct = self.correct
         for index, user_ans in enumerate(user_answer):
             question_number = str(index + 1) + '. '
-            html_text_setting = f'''
-            <font color="black">{question_number}</font>
-            <font color="blue">{user_ans}</font>
-            <font color="red">{current_year_answer[index]}</font>'''
+            if user_ans != current_year_answer[index]:
+                html_text_setting = f'''
+                <font color="black">{question_number}</font>
+                <font color="blue">{user_ans}</font>
+                <font color="red">{current_year_answer[index]}</font>'''
+            else:
+                html_text_setting = f'''
+                <font color="black">{question_number}</font>
+                <font color="blue">{user_ans}</font>
+                '''
+                correct += 1
+
             self.labels_list[index].setText(html_text_setting)
+
+        self.correct = correct
+
+        # 顯示正確題數
+        accuracy = "{:.2f}".format(correct / len(user_answer))
+        self.accuracy_label.setText(f'正確題數/總共題數：{correct}/{len(user_answer)}\n正確率：{accuracy}%')
         pass
 
 
