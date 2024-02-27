@@ -841,7 +841,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.setFixedSize(width, height)
 
         # - 處理 labels_layout
-        # 1. 設定 illustrate label 文字, 樣式
+        # 1. 設定 title label 文字, 樣式
         reducing_time = self.parameters["using_time"]
         minute = str(reducing_time[0])
         second = '0' + str(reducing_time[1]) if reducing_time[1] < 10 else str(reducing_time[1])
@@ -854,11 +854,21 @@ class ResultWindows(QtWidgets.QWidget):
         last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
         self.labels_layout.addWidget(self.title_label, 0, 0, 1, last_row)
 
+        # 2. 設定 illustrate label 文字, 樣式
+        html_illustrate = '''
+        <font color="black">使用者答案是</font>
+        <font color="blue">藍色文字</font>
+        <br/>
+        <font color="black">正確答案是</font>
+        <font color="red">紅色文字</font>'''
+        self.illustrate_label.setText(html_illustrate)
+        self.labels_layout.addWidget(self.illustrate_label, 12, 0, 1, last_row)
+
         self.accuracy_label.setStyleSheet('''border: 1px solid;''')
-        self.labels_layout.addWidget(self.accuracy_label, 12, 0, 1, last_row)
+        self.labels_layout.addWidget(self.accuracy_label, 13, 0, 1, last_row)
 
         self.save_test_btn.setText('儲存本次測驗')
-        self.labels_layout.addWidget(self.save_test_btn, 12, last_row - 1)
+        self.labels_layout.addWidget(self.save_test_btn, 13, last_row - 1)
 
         # - 處理 button_layout 文字, 樣式
         self.back_first_window_btn.setText('返回測驗首頁')
