@@ -801,7 +801,14 @@ class ResultWindows(QtWidgets.QWidget):
         self.labels_layout = QtWidgets.QGridLayout(self)
         # - 顯示問題, 選項, 圖片的 layout
         self.question_layout = QtWidgets.QGridLayout(self)
+        # - 顯示按鈕的 layout
+        self.button_layout = QtWidgets.QHBoxLayout(self)
         # --
+
+        # 設定說明, 正確率標籤, 儲存本次測驗的按鈕
+        self.illustrate_label = QtWidgets.QLabel(self)
+        self.accuracy_label = QtWidgets.QLabel(self)
+        self.save_test_btn = QtWidgets.QPushButton(self)
 
         # 設定顯示題號, 使用者選項, 正確答案的標籤
         self.question_number = len(kwargs["questions"].keys())
@@ -814,6 +821,11 @@ class ResultWindows(QtWidgets.QWidget):
         self.question_text = QtWidgets.QTextEdit(self)
         self.question_image = QtWidgets.QLabel(self)
         self.options = QtWidgets.QLabel(self)
+
+        # 設定按鈕元件
+        self.back_first_window_btn = QtWidgets.QPushButton(self)
+        self.history_btn = QtWidgets.QPushButton(self)
+        self.exit_system = QtWidgets.QPushButton(self)
         # -----
 
         self._windows_setting()
@@ -824,18 +836,11 @@ class ResultWindows(QtWidgets.QWidget):
         width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
         self.setFixedSize(width, height)
 
-        text_width, text_height = int(width * 0.6), int(height * 0.3)
+        self.illustrate_label.setStyleSheet('''border: 1px solid;''')
+        self.accuracy_label.setStyleSheet('''border: 1px solid;''')
+
+        text_width, text_height = int(width * 0.5), int(height * 0.3)
         self.question_text.setFixedSize(text_width, text_height)
-
-        pass
-
-    def ui(self):
-        label_list = self.labels_list
-        for i, label in enumerate(label_list):
-            column, row = i % 10, i // 10
-            label.setText(f'{str(i + 1)}. ')
-            label.setStyleSheet('''border: 1px solid;''')
-            self.labels_layout.addWidget(label, column, row + 1)
 
         self.question_text.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.question_text, 0, 0)
@@ -848,8 +853,39 @@ class ResultWindows(QtWidgets.QWidget):
         self.options.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.options, 2, 0)
 
-        self.window_layout.addLayout(self.labels_layout, 0, 0)
+        self.window_layout.addLayout(self.labels_layout, 0, 0, 2, 1)
         self.window_layout.addLayout(self.question_layout, 0, 1)
+        self.window_layout.addLayout(self.button_layout, 1, 1)
+        pass
+
+    def ui(self):
+        label_list = self.labels_list
+
+        for i, label in enumerate(label_list):
+            column, row = i % 10, i // 10
+            label.setText(f'{str(i + 1)}. ')
+            label.setStyleSheet('''border: 1px solid;''')
+            self.labels_layout.addWidget(label, column + 1, row)
+
+        last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
+
+        self.illustrate_label.setText('這是 illustrate label')
+        self.labels_layout.addWidget(self.illustrate_label, 0, 0, 1, last_row)
+
+        self.accuracy_label.setText('這是 Accuracy label')
+        self.labels_layout.addWidget(self.accuracy_label, 12, 0, 1, last_row)
+
+        self.save_test_btn.setText('儲存本次測驗')
+        self.labels_layout.addWidget(self.save_test_btn, 12, last_row - 1)
+
+        self.back_first_window_btn.setText('返回測驗首頁')
+        self.button_layout.addWidget(self.back_first_window_btn, 0)
+
+        self.history_btn.setText('歷史測驗紀錄')
+        self.button_layout.addWidget(self.history_btn, 0)
+
+        self.exit_system.setText('離開測驗')
+        self.button_layout.addWidget(self.exit_system, 0)
 
         pass
 
