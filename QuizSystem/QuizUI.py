@@ -801,7 +801,8 @@ class ResultWindows(QtWidgets.QWidget):
         self.button_layout = QtWidgets.QHBoxLayout(self)
         # --
 
-        # 設定說明, 正確率標籤, 儲存本次測驗的按鈕
+        # 設定標題, 說明, 正確率標籤, 儲存本次測驗的按鈕
+        self.title_label = QtWidgets.QLabel(self)
         self.illustrate_label = QtWidgets.QLabel(self)
         self.accuracy_label = QtWidgets.QLabel(self)
         self.save_test_btn = QtWidgets.QPushButton(self)
@@ -846,12 +847,12 @@ class ResultWindows(QtWidgets.QWidget):
         second = '0' + str(reducing_time[1]) if reducing_time[1] < 10 else str(reducing_time[1])
         subject = self.parameters["subject"]
 
-        self.illustrate_label.setText(f'測驗科目：{subject}  作答時間：{minute}分{second}秒')
-        self.illustrate_label.setStyleSheet('''border: 1px solid;''')
+        self.title_label.setText(f'測驗科目：{subject}  作答時間：{minute}分{second}秒')
+        self.title_label.setStyleSheet('''border: 1px solid;''')
 
         label_list = self.labels_list
         last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
-        self.labels_layout.addWidget(self.illustrate_label, 0, 0, 1, last_row)
+        self.labels_layout.addWidget(self.title_label, 0, 0, 1, last_row)
 
         self.accuracy_label.setStyleSheet('''border: 1px solid;''')
         self.labels_layout.addWidget(self.accuracy_label, 12, 0, 1, last_row)
@@ -897,26 +898,27 @@ class ResultWindows(QtWidgets.QWidget):
             label.setStyleSheet('''border: 1px solid;''')  # 同時設定答案框的樣式
             self.labels_layout.addWidget(label, column + 1, row)
 
-        # self._correct_answer_event()
+        self._correct_answer_event()
         pass
 
     def _correct_answer_event(self):
-        pass
+        with open(self.answer_path) as answer_data:
+            json = load(answer_data)
+            current_year_answer = json[self.year]
 
-        # with open(self.answer_path) as answer_data:
-        #     json = load(answer_data)
-        #     current_year_answer = json[self.year]
-        #
-        # user_answer = self.user_answer
-        # answer_lst = [str(ord(i) - 64) for i in current_year_answer]  # 正確答案
-        #
-        # for index, user_ans in enumerate(user_answer):
-        #     question_number = str(index + 1) + '. '
-            # html_text_setting = f'''
-            # <font color="black">{question_number}</font> and
-            # <font color="black">{user_ans}</font> and
-            # <font color="red">{answer_lst[index]}</font>'''
-            # self.labels_list[index].setText(html_text_setting)
+        # 將使用者的答案, 轉換成 A, B, C, D
+        user_answer = self.user_answer
+        for i, ans in enumerate(user_answer):
+            option = chr(ans + 64) if ans != 0 else '&nbsp;'
+            user_answer[i] = option
+
+        for index, user_ans in enumerate(user_answer):
+            question_number = str(index + 1) + '. '
+            html_text_setting = f'''
+            <font color="black">{question_number}</font>
+            <font color="blue">{user_ans}</font>
+            <font color="red">{current_year_answer[index]}</font>'''
+            self.labels_list[index].setText(html_text_setting)
         pass
 
 
