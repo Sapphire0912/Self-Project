@@ -3,7 +3,7 @@ from PyQt5.QtGui import QFont, QPalette, QColor
 from json import load
 import sys
 
-# 可以根據使用者選的選項之後, 再 import 特定的檔案和答案
+# 之後可以根據使用者選的選項之後, 再 import 特定的檔案和答案
 import Question.Chinese.ChineseQ as chineseQ
 import Question.Math.MathQ as mathQ
 import Question.Espr.EsprQ as esprQ
@@ -796,8 +796,10 @@ class ResultWindows(QtWidgets.QWidget):
         self.window_layout = QtWidgets.QGridLayout(self)
         # - 顯示正確答案 & 使用者答案的 layout
         self.labels_layout = QtWidgets.QGridLayout(self)
-        # - 顯示問題, 選項, 圖片的 layout
+        # - 顯示問題, 圖片的 layout
         self.question_layout = QtWidgets.QGridLayout(self)
+        # - 顯示選項的 layout
+        self.options_layout = QtWidgets.QGridLayout(self)
         # - 顯示按鈕的 layout
         self.button_layout = QtWidgets.QHBoxLayout(self)
         # --
@@ -818,7 +820,8 @@ class ResultWindows(QtWidgets.QWidget):
         # 設定顯示題目, 圖片, 選項的元件
         self.question_text = QtWidgets.QTextEdit(self)
         self.question_image = QtWidgets.QLabel(self)
-        self.options = QtWidgets.QLabel(self)
+        self.optionA, self.optionB = QtWidgets.QLabel(self), QtWidgets.QLabel(self)
+        self.optionC, self.optionD = QtWidgets.QLabel(self), QtWidgets.QLabel(self)
 
         # 設定按鈕元件
         self.back_first_window_btn = QtWidgets.QPushButton(self)
@@ -831,6 +834,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.user_answer = kwargs["user_answer"]
         self.answer_path = kwargs["answer_path"]
         self.correct = 0
+        self.wrong_number = list()
         # -----
 
         self._windows_setting()
@@ -854,8 +858,8 @@ class ResultWindows(QtWidgets.QWidget):
         second = '0' + str(reducing_time[1]) if reducing_time[1] < 10 else str(reducing_time[1])
         subject = self.parameters["subject"]
 
-        self.title_label.setText(f'測驗科目：{subject}  作答時間：{minute}分{second}秒')
-        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.title_label.setText(f'測驗科目：{subject}\n作答時間：{minute}分{second}秒')
+        self.title_label.setAlignment(QtCore.Qt.AlignLeft)
 
         label_list = self.labels_list
         last_row = len(label_list) // 10 if len(label_list) % 10 == 0 else len(label_list) // 10 + 1
@@ -886,21 +890,28 @@ class ResultWindows(QtWidgets.QWidget):
 
         self.exit_system.setText('離開測驗')
         self.button_layout.addWidget(self.exit_system, 0)
+        # -
 
         # - 處理 question_layout 的文字, 樣式
-        text_width, text_height = int(width * 0.5), int(height * 0.3)
+        text_width, text_height = int(width * 0.6), int(height * 0.25)
         self.question_text.setFixedSize(text_width, text_height)
 
         self.question_text.setStyleSheet('''border: 1px solid;''')
+        palette = self.palette()
+        palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.question_text.setPalette(palette)
         self.question_layout.addWidget(self.question_text, 0, 0)
 
         self.question_image.setText('這是要放 image 的 label')
         self.question_image.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.question_image, 1, 0)
 
-        self.options.setText('這是放 4 個選項的 label(4個選項要分開做 label)')
-        self.options.setStyleSheet('''border: 1px solid;''')
-        self.question_layout.addWidget(self.options, 2, 0)
+        self.options_layout.addWidget(self.optionA, 0, 0)
+        self.options_layout.addWidget(self.optionB, 0, 1)
+        self.options_layout.addWidget(self.optionC, 1, 0)
+        self.options_layout.addWidget(self.optionD, 1, 1)
+
+        self.question_layout.addLayout(self.options_layout, 2, 0)
 
         self.window_layout.addLayout(self.labels_layout, 0, 0, 2, 1)
         self.window_layout.addLayout(self.question_layout, 0, 1)
@@ -925,6 +936,10 @@ class ResultWindows(QtWidgets.QWidget):
         # 處理 back_first_window_btn 事件
         self.back_first_window_btn.clicked.connect(self._back_first_window)
         self.exit_system.clicked.connect(self._exit_system)
+
+        # 設定 question text Read Only
+        self.question_text.setReadOnly(True)
+
         pass
 
     def _mouse_cursor_enter(self, event):
@@ -935,11 +950,35 @@ class ResultWindows(QtWidgets.QWidget):
 
     def _question_is_clicked(self, event, clicked_label):
         html_text = clicked_label.text()  # 取得 HTML 的文本
-        number = html_text.split('.')[0].split('>')[-1]  # 取得題號
+        number = int(html_text.split('.')[0].split('>')[-1])  # 取得題號
         self._display_clicked_question(number)
 
     def _display_clicked_question(self, number):
-        print('exec.')
+        question = self.question[number]
+        if question["isImage"] == "":
+            Q, options = question['Q']["text"], question["Option"]
+            Q = str(number) + ". " + Q
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+
+            self.question_text.setText(Q)
+            self.optionA.setText(A)
+            self.optionB.setText(B)
+            self.optionC.setText(C)
+            self.optionD.setText(D)
+
+        elif question["isImage"] == "Q":
+            pass
+
+        elif question["isImage"] == "A":
+            pass
+
+        elif question["isImage"] == "Q&A":
+            pass
+
+        else:
+            pass
+
+
         pass
 
     def _correct_answer_event(self):
@@ -955,7 +994,7 @@ class ResultWindows(QtWidgets.QWidget):
 
         # 若使用者答案正確就不要顯示解答的答案
         correct = self.correct
-        wrong_index = list()  # 儲存錯誤的答案
+        wrong_number = self.wrong_number  # 儲存錯誤答案的題號
         for index, user_ans in enumerate(user_answer):
             question_number = str(index + 1) + '. '
             if user_ans != current_year_answer[index]:
@@ -963,7 +1002,7 @@ class ResultWindows(QtWidgets.QWidget):
                 <font color="black">{question_number}</font>
                 <font color="blue">{user_ans}</font>
                 <font color="red">{current_year_answer[index]}</font>'''
-                wrong_index.append(index)
+                wrong_number.append(index + 1)
             else:
                 html_text_setting = f'''
                 <font color="black">{question_number}</font>
@@ -976,7 +1015,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.correct = correct
 
         # 顯示正確題數
-        accuracy = "{:.2f}".format(correct / len(user_answer))
+        accuracy = "{:.2f}".format(correct * 100 / len(user_answer))
         self.accuracy_label.setText(f'正確題數/總共題數：{correct}/{len(user_answer)}\n正確率：{accuracy}%')
         pass
 
