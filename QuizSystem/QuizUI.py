@@ -950,17 +950,17 @@ class ResultWindows(QtWidgets.QWidget):
 
     def _question_is_clicked(self, event, clicked_label):
         html_text = clicked_label.text()  # 取得 HTML 的文本
-        number = int(html_text.split('.')[0].split('>')[-1])  # 取得題號
+        number = html_text.split('.')[0].split('>')[-1]  # 取得題號
         self._display_clicked_question(number)
 
     def _display_clicked_question(self, number):
-        question = self.question[number]
+        question = self.question[int(number)]
         if question["isImage"] == "":
             Q, options = question['Q']["text"], question["Option"]
             Q = str(number) + ". " + Q
-            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-
             self.question_text.setText(Q)
+
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             self.optionA.setText(A)
             self.optionB.setText(B)
             self.optionC.setText(C)
