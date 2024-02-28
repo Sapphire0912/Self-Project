@@ -95,8 +95,8 @@ def year94():
 
 # print(create_template(25))
 YEARS = [
-    year94(), year95(), year96(), year97(), year98(),
-    year99(), year100(), year101(), year102(), year103(),
-    year104(), year105(), year106(), year108_1(), year108_2(),
-    year109(), year110(), year111(), year112()
+    year112(), year111(), year110(), year109(), year108_2(),
+    year108_1(), year106(), year105(), year104(), year103(),
+    year102(), year101(), year100(), year99(), year98(),
+    year97(), year96(), year95(), year94()
 ]

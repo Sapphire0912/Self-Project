@@ -383,9 +383,9 @@ class InitialWindow(QtWidgets.QWidget):
 
         # 設定選擇範圍下拉式選單的值, 數學僅從 103 年開始
         if select_id == 1:
-            lst = [str(i) for i in range(103, 113)]
+            lst = [str(i) for i in range(112, 102, -1)]
         else:
-            lst = [str(i) for i in range(94, 113)]
+            lst = [str(i) for i in range(112, 93, -1)]
             # lst.append("103 ~ 112")
 
         lst.insert(0, "請選擇年份")
@@ -896,14 +896,14 @@ class ResultWindows(QtWidgets.QWidget):
         text_width, text_height = int(width * 0.6), int(height * 0.25)
         self.question_text.setFixedSize(text_width, text_height)
 
-        self.question_text.setStyleSheet('''border: 1px solid;''')
+        self.question_text.setStyleSheet('''border: none;''')
         palette = self.palette()
         palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
         self.question_text.setPalette(palette)
         self.question_layout.addWidget(self.question_text, 0, 0)
 
-        self.question_image.setText('這是要放 image 的 label')
-        self.question_image.setStyleSheet('''border: 1px solid;''')
+        # self.question_image.setText('這是要放 image 的 label')
+        # self.question_image.setStyleSheet('''border: 1px solid;''')
         self.question_layout.addWidget(self.question_image, 1, 0)
 
         self.options_layout.addWidget(self.optionA, 0, 0)
