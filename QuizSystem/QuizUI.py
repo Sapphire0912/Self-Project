@@ -1100,8 +1100,9 @@ class HistoryWindow(QtWidgets.QWidget):
         self.setFixedSize(640, 480)
         x, y, w, h = 10, 10, 620, 460
 
-        self.history_table.setFont(QFont('新細明體', 12))
+        self.history_table.setFont(QFont('新細明體', 10))
         self.history_table.setGeometry(x, y, w, h)
+        self.history_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         self.history_table.setStyleSheet('''
             border: 1px solid black;
         ''')
@@ -1122,7 +1123,6 @@ class HistoryWindow(QtWidgets.QWidget):
                 for j, data in enumerate(database[count].values()):
                     data = QtWidgets.QTableWidgetItem(str(data))  # 要轉換成 pyqt5 表格專用的字串
                     self.history_table.setItem(i, j, data)
-        pass
 
 
 if __name__ == '__main__':
