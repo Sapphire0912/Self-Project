@@ -1117,15 +1117,17 @@ class HistoryWindow(QtWidgets.QWidget):
     def ui(self):
         # 顯示測驗的歷史紀錄
         if os.path.exists("./_history_test.json"):
-            history = open("./_history_test.json")
-            database = load(history)
+            with open("./_history_test.json") as history:
+                database = load(history)
+                self.history_table.setRowCount(len(database.keys()))
 
-            for i, count in enumerate(database.keys()):
-                for j, data in enumerate(database[count].values()):
-                    data = QtWidgets.QTableWidgetItem(str(data))  # 要轉換成 pyqt5 表格專用的字串
-                    self.history_table.setItem(i, j, data)
+                for i, count in enumerate(database.keys()):
+                    for j, data in enumerate(database[count].values()):
+                        data = QtWidgets.QTableWidgetItem(str(data))  # 要轉換成 pyqt5 表格專用的字串
+                        self.history_table.setItem(i, j, data)
         else:
             pass
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
