@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPalette, QColor
 from json import load
+from datetime import datetime
 import sys
 
 # 之後可以根據使用者選的選項之後, 再 import 特定的檔案和答案
@@ -940,6 +941,28 @@ class ResultWindows(QtWidgets.QWidget):
         # 設定 question text Read Only
         self.question_text.setReadOnly(True)
 
+        # 儲存本次測驗按鈕事件設定
+        self.save_test_btn.clicked.connect(self._save_currect_test)
+
+        pass
+
+    def _save_currect_test(self):
+        # 將測驗科目, 作答時間, 日期, 時間, 正確率, 錯誤題數儲存起來(用 JSON 檔案)
+        subject, using_time = self.title_label.text().split('\n')
+        today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        acc_number, acc_percent = self.accuracy_label.text().split('\n')
+        wrong_number = [str(i) for i in self.wrong_number]
+        wrong_number = ' '.join(wrong_number)
+
+        data = {
+            "日期": today,
+            "測驗科目": subject,
+            "作答時間": using_time,
+            "正確題數": acc_number,
+            "正確率": acc_percent,
+            "錯誤題號": wrong_number
+        }
+        print(data)
         pass
 
     def _mouse_cursor_enter(self, event):
@@ -977,9 +1000,6 @@ class ResultWindows(QtWidgets.QWidget):
 
         else:
             pass
-
-
-        pass
 
     def _correct_answer_event(self):
         with open(self.answer_path) as answer_data:
