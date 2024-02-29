@@ -601,11 +601,40 @@ class QuizWindows(QtWidgets.QWidget):
         # img_example = QtGui.QImage('img_exam.PNG')
         # self.question_image.setPixmap(QtGui.QPixmap.fromImage(img_example))
 
-        # 設定 option btn A, B, C, D
+        # 設定點選標籤也可以選擇該選項
+        self.text_A.enterEvent = self._mouse_cursor_enter
+        self.text_A.mousePressEvent = self._label_option_A_clicked
+        self.text_A.leaveEvent = self._mouse_cursor_leave
+
+        self.text_B.enterEvent = self._mouse_cursor_enter
+        self.text_B.mousePressEvent = self._label_option_B_clicked
+        self.text_B.leaveEvent = self._mouse_cursor_leave
+
+        self.text_C.enterEvent = self._mouse_cursor_enter
+        self.text_C.mousePressEvent = self._label_option_C_clicked
+        self.text_C.leaveEvent = self._mouse_cursor_leave
+
+        self.text_D.enterEvent = self._mouse_cursor_enter
+        self.text_D.mousePressEvent = self._label_option_D_clicked
+        self.text_D.leaveEvent = self._mouse_cursor_leave
+
+        # 設定 option btn A, B, C, D 以及相關滑鼠事件
         self.option_group.addButton(self.btn_A, id=1)
         self.option_group.addButton(self.btn_B, id=2)
         self.option_group.addButton(self.btn_C, id=3)
         self.option_group.addButton(self.btn_D, id=4)
+
+        self.btn_A.enterEvent = self._mouse_cursor_enter
+        self.btn_A.leaveEvent = self._mouse_cursor_leave
+
+        self.btn_B.enterEvent = self._mouse_cursor_enter
+        self.btn_B.leaveEvent = self._mouse_cursor_leave
+
+        self.btn_C.enterEvent = self._mouse_cursor_enter
+        self.btn_C.leaveEvent = self._mouse_cursor_leave
+
+        self.btn_D.enterEvent = self._mouse_cursor_enter
+        self.btn_D.leaveEvent = self._mouse_cursor_leave
 
         self._restore_option_choice()
         self.option_group.buttonClicked.connect(self._option_choice_event)
@@ -661,6 +690,28 @@ class QuizWindows(QtWidgets.QWidget):
             # 題目 & 選項都有圖片
             pass
         pass
+
+    def _mouse_cursor_enter(self, event):
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+
+    def _mouse_cursor_leave(self, event):
+        self.setCursor(QtCore.Qt.ArrowCursor)
+
+    def _label_option_A_clicked(self, event):
+        self.btn_A.setChecked(True)
+        self._option_choice_event()
+
+    def _label_option_B_clicked(self, event):
+        self.btn_B.setChecked(True)
+        self._option_choice_event()
+
+    def _label_option_C_clicked(self, event):
+        self.btn_C.setChecked(True)
+        self._option_choice_event()
+
+    def _label_option_D_clicked(self, event):
+        self.btn_D.setChecked(True)
+        self._option_choice_event()
 
     def _option_choice_event(self):
         index = self.current_question - 1
@@ -777,8 +828,6 @@ class QuizWindows(QtWidgets.QWidget):
         )
         self.result_window.show()
         self.close()
-        pass
-    pass
 
 
 class ResultWindows(QtWidgets.QWidget):
