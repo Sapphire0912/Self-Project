@@ -942,15 +942,22 @@ class ResultWindows(QtWidgets.QWidget):
         self.question_text.setReadOnly(True)
 
         # 儲存本次測驗按鈕事件設定
-        self.save_test_btn.clicked.connect(self._save_currect_test)
+        self.save_test_btn.clicked.connect(self._save_current_test)
 
+        # 查看歷史紀錄
+        self.history_btn.clicked.connect(self._history_test_show)
         pass
 
-    def _save_currect_test(self):
+    def _save_current_test(self):
         # 將測驗科目, 作答時間, 日期, 時間, 正確率, 錯誤題數儲存起來(用 JSON 檔案)
         subject, using_time = self.title_label.text().split('\n')
+        subject, using_time = subject.split('：')[1], using_time.split('：')[1]
+
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         acc_number, acc_percent = self.accuracy_label.text().split('\n')
+        acc_number, acc_percent = acc_number.split('：')[1], acc_percent.split('：')[1]
+
         wrong_number = [str(i) for i in self.wrong_number]
         wrong_number = ' '.join(wrong_number)
 
@@ -960,7 +967,7 @@ class ResultWindows(QtWidgets.QWidget):
             "作答時間": using_time,
             "正確題數": acc_number,
             "正確率": acc_percent,
-            "錯誤率": wrong_number
+            "錯誤題號": wrong_number
         }
 
         # 若路徑已經有檔案了, 則先讀取先前的資料後再複寫
@@ -985,7 +992,8 @@ class ResultWindows(QtWidgets.QWidget):
                 data_test = {"1": data_test}
                 dump(data_test, history, indent=4)
 
-        pass
+        # 儲存過一次之後就將按鈕設置成不能再按的狀態
+        self.save_test_btn.setEnabled(False)
 
     def _mouse_cursor_enter(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
@@ -1065,8 +1073,56 @@ class ResultWindows(QtWidgets.QWidget):
         self.parameters["first_window"].show()
         self.close()
 
+    def _history_test_show(self):
+        self.history_window = HistoryWindow()
+        self.history_window.show()
+        pass
+
     def _exit_system(self):
         self.close()
+
+
+class HistoryWindow(QtWidgets.QWidget):
+    def __init__(self):
+        super(HistoryWindow, self).__init__()
+
+        self.setWindowTitle("教師資格考試測驗系統")
+        self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+
+        # 顯示歷史紀錄的標籤
+        self.history_table = QtWidgets.QTableWidget(self)
+
+        self._windows_setting()
+        self.ui()
+
+    def _windows_setting(self):
+        self.setFixedSize(640, 480)
+        x, y, w, h = 10, 10, 620, 460
+
+        self.history_table.setFont(QFont('新細明體', 12))
+        self.history_table.setGeometry(x, y, w, h)
+        self.history_table.setStyleSheet('''
+            border: 1px solid black;
+        ''')
+
+    def ui(self):
+        # 顯示測驗的歷史紀錄
+        with open("./_history_test.json") as history:
+            database = load(history)
+
+            # 設定表格的相關資訊
+            self.history_table.setRowCount(len(database.keys()))
+            self.history_table.setColumnCount(6)
+
+            self.history_table.setHorizontalHeaderLabels(
+                ['測驗日期', '測驗科目', '作答時間', '正確題數', '正確率', '錯誤題號']
+            )
+            for i, count in enumerate(database.keys()):
+                for j, data in enumerate(database[count].values()):
+                    data = QtWidgets.QTableWidgetItem(str(data))  # 要轉換成 pyqt5 表格專用的字串
+                    self.history_table.setItem(i, j, data)
+        pass
 
 
 if __name__ == '__main__':
