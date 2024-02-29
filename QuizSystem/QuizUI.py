@@ -1097,11 +1097,18 @@ class HistoryWindow(QtWidgets.QWidget):
         self.ui()
 
     def _windows_setting(self):
-        self.setFixedSize(640, 480)
-        x, y, w, h = 10, 10, 620, 460
+        self.setFixedSize(720, 600)
+        x, y, w, h = 10, 10, 700, 580
+
+        # 設定表格的相關資訊
+        self.history_table.setColumnCount(6)
+        self.history_table.setHorizontalHeaderLabels(
+            ['測驗日期', '測驗科目', '作答時間', '正確題數', '正確率', '錯誤題號']
+        )
 
         self.history_table.setFont(QFont('新細明體', 10))
         self.history_table.setGeometry(x, y, w, h)
+
         self.history_table.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
         self.history_table.setStyleSheet('''
             border: 1px solid black;
@@ -1109,21 +1116,16 @@ class HistoryWindow(QtWidgets.QWidget):
 
     def ui(self):
         # 顯示測驗的歷史紀錄
-        with open("./_history_test.json") as history:
+        if os.path.exists("./_history_test.json"):
+            history = open("./_history_test.json")
             database = load(history)
 
-            # 設定表格的相關資訊
-            self.history_table.setRowCount(len(database.keys()))
-            self.history_table.setColumnCount(6)
-
-            self.history_table.setHorizontalHeaderLabels(
-                ['測驗日期', '測驗科目', '作答時間', '正確題數', '正確率', '錯誤題號']
-            )
             for i, count in enumerate(database.keys()):
                 for j, data in enumerate(database[count].values()):
                     data = QtWidgets.QTableWidgetItem(str(data))  # 要轉換成 pyqt5 表格專用的字串
                     self.history_table.setItem(i, j, data)
-
+        else:
+            pass
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
