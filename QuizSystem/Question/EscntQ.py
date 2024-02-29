@@ -93,7 +93,8 @@ def year94():
     pass
 
 
-# print(create_template(25))
+print(create_template(25))
+
 YEARS = [
     year112(), year111(), year110(), year109(), year108_2(),
     year108_1(), year106(), year105(), year104(), year103(),
