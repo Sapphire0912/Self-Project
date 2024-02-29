@@ -243,6 +243,8 @@ def year112():
             'isImage': ''}
     }
 
+    return question
+
 
 def year111():
     pass
@@ -316,7 +318,7 @@ def year94():
     pass
 
 
-print(create_template(25))
+# print(create_template(25))
 
 YEARS = [
     year112(), year111(), year110(), year109(), year108_2(),
