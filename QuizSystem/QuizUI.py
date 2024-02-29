@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPalette, QColor
-from json import load
+from json import load, dump
 from datetime import datetime
-import sys
+import os, sys
 
 # 之後可以根據使用者選的選項之後, 再 import 特定的檔案和答案
 import Question.ChineseQ as chineseQ
@@ -954,15 +954,36 @@ class ResultWindows(QtWidgets.QWidget):
         wrong_number = [str(i) for i in self.wrong_number]
         wrong_number = ' '.join(wrong_number)
 
-        data = {
-            "日期": today,
+        data_test = {
+            "測驗日期": today,
             "測驗科目": subject,
             "作答時間": using_time,
             "正確題數": acc_number,
             "正確率": acc_percent,
-            "錯誤題號": wrong_number
+            "錯誤率": wrong_number
         }
 
+        # 若路徑已經有檔案了, 則先讀取先前的資料後再複寫
+        if os.path.exists("./_history_test.json"):
+            history = open("./_history_test.json")
+            old_data = load(history)
+
+            # 最多保留最新的 20 筆測驗紀錄
+            data_number = len(old_data.keys())
+            if data_number == 20:
+                for i in range(1, 20):
+                    old_data[str(i)] = old_data[str(i + 1)]
+                old_data["20"] = data_test
+            else:
+                old_data[str(data_number + 1)] = data_test
+
+            with open("./_history_test.json", 'w') as history:
+                dump(old_data, history, indent=4)
+
+        else:
+            with open("./_history_test.json", 'w') as history:
+                data_test = {"1": data_test}
+                dump(data_test, history, indent=4)
 
         pass
 
