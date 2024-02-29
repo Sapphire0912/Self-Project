@@ -5,11 +5,11 @@ from datetime import datetime
 import sys
 
 # 之後可以根據使用者選的選項之後, 再 import 特定的檔案和答案
-import Question.Chinese.ChineseQ as chineseQ
-import Question.Math.MathQ as mathQ
-import Question.Espr.EsprQ as esprQ
-import Question.Esdng.EsdngQ as esdngQ
-import Question.Escnt.EscntQ as escntQ
+import Question.ChineseQ as chineseQ
+import Question.MathQ as mathQ
+import Question.EsprQ as esprQ
+import Question.EsdngQ as esdngQ
+import Question.EscntQ as escntQ
 
 
 # 各年各科目的測驗題數(去除 107 年)
@@ -962,7 +962,8 @@ class ResultWindows(QtWidgets.QWidget):
             "正確率": acc_percent,
             "錯誤題號": wrong_number
         }
-        print(data)
+
+
         pass
 
     def _mouse_cursor_enter(self, event):
