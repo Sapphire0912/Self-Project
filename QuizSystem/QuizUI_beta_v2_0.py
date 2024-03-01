@@ -526,7 +526,20 @@ class QuizWindows(QtWidgets.QWidget):
         # 1. 設定題目文字位置
         # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
-        q_text_y, q_text_h = int(height * 0.02), int(height * 0.23)
+        q_text_y = int(height * 0.02)
+        isImage = self.questions[self.current_question]["isImage"]
+
+        if isImage == "" or isImage == "A":
+            # 題目無圖片
+            q_text_h = int(height * 0.5)
+        else:
+            # 題目有圖片
+            q_text_h = int(height * 0.23)
+            # 2. 設定題目圖片/表格位置
+            q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
+            self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
+            self.question_image.setAlignment(QtCore.Qt.AlignCenter)
+
         self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
 
         palette = self.palette()
@@ -537,11 +550,6 @@ class QuizWindows(QtWidgets.QWidget):
             border: none;
         ''')
         self.question_text.setAlignment(QtCore.Qt.AlignLeft)
-
-        # 2. 設定題目圖片/表格位置
-        q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
-        self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
-        self.question_image.setAlignment(QtCore.Qt.AlignCenter)
 
         # 3. 設定選項 A, B, C, D & 各 Label 的位置(若有圖片, 盡量找可以 resize image 的方法)
         btnA_y, btn_w, btn_h = int(height * 0.6), 20, 20
