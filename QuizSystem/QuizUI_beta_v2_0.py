@@ -669,27 +669,38 @@ class QuizWindows(QtWidgets.QWidget):
 
         if question["isImage"] == "":
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.text_A.setText(A)
+            self.text_B.setText(B)
+            self.text_C.setText(C)
+            self.text_D.setText(D)
 
         elif question["isImage"] == "Q":
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.text_A.setText(A)
+            self.text_B.setText(B)
+            self.text_C.setText(C)
+            self.text_D.setText(D)
+
             # 題目有圖片
             q_img = QPixmap(question["Q"]["img"])
             self.question_image.setPixmap(q_img)
 
         elif question["isImage"] == "A":
-            # 選項有圖片
-            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-            pass
+            # 選項有圖片無文字, 此時將 radio button 設定文字選項
+            img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
+            img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
+
+            self.text_A.setPixmap(img_a)
+            self.text_B.setPixmap(img_b)
+            self.text_C.setPixmap(img_c)
+            self.text_D.setPixmap(img_d)
+
         else:
             # 題目 & 選項都有圖片
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             pass
 
         self.question_text.setText(q)
-        self.text_A.setText(A)
-        self.text_B.setText(B)
-        self.text_C.setText(C)
-        self.text_D.setText(D)
 
     def _mouse_cursor_enter(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
@@ -1079,16 +1090,32 @@ class ResultWindows(QtWidgets.QWidget):
 
         if question["isImage"] == "":
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.optionA.setText(A)
+            self.optionB.setText(B)
+            self.optionC.setText(C)
+            self.optionD.setText(D)
 
         elif question["isImage"] == "Q":
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.optionA.setText(A)
+            self.optionB.setText(B)
+            self.optionC.setText(C)
+            self.optionD.setText(D)
+
             # 題目有圖片
             q_img = QPixmap(question["Q"]["img"])
             self.question_image.setPixmap(q_img)
 
         elif question["isImage"] == "A":
-            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-            pass
+            # 選項有圖片無文字
+            img_a = QPixmap(options["A"]["img"])
+            img_b = QPixmap(options["B"]["img"])
+            img_c = QPixmap(options["C"]["img"])
+            img_d = QPixmap(options["D"]["img"])
+            self.optionA.setPixmap(img_a)
+            self.optionB.setPixmap(img_b)
+            self.optionC.setPixmap(img_c)
+            self.optionD.setPixmap(img_d)
 
         else:
             # 題目和答案都有圖片
@@ -1096,10 +1123,7 @@ class ResultWindows(QtWidgets.QWidget):
             pass
 
         self.question_text.setText(q)
-        self.optionA.setText(A)
-        self.optionB.setText(B)
-        self.optionC.setText(C)
-        self.optionD.setText(D)
+
 
     def _correct_answer_event(self):
         with open(self.answer_path) as answer_data:
