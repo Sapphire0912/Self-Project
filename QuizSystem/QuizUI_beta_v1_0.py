@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtGui import QFont, QPalette, QColor
+from PyQt5.QtGui import QFont, QPixmap, QPalette, QColor
 from json import load, dump
 from datetime import datetime
 import os, sys
@@ -599,9 +599,6 @@ class QuizWindows(QtWidgets.QWidget):
         self.question_text.setReadOnly(True)
         self._questions_setting()
 
-        # img_example = QtGui.QImage('img_exam.PNG')
-        # self.question_image.setPixmap(QtGui.QPixmap.fromImage(img_example))
-
         # 設定點選標籤也可以選擇該選項
         self.text_A.enterEvent = self._mouse_cursor_enter
         self.text_A.mousePressEvent = self._label_option_a_clicked
@@ -667,36 +664,46 @@ class QuizWindows(QtWidgets.QWidget):
     def _questions_setting(self):
         key = self.current_question
         question = self.questions[key]
+        q, options = question["Q"]["text"], question["Option"]
+        q = str(key) + '. ' + q
 
         if question["isImage"] == "":
-            q, options = question["Q"]["text"], question["Option"]
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
 
-            q = str(key) + '. ' + q
-
-            self.question_text.setText(q)
-            self.text_A.setText(A)
-            self.text_B.setText(B)
-            self.text_C.setText(C)
-            self.text_D.setText(D)
-
         elif question["isImage"] == "Q":
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+
             # 題目有圖片
-            pass
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
 
         elif question["isImage"] == "A":
             # 選項有圖片
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             pass
-        elif question["isImage"] == "Q&A":
+        else:
             # 題目 & 選項都有圖片
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             pass
-        pass
+
+        self.question_text.setText(q)
+        self.text_A.setText(A)
+        self.text_B.setText(B)
+        self.text_C.setText(C)
+        self.text_D.setText(D)
 
     def _mouse_cursor_enter(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
     def _mouse_cursor_leave(self, event):
         self.setCursor(QtCore.Qt.ArrowCursor)
+
+    def _update_question_image_state(self):
+        # 更新題目圖片的狀態 question_image 的 state
+        key = self.current_question
+        question = self.questions[key]["Q"]
+        if question["img"] == '':
+            self.question_image.clear()
 
     def _label_option_a_clicked(self, event):
         self.btn_A.setChecked(True)
@@ -753,18 +760,21 @@ class QuizWindows(QtWidgets.QWidget):
         self._update_btn_state()
         self._restore_option_choice()
         self._questions_setting()
+        self._update_question_image_state()
 
     def _next_question(self):
         self.current_question += 1
         self._update_btn_state()
         self._restore_option_choice()
         self._questions_setting()
+        self._update_question_image_state()
 
     def _page_goto_event(self):
         self.current_question = self.page_goto.currentIndex()
         self._update_btn_state()
         self._restore_option_choice()
         self._questions_setting()
+        self._update_question_image_state()
 
     def _timer_count(self):
         minute = str(self.current_time // 60)
@@ -953,8 +963,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.question_text.setPalette(palette)
         self.question_layout.addWidget(self.question_text, 0, 0)
 
-        # self.question_image.setText('這是要放 image 的 label')
-        # self.question_image.setStyleSheet('''border: 1px solid;''')
+        self.question_image.setAlignment(QtCore.Qt.AlignCenter)
         self.question_layout.addWidget(self.question_image, 1, 0)
 
         self.options_layout.addWidget(self.optionA, 0, 0)
@@ -1051,35 +1060,47 @@ class ResultWindows(QtWidgets.QWidget):
     def _mouse_cursor_leave(self, event):
         self.setCursor(QtCore.Qt.ArrowCursor)
 
+    def _update_question_image_state(self, number):
+        # 更新題目圖片的狀態 question_image 的 state
+        question = self.question[int(number)]["Q"]
+        if question["img"] == '':
+            self.question_image.clear()
+
     def _question_is_clicked(self, event, clicked_label):
         html_text = clicked_label.text()  # 取得 HTML 的文本
         number = html_text.split('.')[0].split('>')[-1]  # 取得題號
+
+        self._update_question_image_state(number)
         self._display_clicked_question(number)
 
     def _display_clicked_question(self, number):
         question = self.question[int(number)]
-        if question["isImage"] == "":
-            Q, options = question['Q']["text"], question["Option"]
-            Q = str(number) + ". " + Q
-            self.question_text.setText(Q)
+        q, options = question['Q']["text"], question["Option"]
+        q = str(number) + ". " + q
 
+        if question["isImage"] == "":
             A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-            self.optionA.setText(A)
-            self.optionB.setText(B)
-            self.optionC.setText(C)
-            self.optionD.setText(D)
 
         elif question["isImage"] == "Q":
-            pass
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            # 題目有圖片
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
 
         elif question["isImage"] == "A":
-            pass
-
-        elif question["isImage"] == "Q&A":
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             pass
 
         else:
+            # 題目和答案都有圖片
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
             pass
+
+        self.question_text.setText(q)
+        self.optionA.setText(A)
+        self.optionB.setText(B)
+        self.optionC.setText(C)
+        self.optionD.setText(D)
 
     def _correct_answer_event(self):
         with open(self.answer_path) as answer_data:

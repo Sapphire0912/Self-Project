@@ -4,7 +4,7 @@
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Question/EscntQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/EscntQ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_handlePDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handlePDF.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizUI_beta_v1_0.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_beta_v1_0.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +49,7 @@
       <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\教育理念與實務" />
     </key>
   </component>
-  <component name="RunManager" selected="Python._handlePDF (1)">
+  <component name="RunManager" selected="Python.QuizUI_beta_v1_0 (1)">
     <configuration name="EscntQ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QuizSystem" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -178,8 +178,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python.QuizUI_beta_v1_0 (1)" />
+        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python._handlePDF" />
         <item itemvalue="Python.EscntQ" />
         <item itemvalue="Python.QuizUI_beta_v1_0" />
@@ -216,34 +216,49 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
-          <line>681</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
-          <line>685</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
-          <line>688</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
-          <line>954</line>
-          <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Question/EscntQ.py</url>
           <line>440</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Question/EscntQ.py</url>
-          <line>472</line>
+          <line>473</line>
           <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>672</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>679</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>683</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>965</line>
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>1082</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>1088</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/QuizUI_beta_v1_0.py</url>
+          <line>1092</line>
+          <option name="timeStamp" value="92" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
