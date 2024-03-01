@@ -698,6 +698,7 @@ class QuizWindows(QtWidgets.QWidget):
             img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
             img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
 
+            # 讓圖片 Resize 成 QLabel 的大小
             img_a = img_a.scaled(self.text_A.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
             img_b = img_b.scaled(self.text_B.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
             img_c = img_c.scaled(self.text_C.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
@@ -999,7 +1000,6 @@ class ResultWindows(QtWidgets.QWidget):
         self.window_layout.addLayout(self.labels_layout, 0, 0, 2, 1)
         self.window_layout.addLayout(self.question_layout, 0, 1)
         self.window_layout.addLayout(self.button_layout, 1, 1)
-        pass
 
     def ui(self):
         label_list = self.labels_list
@@ -1089,19 +1089,11 @@ class ResultWindows(QtWidgets.QWidget):
         if question["img"] == '':
             self.question_image.clear()
 
-    def _update_option_state(self):
-        # 調整選項的位置, 讓其置左
-        self.optionA.setAlignment(QtCore.Qt.AlignLeft)
-        self.optionB.setAlignment(QtCore.Qt.AlignLeft)
-        self.optionC.setAlignment(QtCore.Qt.AlignLeft)
-        self.optionD.setAlignment(QtCore.Qt.AlignLeft)
-
     def _question_is_clicked(self, event, clicked_label):
         html_text = clicked_label.text()  # 取得 HTML 的文本
         number = html_text.split('.')[0].split('>')[-1]  # 取得題號
 
         self._update_question_image_state(number)
-        self._update_option_state()
         self._display_clicked_question(number)
 
     def _display_clicked_question(self, number):
@@ -1128,23 +1120,21 @@ class ResultWindows(QtWidgets.QWidget):
             self.question_image.setPixmap(q_img)
 
         elif question["isImage"] == "A":
-            # 選項有圖片無文字(讓選項置中)
+            # 選項有圖片無文字
             img_a = QPixmap(options["A"]["img"])
             img_b = QPixmap(options["B"]["img"])
             img_c = QPixmap(options["C"]["img"])
             img_d = QPixmap(options["D"]["img"])
 
+            # img_a = img_a.scaled(self.optionA.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            # img_b = img_b.scaled(self.optionB.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            # img_c = img_c.scaled(self.optionC.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            # img_d = img_d.scaled(self.optionD.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
             self.optionA.setPixmap(img_a)
-            self.optionA.setAlignment(QtCore.Qt.AlignCenter)
-
             self.optionB.setPixmap(img_b)
-            self.optionB.setAlignment(QtCore.Qt.AlignCenter)
-
             self.optionC.setPixmap(img_c)
-            self.optionC.setAlignment(QtCore.Qt.AlignCenter)
-
             self.optionD.setPixmap(img_d)
-            self.optionD.setAlignment(QtCore.Qt.AlignCenter)
 
         else:
             # 題目和答案都有圖片
