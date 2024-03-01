@@ -311,6 +311,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setReadOnly(True)  # Read Only
         self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選進入測驗的按鈕\n5. 再次確認考試資訊無誤後, 點選確認進入正式測驗\n\n版本說明：
+beta v2.1：新增國文 112 年試卷，修正圖片沒有選項的問題
 beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課程教學與評量 111、112 年試卷\n''')
         pass
 
