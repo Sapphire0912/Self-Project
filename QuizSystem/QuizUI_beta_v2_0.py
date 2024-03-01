@@ -690,6 +690,11 @@ class QuizWindows(QtWidgets.QWidget):
             img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
             img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
 
+            img_a = img_a.scaled(self.text_A.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            img_b = img_b.scaled(self.text_B.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            img_c = img_c.scaled(self.text_C.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            img_d = img_d.scaled(self.text_D.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
             self.text_A.setPixmap(img_a)
             self.text_B.setPixmap(img_b)
             self.text_C.setPixmap(img_c)

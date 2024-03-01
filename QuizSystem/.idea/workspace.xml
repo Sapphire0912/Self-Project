@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/QuizUI_v1_0.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_v1_0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/ChineseQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/ChineseQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizUI_beta_v2_0.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_beta_v2_0.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +49,7 @@
       <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\教育理念與實務" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.QuizUI_v1_0">
+  <component name="RunManager" selected="Python.QuizUI_beta_v2_0 (1)">
     <configuration name="ChineseQ" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QuizSystem" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -197,10 +199,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.QuizUI_v1_0" />
         <item itemvalue="Python.QuizUI_beta_v2_0 (1)" />
-        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python.ChineseQ" />
+        <item itemvalue="Python.QuizUI_v1_0" />
+        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python.QuizUI_beta_v2_0" />
       </list>
     </recent_temporary>
@@ -251,12 +253,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI_beta_v2_0.py</url>
-          <line>698</line>
+          <line>702</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/QuizUI_beta_v2_0.py</url>
-          <line>688</line>
+          <line>687</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
