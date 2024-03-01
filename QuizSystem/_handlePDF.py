@@ -29,9 +29,9 @@ import os
 #     jsonFile = open(subject + "Answers.json", 'w')
 #     json.dump(answerDict, jsonFile)
 
-targetPath = "C:/Users/iris2/Desktop/Question/學習者發展與適性輔導/111_學習者發展與適性輔導.pdf"
+targetPath = "C:/Users/iris2/Desktop/Question/課程教學與評量/111_課程教學與評量.pdf"
 pdf = pdfplumber.open(targetPath)
-for page in pdf.pages[1:6]:
+for page in pdf.pages[3:5]:
     text = page.extract_text_simple()
     print(text)
     pass
