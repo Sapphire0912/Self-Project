@@ -1218,7 +1218,7 @@ class ResultWindows(QtWidgets.QWidget):
             if img_d.size().width() > self.optionD.size().width() or \
                     img_d.size().height() > self.optionD.size().height():
                 img_d = img_d.scaled(self.optionD.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-                
+
             self.optionA.setPixmap(img_a)
             self.optionB.setPixmap(img_b)
             self.optionC.setPixmap(img_c)
