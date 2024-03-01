@@ -523,7 +523,6 @@ class QuizWindows(QtWidgets.QWidget):
         screen_width, screen_height = screen.width(), screen.height()
         self.move((screen_width - width) // 2, (screen_height - height) // 2)
 
-        # @@ 所有元件會因為該題目/選項中是否有圖片去調整位置, 下面先設定無圖片版本的
         # 1. 設定題目文字位置
         # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
