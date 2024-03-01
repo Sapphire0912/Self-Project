@@ -539,7 +539,7 @@ class QuizWindows(QtWidgets.QWidget):
             # 2. 設定題目圖片/表格位置
             q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
             self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
-            self.question_image.setAlignment(QtCore.Qt.AlignCenter)
+            self.question_image.setAlignment(QtCore.Qt.AlignLeft)
 
         self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
 
@@ -701,10 +701,17 @@ class QuizWindows(QtWidgets.QWidget):
             img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
 
             # 讓圖片 Resize 成 QLabel 的大小
-            img_a = img_a.scaled(self.text_A.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            img_b = img_b.scaled(self.text_B.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            img_c = img_c.scaled(self.text_C.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            img_d = img_d.scaled(self.text_D.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            if img_a.size().width() > self.text_A.size().width() or img_a.size().height() > self.text_A.size().height():
+                img_a = img_a.scaled(self.text_A.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.text_B.size().width() or img_b.size().height() > self.text_B.size().height():
+                img_b = img_b.scaled(self.text_B.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.text_C.size().width() or img_c.size().height() > self.text_C.size().height():
+                img_c = img_c.scaled(self.text_C.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.text_D.size().width() or img_d.size().height() > self.text_D.size().height():
+                img_d = img_d.scaled(self.text_D.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
 
             self.text_A.setPixmap(img_a)
             self.text_B.setPixmap(img_b)
@@ -713,8 +720,29 @@ class QuizWindows(QtWidgets.QWidget):
 
         else:
             # 題目 & 選項都有圖片
-            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-            pass
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
+
+            img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
+            img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
+
+            # 讓圖片 Resize 成 QLabel 的大小
+            if img_a.size().width() > self.text_A.size().width() or img_a.size().height() > self.text_A.size().height():
+                img_a = img_a.scaled(self.text_A.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.text_B.size().width() or img_b.size().height() > self.text_B.size().height():
+                img_b = img_b.scaled(self.text_B.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.text_C.size().width() or img_c.size().height() > self.text_C.size().height():
+                img_c = img_c.scaled(self.text_C.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.text_D.size().width() or img_d.size().height() > self.text_D.size().height():
+                img_d = img_d.scaled(self.text_D.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            self.text_A.setPixmap(img_a)
+            self.text_B.setPixmap(img_b)
+            self.text_C.setPixmap(img_c)
+            self.text_D.setPixmap(img_d)
 
         self.question_text.setText(q)
 
