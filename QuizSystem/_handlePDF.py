@@ -1,6 +1,5 @@
 import pdfplumber
-import json
-import os
+from PIL import Image
 
 # AnswerDir = "./Answer/"
 # subjectsPath = [AnswerDir + path + "/" for path in os.listdir(AnswerDir)]
@@ -29,11 +28,10 @@ import os
 #     jsonFile = open(subject + "Answers.json", 'w')
 #     json.dump(answerDict, jsonFile)
 
-targetPath = "C:/Users/iris2/Desktop/Question/課程教學與評量/111_課程教學與評量.pdf"
+targetPath = "C:/Users/iris2/Desktop/Question/國語文能力測驗/112_國語文能力測驗.pdf"
 pdf = pdfplumber.open(targetPath)
-for page in pdf.pages[3:5]:
-    text = page.extract_text_simple()
-    print(text)
-    pass
-
+# for page in pdf.pages:
+#     text = page.extract_text_simple()
+#     print(text)
+#     pass
 
