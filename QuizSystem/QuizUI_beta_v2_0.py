@@ -546,6 +546,7 @@ class QuizWindows(QtWidgets.QWidget):
         palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
         self.question_text.setPalette(palette)
 
+        self.question_text.setFont(QFont('細明體', self.parameters["font_size"]))
         self.question_text.setStyleSheet('''
             border: none;
         ''')
@@ -781,22 +782,28 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _previous_question(self):
         self.current_question -= 1
+
         self._update_btn_state()
         self._restore_option_choice()
+        self._window_setting()
         self._questions_setting()
         self._update_question_image_state()
 
     def _next_question(self):
         self.current_question += 1
+
         self._update_btn_state()
         self._restore_option_choice()
+        self._window_setting()
         self._questions_setting()
         self._update_question_image_state()
 
     def _page_goto_event(self):
         self.current_question = self.page_goto.currentIndex()
+
         self._update_btn_state()
         self._restore_option_choice()
+        self._window_setting()
         self._questions_setting()
         self._update_question_image_state()
 
@@ -920,6 +927,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.answer_path = kwargs["answer_path"]
         self.correct = 0
         self.wrong_number = list()
+        self.current_number = 1
         # -----
 
         self._windows_setting()
@@ -958,6 +966,7 @@ class ResultWindows(QtWidgets.QWidget):
         <font color="black">正確答案是</font>
         <font color="red">紅色文字</font>'''
         self.illustrate_label.setText(html_illustrate)
+        self.illustrate_label.setFont(QFont('細明體', self.parameters["font_size"]))
         self.illustrate_label.setStyleSheet('''border: solid black; border-width: 0px 0px 1px 0px;''')
         self.labels_layout.addWidget(self.illustrate_label, 12, 0, 1, last_row)
 
@@ -978,17 +987,25 @@ class ResultWindows(QtWidgets.QWidget):
         # -
 
         # - 處理 question_layout 的文字, 樣式
-        text_width, text_height = int(width * 0.6), int(height * 0.25)
+        text_width = int(width * 0.6)
+
+        isImage = self.question[self.current_number]["isImage"]
+        if isImage == "" or isImage == "A":
+            text_height = int(height * 0.4)
+        else:
+            text_height = int(height * 0.25)
+
+            self.question_image.setAlignment(QtCore.Qt.AlignCenter)
+            self.question_layout.addWidget(self.question_image, 1, 0)
+
+        self.question_layout.addWidget(self.question_text, 0, 0)
         self.question_text.setFixedSize(text_width, text_height)
 
+        self.question_text.setFont(QFont('細明體', self.parameters["font_size"]))
         self.question_text.setStyleSheet('''border: none;''')
         palette = self.palette()
         palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
         self.question_text.setPalette(palette)
-        self.question_layout.addWidget(self.question_text, 0, 0)
-
-        self.question_image.setAlignment(QtCore.Qt.AlignCenter)
-        self.question_layout.addWidget(self.question_image, 1, 0)
 
         self.options_layout.addWidget(self.optionA, 0, 0)
         self.options_layout.addWidget(self.optionB, 0, 1)
@@ -1093,6 +1110,8 @@ class ResultWindows(QtWidgets.QWidget):
         html_text = clicked_label.text()  # 取得 HTML 的文本
         number = html_text.split('.')[0].split('>')[-1]  # 取得題號
 
+        self.current_number = int(number)  # 用給 ui() 調整版面使用
+        self._windows_setting()
         self._update_question_image_state(number)
         self._display_clicked_question(number)
 
