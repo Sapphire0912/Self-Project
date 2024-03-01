@@ -1174,10 +1174,21 @@ class ResultWindows(QtWidgets.QWidget):
             img_c = QPixmap(options["C"]["img"])
             img_d = QPixmap(options["D"]["img"])
 
-            # img_a = img_a.scaled(self.optionA.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            # img_b = img_b.scaled(self.optionB.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            # img_c = img_c.scaled(self.optionC.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
-            # img_d = img_d.scaled(self.optionD.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+            if img_a.size().width() > self.optionA.size().width() or \
+                    img_a.size().height() > self.optionA.size().height():
+                img_a = img_a.scaled(self.optionA.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.optionB.size().width() or \
+                    img_b.size().height() > self.optionB.size().height():
+                img_b = img_b.scaled(self.optionB.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.optionC.size().width() or \
+                    img_c.size().height() > self.optionC.size().height():
+                img_c = img_c.scaled(self.optionC.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.optionD.size().width() or \
+                    img_d.size().height() > self.optionD.size().height():
+                img_d = img_d.scaled(self.optionD.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
 
             self.optionA.setPixmap(img_a)
             self.optionB.setPixmap(img_b)
@@ -1186,8 +1197,32 @@ class ResultWindows(QtWidgets.QWidget):
 
         else:
             # 題目和答案都有圖片
-            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
-            pass
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
+
+            img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
+            img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
+
+            if img_a.size().width() > self.optionA.size().width() or \
+                    img_a.size().height() > self.optionA.size().height():
+                img_a = img_a.scaled(self.optionA.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.optionB.size().width() or \
+                    img_b.size().height() > self.optionB.size().height():
+                img_b = img_b.scaled(self.optionB.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.optionC.size().width() or \
+                    img_c.size().height() > self.optionC.size().height():
+                img_c = img_c.scaled(self.optionC.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.optionD.size().width() or \
+                    img_d.size().height() > self.optionD.size().height():
+                img_d = img_d.scaled(self.optionD.size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+                
+            self.optionA.setPixmap(img_a)
+            self.optionB.setPixmap(img_b)
+            self.optionC.setPixmap(img_c)
+            self.optionD.setPixmap(img_d)
 
         self.question_text.setText(q)
 
