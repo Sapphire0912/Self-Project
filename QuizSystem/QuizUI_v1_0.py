@@ -128,7 +128,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 
         # 初始螢幕視窗大小(固定)
-        self.setFixedSize(1200, 768)
+        self.setFixedSize(1600, 900)
 
         # ----- 參數設定 -----
         self.init_title = QtWidgets.QLabel(self)
@@ -297,9 +297,9 @@ class InitialWindow(QtWidgets.QWidget):
         # windows size select
         self.label_size.setText('選擇視窗大小：')
         self.median.setChecked(True)
-        self.small.setText('960x720')
-        self.median.setText('1200x768')
-        self.large.setText('1440x960')
+        self.small.setText('1200x768')
+        self.median.setText('1600x900')
+        self.large.setText('1920x1080')
 
         self.winsize_group.addButton(self.small, id=1)
         self.winsize_group.addButton(self.median, id=2)
@@ -357,11 +357,11 @@ beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課�
     def _win_select_event(self):
         select_id = self.winsize_group.checkedId()
         if select_id == 1:
-            self.setFixedSize(960, 720)
-        elif select_id == 2:
             self.setFixedSize(1200, 768)
+        elif select_id == 2:
+            self.setFixedSize(1600, 900)
         elif select_id == 3:
-            self.setFixedSize(1440, 960)
+            self.setFixedSize(1920, 1080)
 
         self._windows_setting()  # 重新整理視窗介面
 
@@ -888,7 +888,6 @@ class QuizWindows(QtWidgets.QWidget):
 
         # 交卷後的新視窗
         self.result_window = ResultWindows(
-            window_size=(self.width(), self.height()),
             font_size=self.parameters["font_size"],
             subject=self.parameters["subject_info"]["subject"],
             question=self.questions,
@@ -910,6 +909,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         self.setFont(QFont('細明體', kwargs["font_size"]))
+        self.setFixedSize(1600, 900)
 
         self.parameters = kwargs
 
@@ -966,8 +966,7 @@ class ResultWindows(QtWidgets.QWidget):
 
     def _windows_setting(self):
         # 視窗大小的基本設定
-        width, height = self.parameters["window_size"][0], self.parameters["window_size"][1]
-        self.setFixedSize(width, height)
+        width, height = self.width(), self.height()
 
         # 讓視窗在螢幕正中間顯示
         screen = QtWidgets.QApplication.desktop()
