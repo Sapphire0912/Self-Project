@@ -909,7 +909,7 @@ class ResultWindows(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
         self.setFont(QFont('細明體', kwargs["font_size"]))
-        self.setFixedSize(1600, 900)
+        self.setFixedSize(1920, 900)
 
         self.parameters = kwargs
 
