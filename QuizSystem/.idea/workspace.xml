@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/QuizUI_v1_0.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_v1_0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/EsprQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/EsprQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_handlePDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handlePDF.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,9 +242,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.QuizUI_v1_0" />
+        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python.QuizUI_v1_0 (1)" />
         <item itemvalue="Python.MathQ" />
-        <item itemvalue="Python._handlePDF (1)" />
         <item itemvalue="Python.QuizUI_beta_v2_1" />
       </list>
     </recent_temporary>
