@@ -14,7 +14,7 @@ h6 {
 }
 
 body {
-  font-family: "DFkai-sb";
+  font-family: "Times New Roman", "DFkai-sb";
 }
 body nav {
   background-color: rgba(211, 211, 211, 0.3);
@@ -51,7 +51,8 @@ body main section.main-area {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  min-height: 30vh;
+  line-height: 1.5;
 }
 body main section.main-area div.introduce {
   flex-basis: 450px;
@@ -59,7 +60,7 @@ body main section.main-area div.introduce {
 }
 body main section.main-area div.introduce h1 {
   font-size: 2.5rem;
-  text-align: left;
+  text-align: center;
 }
 body main section.main-area div.introduce p {
   font-size: 1.15rem;
@@ -86,18 +87,41 @@ body main section.main-area div.self-image img {
   width: 100%;
 }
 body main section.skill {
+  margin-top: 2rem;
   padding: 5rem 0rem;
-  background-color: white;
+  background-color: rgba(244, 164, 96, 0.2);
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
   align-items: center;
-  min-height: 60vh;
+  min-height: 30vh;
+  flex: 5 1 500px;
 }
 body main section.skill div.self-image2 {
-  padding: 2rem;
-  flex-basis: 1000px;
+  padding: 1rem;
+  flex-basis: 600px;
 }
 body main section.skill div.self-image2 img {
   width: 100%;
+  border-radius: 10px;
+}
+body main section.skill div.self-skill {
+  padding: 2rem;
+  font-size: 1.25rem;
+  flex: 3 1 400px;
+}
+body main section.skill div.self-skill table {
+  border-collapse: collapse;
+}
+body main section.skill div.self-skill table tr {
+  line-height: 2;
+}
+body main section.skill div.self-skill div.web-design {
+  padding-top: 2rem;
+}
+body main section.skill div.self-skill div.web-design h3 {
+  font-weight: bolder;
+}
+body main section.skill div.self-skill div.web-design ul {
+  list-style-position: inside;
 }/*# sourceMappingURL=styles.css.map */

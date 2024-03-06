@@ -15,7 +15,7 @@ h6 {
 
 $fontColor: dodgerblue;
 body {
-  font-family: "DFkai-sb";
+  font-family: "Times New Roman", "DFkai-sb";
   nav {
     background-color: rgba(211, 211, 211, 0.3);
     ul {
@@ -50,18 +50,20 @@ body {
   main {
     section.main-area {
       background-color: white;
+
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      min-height: 60vh;
+      min-height: 30vh;
 
+      line-height: 1.5;
       div.introduce {
         flex-basis: 450px;
         padding: 0.5rem;
         h1 {
           font-size: 2.5rem;
-          text-align: left;
+          text-align: center;
         }
         p {
           font-size: 1.15rem;
@@ -91,20 +93,46 @@ body {
       }
     }
     section.skill {
+      margin-top: 2rem;
       padding: 5rem 0rem;
-      background-color: white;
+      background-color: rgba(244, 164, 96, 0.2);
 
       display: flex;
       flex-wrap: wrap;
       justify-content: left;
       align-items: center;
-      min-height: 60vh;
+      min-height: 30vh;
+
+      flex: 5 1 500px;
 
       div.self-image2 {
-        padding: 2rem;
-        flex-basis: 1000px;
+        padding: 1rem;
+        flex-basis: 600px;
         img {
           width: 100%;
+          border-radius: 10px;
+        }
+      }
+
+      div.self-skill {
+        padding: 2rem;
+        font-size: 1.25rem;
+        flex: 3 1 400px;
+        table {
+          border-collapse: collapse;
+
+          tr {
+            line-height: 2;
+          }
+        }
+        div.web-design {
+          padding-top: 2rem;
+          h3 {
+            font-weight: bolder;
+          }
+          ul {
+            list-style-position: inside;
+          }
         }
       }
     }
