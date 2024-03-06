@@ -1,7 +1,0 @@
-@charName=tartaglia
-defaultTouchCursor=./pic_icon/tartaglia_icon.png
-defaultClickCursor=./pic_icon/morabag_icon.png
-buttonStyle=background:#8282FF;font:18px '微軟正黑體';border-radius:35px;
-buttonStyle2=background:#D6D6FF;font:18px '微軟正黑體';border-radius:35px;
-defaultTableImage=./pic_tartaglia/tartaglia_serious_01.png
-defaultMoveImage=./pic_tartaglia/tartaglia_cry_01.png
