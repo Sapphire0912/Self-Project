@@ -94,16 +94,13 @@ body {
     }
     section.skill {
       margin-top: 2rem;
-      padding: 5rem 0rem;
+      //   padding: 5rem 0rem;
       background-color: rgba(244, 164, 96, 0.2);
 
       display: flex;
       flex-wrap: wrap;
-      justify-content: left;
       align-items: center;
       min-height: 30vh;
-
-      flex: 5 1 500px;
 
       div.self-image2 {
         padding: 1rem;
@@ -120,7 +117,6 @@ body {
         flex: 3 1 400px;
         table {
           border-collapse: collapse;
-
           tr {
             line-height: 2;
           }
@@ -129,9 +125,12 @@ body {
           padding-top: 2rem;
           h3 {
             font-weight: bolder;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid gray;
           }
           ul {
             list-style-position: inside;
+            line-height: 2;
           }
         }
       }
