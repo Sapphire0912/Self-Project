@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+body {
+  font-family: "DFkai-sb";
+}
+body nav {
+  background-color: rgba(211, 211, 211, 0.3);
+}
+body nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+body nav ul li {
+  list-style-type: none;
+  margin: 1rem;
+}
+body nav ul li .active {
+  color: dodgerblue;
+  font-weight: bolder;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid dodgerblue;
+}
+body nav ul li a {
+  color: black;
+  font-size: 1.25rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+body nav ul li a:hover {
+  color: dodgerblue;
+  padding-bottom: 0.2rem;
+  border-bottom: 2px solid dodgerblue;
+}
+body main section.main-area {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+body main section.main-area div.introduce {
+  flex-basis: 450px;
+  margin: 0.5rem 0.25rem;
+}
+body main section.main-area div.introduce h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+body main section.main-area div.introduce p {
+  font-size: 1.15rem;
+  text-align: center;
+}
+body main section.main-area div.introduce a {
+  background-color: mediumaquamarine;
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+body main section.main-area div.introduce a:hover {
+  transform: scale(1.2);
+}
+body main section.main-area div.self-image {
+  flex-basis: 450px;
+  width: 100%;
+}/*# sourceMappingURL=styles.css.map */
