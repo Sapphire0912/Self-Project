@@ -55,15 +55,15 @@ body main section.main-area {
 }
 body main section.main-area div.introduce {
   flex-basis: 450px;
-  margin: 0.5rem 0.25rem;
+  padding: 0.5rem;
 }
 body main section.main-area div.introduce h1 {
   font-size: 2.5rem;
-  text-align: center;
+  text-align: left;
 }
 body main section.main-area div.introduce p {
   font-size: 1.15rem;
-  text-align: center;
+  text-align: left;
 }
 body main section.main-area div.introduce a {
   background-color: mediumaquamarine;
@@ -73,7 +73,7 @@ body main section.main-area div.introduce a {
   padding: 0.5rem;
   border-radius: 20px;
   display: inline-block;
-  margin: 2rem;
+  margin: 1.5rem;
   transition: all 0.2s ease-in-out;
 }
 body main section.main-area div.introduce a:hover {
@@ -81,5 +81,23 @@ body main section.main-area div.introduce a:hover {
 }
 body main section.main-area div.self-image {
   flex-basis: 450px;
+}
+body main section.main-area div.self-image img {
+  width: 100%;
+}
+body main section.skill {
+  padding: 5rem 0rem;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  min-height: 60vh;
+}
+body main section.skill div.self-image2 {
+  padding: 2rem;
+  flex-basis: 1000px;
+}
+body main section.skill div.self-image2 img {
   width: 100%;
 }/*# sourceMappingURL=styles.css.map */

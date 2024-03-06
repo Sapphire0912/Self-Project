@@ -58,14 +58,14 @@ body {
 
       div.introduce {
         flex-basis: 450px;
-        margin: 0.5rem 0.25rem;
+        padding: 0.5rem;
         h1 {
           font-size: 2.5rem;
-          text-align: center;
+          text-align: left;
         }
         p {
           font-size: 1.15rem;
-          text-align: center;
+          text-align: left;
         }
         a {
           background-color: mediumaquamarine;
@@ -76,7 +76,7 @@ body {
           padding: 0.5rem;
           border-radius: 20px;
           display: inline-block;
-          margin: 2rem;
+          margin: 1.5rem;
           transition: all 0.2s ease-in-out;
           &:hover {
             transform: scale(1.2);
@@ -85,7 +85,27 @@ body {
       }
       div.self-image {
         flex-basis: 450px;
-        width: 100%;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    section.skill {
+      padding: 5rem 0rem;
+      background-color: white;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      align-items: center;
+      min-height: 60vh;
+
+      div.self-image2 {
+        padding: 2rem;
+        flex-basis: 1000px;
+        img {
+          width: 100%;
+        }
       }
     }
   }
