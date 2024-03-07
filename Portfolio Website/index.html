@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JIA-YE HE | 關於我</title>
     <meta name="author" content="JIA-YE HE" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./styles/styles.css" />
   </head>
   <body>
@@ -21,11 +27,11 @@
         <div class="introduce">
           <h1>大家好，我是何佳曄</h1>
           <p>
-            剛畢業的電子系學生，就學期間接觸到軟體工程領域後，正著手研究此領域的應用。
+            剛畢業的電子系學生，就學期間接觸軟體工程領域後，正著手研究此領域的應用。
             曾接觸過醫療影像辨識、機器學習、深度學習領域，後來需要使用到與使用者溝通及互動的介面開發，
             正往網頁設計、串接資料庫、前端框架、全端設計開發發展。
           </p>
-          <a href="contact.html">了解更多</a>
+          <a href="contact.html" title="作品及聯絡方式">了解更多</a>
         </div>
         <div class="self-image">
           <img src="images/個人照片.png" alt="個人照片" />
@@ -37,39 +43,108 @@
           <img src="images/個人照片2.jpg" alt="個人照片2" />
         </div>
         <div class="self-skill">
-          <table>
-            <tr style="border-bottom: 2px solid gray">
-              <th>專長 & 擅長工具</th>
-            </tr>
-            <tr>
-              <td>程式語言</td>
-              <td>C、Python、Javascript</td>
-            </tr>
-            <tr>
-              <td>資料庫</td>
-              <td>MySQL、MongoDB</td>
-            </tr>
-            <tr>
-              <td>作業系統</td>
-              <td>Windows、Linux</td>
-            </tr>
-            <tr>
-              <td>軟體開發管理</td>
-              <td>Github</td>
-            </tr>
-          </table>
+          <div class="tools">
+            <h3>專長 & 擅長工具</h3>
+            <ul>
+              <li>程式語言：C、Python、Javascript</li>
+              <li>資料庫：MySQL、MongoDB</li>
+              <li>作業系統：Windows、Linux</li>
+              <li>軟體專案管理：Github</li>
+            </ul>
+          </div>
           <div class="web-design">
             <h3>網頁設計</h3>
             <ul>
               <li>熟悉 HTML5、CSS3</li>
               <li>熟悉 RWD 響應式網頁設計</li>
-              <li>SCSS</li>
+              <li>Sass / Scss</li>
               <li>React、Vue.js</li>
+            </ul>
+          </div>
+          <div class="image-recognize">
+            <h3>醫療影像辨識</h3>
+            <ul>
+              <li>利用 C、Python、Opencv 開發系統及演算法</li>
+              <li>熟悉 LR、SVM、Kmeans 等機器學習模型應用</li>
+              <li>熟悉 Tensorflow、PyTorch 深度學習模組</li>
             </ul>
           </div>
         </div>
       </section>
-      <section class="about-me"></section>
+
+      <section class="about-me">
+        <div class="text-info">
+          <h3>關於我的一些事情</h3>
+          <p>
+            以前對電腦就特別有興趣，求學階段主修電機與電子相關領域。
+            大學時，接觸了醫療影像辨識、深度學習後開始專攻軟體工程領域。
+            在某次的研究中，因需要設計可以互動式的應用或網頁，後來選擇全端開發做為現在研究的主要項目。
+          </p>
+          <p>
+            我的主要技能是 Python, Javascript, Machine Learning, Deep Learning,
+            Computer Vision 和網頁開發及系統整合開發。
+          </p>
+
+          <div class="process-bar">
+            <p>Python</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                style="width: 90%"
+                aria-valuenow="10"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p>Javascript, Web Development</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                role="progressbar"
+                style="width: 80%"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p>Maching Learning</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                role="progressbar"
+                style="width: 85%"
+                aria-valuenow="50"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p>Deep Learning</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                role="progressbar"
+                style="width: 80%"
+                aria-valuenow="75"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <p>Computer Vision</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                role="progressbar"
+                style="width: 75%"
+                aria-valuenow="100"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+    <footer></footer>
   </body>
 </html>
