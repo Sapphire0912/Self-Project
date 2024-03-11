@@ -15,15 +15,18 @@ h6 {
 
 body nav {
   background-color: snow;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
 }
 body nav ul {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: right;
 }
 body nav ul li {
   list-style-type: none;
-  margin: 1rem 2rem;
+  padding: 0.75rem 2rem 0rem 2rem;
 }
 body nav ul li .active {
   color: dodgerblue;
@@ -95,9 +98,10 @@ body main section.skill {
 body main section.skill div.self-image2 {
   padding: 1rem;
   flex: 2 1 900px;
+  text-align: center;
 }
 body main section.skill div.self-image2 img {
-  width: 100%;
+  width: 80%;
   border-radius: 10px;
 }
 body main section.skill div.self-skill {
@@ -132,7 +136,7 @@ body main section.about-me {
   justify-content: center;
 }
 body main section.about-me div.text-info {
-  width: 75%;
+  width: 60%;
   text-align: center;
 }
 body main section.about-me div.text-info h3 {
@@ -145,4 +149,41 @@ body main section.about-me div.text-info p {
 }
 body main section.about-me div.text-info .process-bar p {
   margin: 0.5rem;
+}
+body main section.about-me div.text-info div.fast-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding: 1.25rem;
+}
+body main section.about-me div.text-info div.fast-link a {
+  background-color: rgba(0, 139, 139, 0.5);
+  color: black;
+  text-decoration: none;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 0.8rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  transition: all 0.2s ease-in;
+}
+body main section.about-me div.text-info div.fast-link a:hover {
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 600px) {
+  body nav {
+    justify-content: flex-start;
+  }
+  body nav ul {
+    flex-direction: column;
+    padding-left: 0.25rem;
+  }
+}
+@media screen and (max-width: 800px) {
+  body main section.about-me div.text-info {
+    width: 100%;
+  }
 }/*# sourceMappingURL=styles.css.map */
