@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="" />
+    <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/EscntQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/EscntQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_handlePDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handlePDF.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
