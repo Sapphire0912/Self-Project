@@ -452,6 +452,15 @@ class QuizWindows(QtWidgets.QWidget):
         self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
         self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
 
+        # 設定視窗大小並固定在螢幕正中間出現
+        windows = kwargs['windows_size']
+        self.width, self.height = windows
+        self.setFixedSize(self.width, self.height)
+
+        screen = QtWidgets.QApplication.desktop()
+        screen_width, screen_height = screen.width(), screen.height()
+        self.move((screen_width - self.width) // 2, (screen_height - self.height) // 2)
+
         # 初始視窗的參數
         self.parameters = kwargs
         self.setFont(QFont('細明體', kwargs["font_size"]))
@@ -521,6 +530,11 @@ class QuizWindows(QtWidgets.QWidget):
         self.questions_number = TEST_SUBJECTS[index][years]["ChooseQ"]
         self.user_answers = [0] * self.questions_number
 
+        # 收藏題目的變數
+        self.collectionQ = list()
+        self.isCollect = 0  # 控制開關
+        self.collection_label = QtWidgets.QLabel(self)
+
         # 交卷的變數
         self.send_answer_btn = QtWidgets.QPushButton(self)
         self.result_window = None  # 新視窗的變數
@@ -531,13 +545,7 @@ class QuizWindows(QtWidgets.QWidget):
 
     def _window_setting(self):
         # 設定視窗大小並固定在螢幕正中間出現
-        windows = self.parameters['windows_size']
-        width, height = windows
-        self.setFixedSize(width, height)
-
-        screen = QtWidgets.QApplication.desktop()
-        screen_width, screen_height = screen.width(), screen.height()
-        self.move((screen_width - width) // 2, (screen_height - height) // 2)
+        width, height = self.width, self.height
 
         # 1. 設定題目文字位置
         # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
@@ -611,9 +619,14 @@ class QuizWindows(QtWidgets.QWidget):
         icon = QtGui.QIcon(pixmap)
         self.timer_pause_btn.setIcon(icon)
         self.timer_pause_btn.setGeometry(page_btn_x, timer_label_y + page_btn_h, pixmap.width(), pixmap.height())
-        pass
 
-        # 7. 交卷按鈕位置
+        # 7. 設定 collection btn 的樣式 (設定在下拉式選單的旁邊)
+        pixmap2 = QtGui.QPixmap('./image/icon_black_star.png')
+        pixmap2 = pixmap2.scaled(page_btn_h, page_btn_h)
+        self.collection_label.setPixmap(pixmap2)
+        self.collection_label.setGeometry(page_btn_x + page_goto_w + 40, page_goto_y, page_btn_h, page_btn_h)
+
+        # 8. 交卷按鈕位置
         send_btn_x, send_btn_y = page_btn_x + page_btn_w + 10, page_goto_y + page_btn_h * 5
         send_btn_w, send_btn_h = int(width * 0.1), int(height * 0.05)
         self.send_answer_btn.setFont(QFont('細明體', 14))
@@ -681,6 +694,11 @@ class QuizWindows(QtWidgets.QWidget):
         # 設定 timer 定時, 顯示標籤文字, 暫停/開始按鈕, 以及視窗
         self.timer.start(1000)  # 計時器
         self.timer_pause_btn.clicked.connect(self._timer_pause)
+
+        # 設定收藏 Label 的事件
+        self.collection_label.enterEvent = self._mouse_cursor_enter
+        self.collection_label.mousePressEvent = self._collection_clicked
+        self.collection_label.leaveEvent = self._mouse_cursor_leave
 
         # 設定交卷按鈕
         self.send_answer_btn.setText('交卷')
@@ -831,6 +849,7 @@ class QuizWindows(QtWidgets.QWidget):
         self._restore_option_choice()
         self._window_setting()
         self._questions_setting()
+        self._restore_collection_mark()
         self._update_question_image_state()
 
     def _next_question(self):
@@ -840,6 +859,7 @@ class QuizWindows(QtWidgets.QWidget):
         self._restore_option_choice()
         self._window_setting()
         self._questions_setting()
+        self._restore_collection_mark()
         self._update_question_image_state()
 
     def _page_goto_event(self):
@@ -849,6 +869,7 @@ class QuizWindows(QtWidgets.QWidget):
         self._restore_option_choice()
         self._window_setting()
         self._questions_setting()
+        self._restore_collection_mark()
         self._update_question_image_state()
 
     def _timer_count(self):
@@ -892,6 +913,36 @@ class QuizWindows(QtWidgets.QWidget):
 
         elif isExitTest == 1:
             self._send_answer_event()
+
+    def _restore_collection_mark(self):
+        if self.current_question in self.collectionQ:
+            self.isCollect = 1
+            pixmap = QPixmap('./image/icon_yellow_star.png')
+            pixmap = pixmap.scaled(self.collection_label.width(), self.collection_label.height())
+            self.collection_label.setPixmap(pixmap)
+        else:
+            self.isCollect = 0
+
+    def _collection_clicked(self, event):
+        # 點選一下是將題目加入收藏, 若題目已加入收藏時, 再點一下是取消
+        if self.isCollect == 0:
+            self.isCollect = 1
+            pixmap = QPixmap('./image/icon_yellow_star.png')
+            pixmap = pixmap.scaled(self.collection_label.width(), self.collection_label.height())
+
+            if self.current_question not in self.collectionQ:
+                self.collectionQ.append(self.current_question)
+
+        else:
+            # 已經收藏過了, 又點擊則要取消收藏
+            self.isCollect = 0
+            pixmap = QPixmap('./image/icon_black_star.png')
+            pixmap = pixmap.scaled(self.collection_label.width(), self.collection_label.height())
+
+            self.collectionQ.remove(self.current_question)
+
+        self.collection_label.setPixmap(pixmap)
+        self.collectionQ.sort()
 
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
@@ -1106,6 +1157,7 @@ class ResultWindows(QtWidgets.QWidget):
         data_test = {
             "測驗日期": today,
             "測驗科目": subject,
+            "測驗年分": self.year,
             "作答時間": using_time,
             "正確題數": acc_number,
             "正確率": acc_percent,
@@ -1306,13 +1358,14 @@ class HistoryWindow(QtWidgets.QWidget):
         self.ui()
 
     def _windows_setting(self):
-        self.setFixedSize(720, 600)
+        self.setFixedSize(900, 720)
         x, y, w, h = 10, 10, 700, 580
+        self.history_table.verticalHeader().setMinimumWidth(20)
 
         # 設定表格的相關資訊
-        self.history_table.setColumnCount(6)
+        self.history_table.setColumnCount(7)
         self.history_table.setHorizontalHeaderLabels(
-            ['測驗日期', '測驗科目', '作答時間', '正確題數', '正確率', '錯誤題號']
+            ['測驗日期', '測驗科目', '測驗年份', '作答時間', '正確題數', '正確率', '錯誤題號']
         )
 
         self.history_table.setFont(QFont('新細明體', 10))
