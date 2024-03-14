@@ -432,7 +432,12 @@ beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課�
         self.years_menu.currentIndexChanged.connect(self._year_select_event)
 
     def _collection_clicked(self):
-        self.collection_windows = 1
+        self.collection_windows = CollectionQWindows(
+            windows_size=(self.width(), self.height()),
+            font_size=10 + self.winsize_group.checkedId() * 2,
+            initWindow=self
+        )
+        self.collection_windows.show()
         self.close()
 
     def _enter_test_event(self):
@@ -560,7 +565,6 @@ class QuizWindows(QtWidgets.QWidget):
         self.ui()
 
     def _window_setting(self):
-        # 設定視窗大小並固定在螢幕正中間出現
         width, height = self.width, self.height
 
         # 1. 設定題目文字位置
@@ -1029,6 +1033,109 @@ class QuizWindows(QtWidgets.QWidget):
             collectionQ=self.collectionQ
         )
         self.result_window.show()
+        self.close()
+
+
+class CollectionQWindows(QtWidgets.QWidget):
+    def __init__(self, **kwargs):
+        super(CollectionQWindows, self).__init__()
+
+        # 設定視窗大小, 標題, icon, 永遠在螢幕最上層顯示
+        self.width, self.height = kwargs["windows_size"][0], kwargs["windows_size"][1]
+        self.setFixedSize(self.width, self.height)
+
+        self.setWindowTitle("教師資格考試測驗系統")
+        self.setWindowIcon(QtGui.QIcon("./image/windowsicon.ico"))
+        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
+
+        # 設定文字大小
+        self.setFont(QFont('細明體', kwargs["font_size"]))
+
+        # 初始視窗變數
+        self.initWindow = kwargs["initWindow"]
+
+        # ----- 參數設定 -----
+        # - 收藏檔案的路徑
+        if os.path.exists("./_collection_question.json"):
+            with open("./_collection_question.json", 'r') as json_file:
+                self.collection_questions = load(json_file)
+
+            # - 題目文字, 圖片, 選項
+            self.question_text = QtWidgets.QTextEdit(self)
+            self.question_image = QtWidgets.QLabel(self)
+            self.options_list = [QtWidgets.QLabel(self) for _ in range(4)]  # A, B, C, D
+
+            # - 解答檔案資料夾
+            self.answer_dir = "./Answer/"
+
+            # 設定可以快速跳轉到某一頁的選單
+            self.page_goto = QtWidgets.QComboBox(self)
+
+            # 設定前/後一頁的按鈕
+            self.previous_btn = QtWidgets.QPushButton(self)
+            self.next_btn = QtWidgets.QPushButton(self)
+
+            # 返回首頁/離開系統的按鈕
+            self.back_btn = QtWidgets.QPushButton(self)
+            self.exit_btn = QtWidgets.QPushButton(self)
+
+            self._windows_setting()
+            self.ui()
+
+        else:
+            hint_text = QtWidgets.QLabel(self)
+            hint_text.setText('目 前 暫 無 收 藏 題 目')
+            hint_text.setFont(QFont('細明體', 36))
+            hint_text.setGeometry(self.width // 2 - 300, self.height // 2 - 200, 600, 200)
+
+            back_btn = QtWidgets.QPushButton(self)
+            back_btn.setText('返回測驗首頁')
+            back_btn.setGeometry(self.width // 2 - 240, self.height // 2, 150, 60)
+            back_btn.clicked.connect(self._back_first_window)
+
+            exit_btn = QtWidgets.QPushButton(self)
+            exit_btn.setText('離開測驗系統')
+            exit_btn.setGeometry(self.width // 2 + 30, self.height // 2, 150, 60)
+            exit_btn.clicked.connect(self.close)
+
+        # -----
+
+    def _windows_setting(self):
+        width, height = self.width, self.height
+
+        # 1. 設定題目文字位置
+        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
+        q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
+        q_text_y = int(height * 0.02)
+        # isImage = self.questions[self.current_question]["isImage"]
+        #
+        # if isImage == "" or isImage == "A":
+        #     # 題目無圖片
+        #     q_text_h = int(height * 0.5)
+        # else:
+        #     # 題目有圖片
+        #     q_text_h = int(height * 0.23)
+        #     # 2. 設定題目圖片/表格位置
+        #     q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
+        #     self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
+        #     self.question_image.setAlignment(QtCore.Qt.AlignLeft)
+
+        self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, int(height * 0.5))
+
+        palette = self.palette()
+        palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        self.question_text.setPalette(palette)
+
+        self.question_text.setStyleSheet('''
+             border: 2px solid black;
+         ''')
+        self.question_text.setAlignment(QtCore.Qt.AlignLeft)
+
+    def ui(self):
+        pass
+
+    def _back_first_window(self):
+        self.initWindow.show()
         self.close()
 
 
