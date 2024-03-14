@@ -1102,6 +1102,9 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.back_btn = QtWidgets.QPushButton(self)
             self.exit_btn = QtWidgets.QPushButton(self)
 
+            # - 儲存所有題目的變數
+            self.total_questions = dict()
+
             self._handle_questions_data()
             self._windows_setting()
             self.ui()
@@ -1228,10 +1231,10 @@ class CollectionQWindows(QtWidgets.QWidget):
         questions = self.collection_questions
         subjects = questions.keys()
 
-        total_question = 0
+        subject_index = list()  # 存放當前 subject 和 year 的題數(用累加的做法)
+        currentNumber = 1
 
-        for subject in subjects:
-            # print(subject)
+        for index, subject in enumerate(subjects):
             year_list, questions_list = questions[subject]["測驗年份"], questions[subject]["收藏題目"]
 
             # 利用 index 去找到相對應的題目(處理 108 年有 2 份的問題)
@@ -1242,13 +1245,15 @@ class CollectionQWindows(QtWidgets.QWidget):
 
             # 呼叫對應的 function
             year_index = [112 - int(i) for i in year_list]
-            # print(year_index)
 
             for q_index, y_index in enumerate(year_index):
                 target_question = q_files[subject][y_index]
                 target_number = questions_list[q_index]
-                pass
-        pass
+
+                for number in target_number:
+                    self.total_questions[currentNumber] = target_question[number]
+                    currentNumber += 1
+                subject_index.append(currentNumber)
 
     def _back_first_window(self):
         self.initWindow.show()
