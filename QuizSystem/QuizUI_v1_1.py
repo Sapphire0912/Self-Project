@@ -944,6 +944,40 @@ class QuizWindows(QtWidgets.QWidget):
         self.collection_label.setPixmap(pixmap)
         self.collectionQ.sort()
 
+        # 一旦收藏有變動, 就儲存到收藏題目的 JSON 檔案裡
+        subject = self.parameters["subject_info"]["subject"]
+        year = self.parameters["test_year"]
+
+        if os.path.exists("./_collection_question.json"):
+            with open("./_collection_question.json", "r") as json_file:
+                collections = load(json_file)
+
+                # 判斷測驗科目是否的一致
+                if subject not in collections.keys():
+                    collections[subject] = {
+                        "測驗年份": [],
+                        "收藏題目": []
+                    }
+
+                if year not in collections[subject]["測驗年份"]:
+                    collections[subject]["測驗年份"].append(year)
+                    collections[subject]["收藏題目"].append(self.collectionQ)
+                else:
+                    years = collections[subject]["測驗年份"]
+                    index = years.index(year)
+                    collections[subject]["收藏題目"][index] = self.collectionQ
+
+            with open("./_collection_question.json", 'w') as json_file:
+                dump(collections, json_file, indent=2)
+
+        else:
+            with open("./_collection_question.json", 'w') as json_file:
+                data = {
+                    subject: {"測驗年份": [year], "收藏題目": [self.collectionQ]}
+                }
+                dump(data, json_file, indent=2)
+            pass
+
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
         # 計算作答時間
@@ -960,7 +994,8 @@ class QuizWindows(QtWidgets.QWidget):
             answer_path=self.answers_data_path,
             test_year=self.parameters["test_year"],
             using_time=(time_min, time_second),
-            first_window=self.initWindow
+            first_window=self.initWindow,
+            collectionQ=self.collectionQ
         )
         self.result_window.show()
         self.close()
@@ -1014,6 +1049,9 @@ class ResultWindows(QtWidgets.QWidget):
         self.back_first_window_btn = QtWidgets.QPushButton(self)
         self.history_btn = QtWidgets.QPushButton(self)
         self.exit_system = QtWidgets.QPushButton(self)
+
+        # - 儲存收藏題目
+        self.collectionQ = kwargs["collectionQ"]
 
         # - 批改答案相關變數
         self.question = kwargs["question"]
@@ -1314,6 +1352,8 @@ class ResultWindows(QtWidgets.QWidget):
                 <font color="blue">{user_ans}</font>
                 <font color="red">{current_year_answer[index]}</font>'''
                 wrong_number.append(index + 1)
+                self.collectionQ.append(index + 1)
+
             else:
                 html_text_setting = f'''
                 <font color="black">{question_number}</font>
@@ -1328,6 +1368,9 @@ class ResultWindows(QtWidgets.QWidget):
         # 顯示正確題數
         accuracy = "{:.2f}".format(correct * 100 / len(user_answer))
         self.accuracy_label.setText(f'正確題數/總共題數：{correct}/{len(user_answer)}\n正確率：{accuracy}%')
+
+        # - 將錯誤題目儲存到收藏題目裡面
+
         pass
 
     def _back_first_window(self):
@@ -1337,7 +1380,6 @@ class ResultWindows(QtWidgets.QWidget):
     def _history_test_show(self):
         self.history_window = HistoryWindow()
         self.history_window.show()
-        pass
 
     def _exit_system(self):
         self.close()
