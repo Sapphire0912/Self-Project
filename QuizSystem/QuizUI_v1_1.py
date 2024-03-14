@@ -1072,7 +1072,13 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.options_list = [QtWidgets.QLabel(self) for _ in range(4)]  # A, B, C, D
 
             # - 解答檔案資料夾
-            self.answer_dir = "./Answer/"
+            self.answers_path = {
+                "國語文能力測驗": "./Answer/ChineseA.json",
+                "數學能力測驗": "./Answer/MathA.json",
+                "教育理念與實務": "./Answer/EsprA.json",
+                "課程教學與評量": "./Answer/EscntA.json",
+                "學習者發展與適性輔導": "./Answer/EsdngA.json"
+            }
 
             # 設定可以快速跳轉到某一科的選單(暫時不需要)
             # self.subject_goto = QtWidgets.QComboBox(self)
@@ -1096,6 +1102,7 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.back_btn = QtWidgets.QPushButton(self)
             self.exit_btn = QtWidgets.QPushButton(self)
 
+            self._handle_questions_data()
             self._windows_setting()
             self.ui()
 
@@ -1210,13 +1217,37 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.exit_btn.setText('離開測驗系統')
 
     def _handle_questions_data(self):
-        # total_question = 0
-        # questions = self.collection_questions
-        # subjects = questions.keys()
-        #
-        # for subject in subjects:
-        #     years, question_list = subject["測驗年份"], subjects["收藏題目"]
-        #     pass
+        q_files = {
+            "國語文能力測驗": chineseQ.YEARS,
+            "數學能力測驗": mathQ.YEARS,
+            "教育理念與實務": esprQ.YEARS,
+            "課程教學與評量": escntQ.YEARS,
+            "學習者發展與適性輔導": esdngQ.YEARS
+        }
+
+        questions = self.collection_questions
+        subjects = questions.keys()
+
+        total_question = 0
+
+        for subject in subjects:
+            # print(subject)
+            year_list, questions_list = questions[subject]["測驗年份"], questions[subject]["收藏題目"]
+
+            # 利用 index 去找到相對應的題目(處理 108 年有 2 份的問題)
+            if '108-2' in year_list:
+                year_list[year_list.index('108-2')] = '108'
+            if '108-1' in year_list:
+                year_list[year_list.index('108-1')] = '107'
+
+            # 呼叫對應的 function
+            year_index = [112 - int(i) for i in year_list]
+            # print(year_index)
+
+            for q_index, y_index in enumerate(year_index):
+                target_question = q_files[subject][y_index]
+                target_number = questions_list[q_index]
+                pass
         pass
 
     def _back_first_window(self):
