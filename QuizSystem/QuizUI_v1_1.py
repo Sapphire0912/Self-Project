@@ -943,9 +943,16 @@ class QuizWindows(QtWidgets.QWidget):
         if os.path.exists("./_collection_question.json"):
             with open("./_collection_question.json") as json_file:
                 history_collection = load(json_file)
-                years_list = history_collection[subject]["測驗年份"]
-                index = years_list.index(year)
-                question_list = history_collection[subject]["收藏題目"][index]
+
+                if subject in history_collection.keys():
+                    years_list = history_collection[subject]["測驗年份"]
+                    if year in years_list:
+                        index = years_list.index(year)
+                        question_list = history_collection[subject]["收藏題目"][index]
+                    else:
+                        question_list = self.collectionQ
+                else:
+                    question_list = self.collectionQ
 
             if self.current_question in question_list:
                 self.isCollect = 1
@@ -1203,6 +1210,13 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.exit_btn.setText('離開測驗系統')
 
     def _handle_questions_data(self):
+        # total_question = 0
+        # questions = self.collection_questions
+        # subjects = questions.keys()
+        #
+        # for subject in subjects:
+        #     years, question_list = subject["測驗年份"], subjects["收藏題目"]
+        #     pass
         pass
 
     def _back_first_window(self):
