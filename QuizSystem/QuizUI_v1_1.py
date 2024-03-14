@@ -1072,15 +1072,6 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.question_image = QtWidgets.QLabel(self)
             self.options_list = [QtWidgets.QLabel(self) for _ in range(4)]  # A, B, C, D
 
-            # - 解答檔案資料夾
-            self.answers_path = {
-                "國語文能力測驗": "./Answer/ChineseA.json",
-                "數學能力測驗": "./Answer/MathA.json",
-                "教育理念與實務": "./Answer/EsprA.json",
-                "課程教學與評量": "./Answer/EscntA.json",
-                "學習者發展與適性輔導": "./Answer/EsdngA.json"
-            }
-
             # 設定可以快速跳轉到某一科的選單(暫時不需要)
             # self.subject_goto = QtWidgets.QComboBox(self)
             # self.page_goto = QtWidgets.QComboBox(self)
@@ -1105,6 +1096,7 @@ class CollectionQWindows(QtWidgets.QWidget):
 
             # - 儲存題目資訊的所有計算變數
             self.total_questions = dict()
+            self.total_answers = list()
             self.subject_index = list()
             self.current_question = 1  # 存放當前顯示的題目
             # -----
@@ -1353,6 +1345,14 @@ class CollectionQWindows(QtWidgets.QWidget):
             "學習者發展與適性輔導": esdngQ.YEARS
         }
 
+        answers_path = {
+            "國語文能力測驗": "./Answer/ChineseA.json",
+            "數學能力測驗": "./Answer/MathA.json",
+            "教育理念與實務": "./Answer/EsprA.json",
+            "課程教學與評量": "./Answer/EscntA.json",
+            "學習者發展與適性輔導": "./Answer/EsdngA.json"
+        }
+
         questions = self.collection_questions
         subjects = questions.keys()
 
@@ -1361,6 +1361,13 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         for index, subject in enumerate(subjects):
             year_list, questions_list = questions[subject]["測驗年份"], questions[subject]["收藏題目"]
+
+            # 處理答案
+            answers_file = load(open(answers_path[subject]))
+            for i, year in enumerate(year_list):
+                questions_list[i].sort()  # 預防出現題目 & 答案對不起來的問題
+                for number in questions_list[i]:
+                    self.total_answers.append(answers_file[year][number - 1])
 
             # 利用 index 去找到相對應的題目(處理 108 年有 2 份的問題)
             if '108-2' in year_list:
@@ -1374,6 +1381,7 @@ class CollectionQWindows(QtWidgets.QWidget):
             for q_index, y_index in enumerate(year_index):
                 target_question = q_files[subject][y_index]
                 target_number = questions_list[q_index]
+                target_number.sort()
 
                 for number in target_number:
                     self.total_questions[currentNumber] = target_question[number]
@@ -1381,7 +1389,6 @@ class CollectionQWindows(QtWidgets.QWidget):
                 subject_index.append(currentNumber)
 
         self.subject_index = subject_index
-        print(self.total_questions)
 
     def _back_first_window(self):
         self.initWindow.show()
