@@ -179,8 +179,9 @@ class InitialWindow(QtWidgets.QWidget):
         # 設定 Message Box 變數
         self.test_msgbox = QtWidgets.QMessageBox(self)
 
-        # 新視窗的變數
+        # 測驗視窗的變數
         self.quiz_windows = None
+        self.collection_windows = None
         # -----
 
         self._windows_setting()
@@ -284,7 +285,11 @@ class InitialWindow(QtWidgets.QWidget):
         self.enter_test_btn.setGeometry(test_btn_x, self.height() - test_btn_h * 3, int(subject_w // 2), test_btn_h)
         self.enter_test_btn.setFont(ch_font)
 
-        # 9. 顯示測驗考卷資訊的位置
+        # 9. 顯示查看收藏題目的按鈕位置
+        self.collection_btn.setGeometry(test_btn_x, self.height() - test_btn_h * 5, int(subject_w // 2), test_btn_h)
+        self.collection_btn.setFont(ch_font)
+
+        # 10. 顯示測驗考卷資訊的位置
         test_info_y = int(self.height() * 0.7)
         test_info_w = int(subject_x * 3 // 5)
         self.test_info.setGeometry(subject_x, test_info_y, test_info_w, self.height() - test_info_y)
@@ -349,6 +354,10 @@ beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課�
         # enter test button
         self.enter_test_btn.setText("進入測驗")
         self.enter_test_btn.setEnabled(False)  # 預設按鈕不可點
+
+        # collection button
+        self.collection_btn.setText('查看已收藏題目')
+        self.collection_btn.clicked.connect(self._collection_clicked)
 
         # 新增自訂義按鈕
         sure = QtWidgets.QPushButton("確定")
@@ -421,6 +430,10 @@ beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課�
         self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
         self.years_menu.addItems(lst)
         self.years_menu.currentIndexChanged.connect(self._year_select_event)
+
+    def _collection_clicked(self):
+        self.collection_windows = 1
+        self.close()
 
     def _enter_test_event(self):
         text = self.test_info.text()
@@ -707,6 +720,9 @@ class QuizWindows(QtWidgets.QWidget):
         self.send_answer_btn.setText('交卷')
         self.send_answer_btn.clicked.connect(self._timer_pause)
 
+        # 先跑過一次 _restore_collection_mark
+        self._restore_collection_mark()
+
     def _questions_setting(self):
         key = self.current_question
         question = self.questions[key]
@@ -918,13 +934,24 @@ class QuizWindows(QtWidgets.QWidget):
             self._send_answer_event()
 
     def _restore_collection_mark(self):
-        if self.current_question in self.collectionQ:
-            self.isCollect = 1
-            pixmap = QPixmap('./image/icon_yellow_star.png')
-            pixmap = pixmap.scaled(self.collection_label.width(), self.collection_label.height())
-            self.collection_label.setPixmap(pixmap)
-        else:
-            self.isCollect = 0
+        subject = self.parameters["subject_info"]["subject"]
+        year = self.parameters["test_year"]
+
+        if os.path.exists("./_collection_question.json"):
+            with open("./_collection_question.json") as json_file:
+                history_collection = load(json_file)
+                years_list = history_collection[subject]["測驗年份"]
+                index = years_list.index(year)
+                question_list = history_collection[subject]["收藏題目"][index]
+
+            if self.current_question in question_list:
+                self.isCollect = 1
+                pixmap = QPixmap('./image/icon_yellow_star.png')
+                pixmap = pixmap.scaled(self.collection_label.width(), self.collection_label.height())
+                self.collection_label.setPixmap(pixmap)
+
+            else:
+                self.isCollect = 0
 
     def _collection_clicked(self, event):
         # 點選一下是將題目加入收藏, 若題目已加入收藏時, 再點一下是取消
@@ -1439,7 +1466,7 @@ class HistoryWindow(QtWidgets.QWidget):
 
     def _windows_setting(self):
         self.setFixedSize(900, 720)
-        x, y, w, h = 10, 10, 700, 580
+        x, y, w, h = 10, 10, 880, 700
         self.history_table.verticalHeader().setMinimumWidth(20)
 
         # 設定表格的相關資訊
