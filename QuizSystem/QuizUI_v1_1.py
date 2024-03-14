@@ -173,6 +173,9 @@ class InitialWindow(QtWidgets.QWidget):
             4: {"subject": "課程教學與評量", "time": 80}
         }
 
+        # 設定收藏題目的按鈕
+        self.collection_btn = QtWidgets.QPushButton(self)
+
         # 設定 Message Box 變數
         self.test_msgbox = QtWidgets.QMessageBox(self)
 
