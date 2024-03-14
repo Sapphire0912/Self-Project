@@ -943,7 +943,9 @@ class QuizWindows(QtWidgets.QWidget):
 
         self.collection_label.setPixmap(pixmap)
         self.collectionQ.sort()
+        self.save_collection_file_handle()
 
+    def save_collection_file_handle(self):
         # 一旦收藏有變動, 就儲存到收藏題目的 JSON 檔案裡
         subject = self.parameters["subject_info"]["subject"]
         year = self.parameters["test_year"]
@@ -968,15 +970,14 @@ class QuizWindows(QtWidgets.QWidget):
                     collections[subject]["收藏題目"][index] = self.collectionQ
 
             with open("./_collection_question.json", 'w') as json_file:
-                dump(collections, json_file, indent=2)
+                dump(collections, json_file)
 
         else:
             with open("./_collection_question.json", 'w') as json_file:
                 data = {
                     subject: {"測驗年份": [year], "收藏題目": [self.collectionQ]}
                 }
-                dump(data, json_file, indent=2)
-            pass
+                dump(data, json_file)
 
     def _send_answer_event(self):
         # 到對答案的新視窗(但要把參數傳給新視窗)
