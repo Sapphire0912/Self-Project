@@ -568,7 +568,6 @@ class QuizWindows(QtWidgets.QWidget):
         width, height = self.width, self.height
 
         # 1. 設定題目文字位置
-        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
         q_text_y = int(height * 0.02)
         isImage = self.questions[self.current_question]["isImage"]
@@ -1068,12 +1067,23 @@ class CollectionQWindows(QtWidgets.QWidget):
             # - 解答檔案資料夾
             self.answer_dir = "./Answer/"
 
-            # 設定可以快速跳轉到某一頁的選單
-            self.page_goto = QtWidgets.QComboBox(self)
+            # 設定可以快速跳轉到某一科的選單(暫時不需要)
+            # self.subject_goto = QtWidgets.QComboBox(self)
+            # self.page_goto = QtWidgets.QComboBox(self)
 
             # 設定前/後一頁的按鈕
             self.previous_btn = QtWidgets.QPushButton(self)
             self.next_btn = QtWidgets.QPushButton(self)
+
+            # 顯示收藏圖案的 Label
+            self.collection_label = QtWidgets.QLabel(self)
+
+            # 顯示題目資訊的 Label
+            self.question_info = QtWidgets.QLabel(self)
+
+            # 顯示正確答案的按鈕, Label
+            self.answer_btn = QtWidgets.QPushButton(self)
+            self.answer_label = QtWidgets.QLabel(self)
 
             # 返回首頁/離開系統的按鈕
             self.back_btn = QtWidgets.QPushButton(self)
@@ -1104,9 +1114,10 @@ class CollectionQWindows(QtWidgets.QWidget):
         width, height = self.width, self.height
 
         # 1. 設定題目文字位置
-        # !! 先設定固定值, 若題目或選項中有圖片時, 再更改大小(以下的設定是 question, option 都有圖片的設定)
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
         q_text_y = int(height * 0.02)
+        q_text_h = int(height * 0.23)
+
         # isImage = self.questions[self.current_question]["isImage"]
         #
         # if isImage == "" or isImage == "A":
@@ -1120,7 +1131,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         #     self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
         #     self.question_image.setAlignment(QtCore.Qt.AlignLeft)
 
-        self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, int(height * 0.5))
+        self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
 
         palette = self.palette()
         palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
@@ -1131,7 +1142,67 @@ class CollectionQWindows(QtWidgets.QWidget):
          ''')
         self.question_text.setAlignment(QtCore.Qt.AlignLeft)
 
+        # 2. 設定選項位置
+        textA_y, text_w, text_h = int(height * 0.6), 20, 20
+        textA_w, textA_h = int(width * 0.3), int(height * 0.18)
+        self.options_list[0].setGeometry(q_text_x + text_w, textA_y, textA_w, textA_h)
+
+        textB_x = int(width * 0.4)
+        self.options_list[1].setGeometry(textB_x + text_w, textA_y, textA_w, textA_h)
+        self.options_list[2].setGeometry(q_text_x + text_w, textA_y + textA_h + text_h, textA_w, textA_h)
+        self.options_list[3].setGeometry(textB_x + text_w, textA_y + textA_h + text_h, textA_w, textA_h)
+
+        for option in self.options_list:
+            option.setAlignment(QtCore.Qt.AlignLeft)
+            option.setStyleSheet('''
+                border: 2px solid blue
+            ''')
+
+        # 3. 設定上/下一題的位置
+        page_btn_x = textB_x + textA_w + 4 * text_w
+        page_btn_w = int(width * 0.08)
+        page_btn_h = int(height * 0.05)
+        self.previous_btn.setGeometry(page_btn_x, textA_y, page_btn_w, page_btn_h)
+        self.next_btn.setGeometry(page_btn_x + page_btn_w + 10, textA_y, page_btn_w, page_btn_h)
+
+        # 4. 設定收藏按鈕的位置
+        pixmap2 = QtGui.QPixmap('./image/icon_yellow_star.png')
+        pixmap2 = pixmap2.scaled(page_btn_h, page_btn_h)
+        self.collection_label.setPixmap(pixmap2)
+        self.collection_label.setGeometry(page_btn_x + page_btn_w * 2 + 20, textA_y, page_btn_h, page_btn_h)
+
+        # 5. 顯示題目資訊位置
+        q_info_w = int(width * 0.15)
+        q_info_y = textA_y + int(page_btn_h * 1.2)
+        self.question_info.setGeometry(page_btn_x, q_info_y, q_info_w, page_btn_h * 2)
+        self.question_info.setStyleSheet('''border: 1px solid black''')
+
+        # 6. 顯示正確答案按鈕, Label 位置
+        self.answer_btn.setGeometry(page_btn_x, q_info_y + page_btn_h * 2 + 10, int(width * 0.1), page_btn_h)
+        self.answer_label.setGeometry(page_btn_x, q_info_y + page_btn_h * 3 + 20, int(width * 0.1), page_btn_h)
+        self.answer_label.setStyleSheet('''border: 1px solid black''')
+
+        # 7. 返回首頁/離開系統的按鈕位置
+        back_w = int(width * 0.1)
+        self.back_btn.setGeometry(page_btn_x, q_info_y + int(page_btn_h * 5.5), back_w, page_btn_h)
+        self.exit_btn.setGeometry(page_btn_x + back_w + 20, q_info_y + int(page_btn_h * 5.5), back_w, page_btn_h)
+
     def ui(self):
+        # 設定題目文字是唯獨的
+        self.question_text.setReadOnly(True)
+
+        # 設定上/下一題的文字
+        self.previous_btn.setText('上一題')
+        self.next_btn.setText('下一題')
+
+        # 顯示正確答案按鈕文字
+        self.answer_btn.setText("顯示正確答案")
+
+        # 返回首頁/離開系統的按鈕文字
+        self.back_btn.setText('返回測驗首頁')
+        self.exit_btn.setText('離開測驗系統')
+
+    def _handle_questions_data(self):
         pass
 
     def _back_first_window(self):
