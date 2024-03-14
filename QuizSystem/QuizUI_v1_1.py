@@ -1060,6 +1060,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         # 初始視窗變數
         self.initWindow = kwargs["initWindow"]
 
+        self.parameters = kwargs
         # ----- 參數設定 -----
         # - 收藏檔案的路徑
         if os.path.exists("./_collection_question.json"):
@@ -1105,6 +1106,8 @@ class CollectionQWindows(QtWidgets.QWidget):
             # - 儲存題目資訊的所有計算變數
             self.total_questions = dict()
             self.subject_index = list()
+            self.current_question = 1  # 存放當前顯示的題目
+            # -----
 
             self._handle_questions_data()
             self._windows_setting()
@@ -1126,29 +1129,27 @@ class CollectionQWindows(QtWidgets.QWidget):
             exit_btn.setGeometry(self.width // 2 + 30, self.height // 2, 150, 60)
             exit_btn.clicked.connect(self.close)
 
-        # -----
-
     def _windows_setting(self):
         width, height = self.width, self.height
 
         # 1. 設定題目文字位置
         q_text_x, q_text_w = int(width * 0.02), int(width * 0.95)
         q_text_y = int(height * 0.02)
-        q_text_h = int(height * 0.23)
 
-        # isImage = self.questions[self.current_question]["isImage"]
-        #
-        # if isImage == "" or isImage == "A":
-        #     # 題目無圖片
-        #     q_text_h = int(height * 0.5)
-        # else:
-        #     # 題目有圖片
-        #     q_text_h = int(height * 0.23)
-        #     # 2. 設定題目圖片/表格位置
-        #     q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
-        #     self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
-        #     self.question_image.setAlignment(QtCore.Qt.AlignLeft)
+        isImage = self.total_questions[self.current_question]["isImage"]
 
+        if isImage == "" or isImage == "A":
+            # 題目無圖片
+            q_text_h = int(height * 0.5)
+        else:
+            # 題目有圖片
+            q_text_h = int(height * 0.23)
+            # 2. 設定題目圖片/表格位置
+            q_img_y, q_img_h = int(height * 0.26), int(height * 0.3)
+            self.question_image.setGeometry(q_text_x, q_img_y, q_text_w, q_img_h)
+            self.question_image.setAlignment(QtCore.Qt.AlignLeft)
+
+        self.question_text.setFont(QFont('細明體', self.parameters["font_size"]))
         self.question_text.setGeometry(q_text_x, q_text_y, q_text_w, q_text_h)
 
         palette = self.palette()
@@ -1156,7 +1157,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.question_text.setPalette(palette)
 
         self.question_text.setStyleSheet('''
-             border: 2px solid black;
+             border: none;
          ''')
         self.question_text.setAlignment(QtCore.Qt.AlignLeft)
 
@@ -1172,9 +1173,6 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         for option in self.options_list:
             option.setAlignment(QtCore.Qt.AlignLeft)
-            option.setStyleSheet('''
-                border: 2px solid blue
-            ''')
 
         # 3. 設定上/下一題的位置
         page_btn_x = textB_x + textA_w + 4 * text_w
@@ -1206,19 +1204,145 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.exit_btn.setGeometry(page_btn_x + back_w + 20, q_info_y + int(page_btn_h * 5.5), back_w, page_btn_h)
 
     def ui(self):
-        # 設定題目文字是唯獨的
+        # 設定題目文字是唯讀的
         self.question_text.setReadOnly(True)
+        self._questions_setting()
 
         # 設定上/下一題的文字
         self.previous_btn.setText('上一題')
+        self.previous_btn.clicked.connect(self._previous_question)
+        self.previous_btn.setEnabled(False)
         self.next_btn.setText('下一題')
+        self.next_btn.clicked.connect(self._next_question)
 
         # 顯示正確答案按鈕文字
         self.answer_btn.setText("顯示正確答案")
 
         # 返回首頁/離開系統的按鈕文字
         self.back_btn.setText('返回測驗首頁')
+        self.back_btn.clicked.connect(self._back_first_window)
+
         self.exit_btn.setText('離開測驗系統')
+        self.exit_btn.clicked.connect(self.close)
+
+    def _questions_setting(self):
+        key = self.current_question
+        question = self.total_questions[key]
+        q, options = question["Q"]["text"], question["Option"]
+        q = str(key) + '. ' + q
+
+        if question["isImage"] == "":
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.options_list[0].setText(A)
+            self.options_list[1].setText(B)
+            self.options_list[2].setText(C)
+            self.options_list[3].setText(D)
+
+        elif question["isImage"] == "Q":
+            A, B, C, D = options["A"]["text"], options["B"]["text"], options["C"]["text"], options["D"]["text"]
+            self.options_list[0].setText(A)
+            self.options_list[1].setText(B)
+            self.options_list[2].setText(C)
+            self.options_list[3].setText(D)
+
+            # 題目有圖片
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
+
+        elif question["isImage"] == "A":
+            # 選項有圖片無文字
+            img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
+            img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
+
+            # 讓圖片 Resize 成 QLabel 的大小
+            if img_a.size().width() > self.options_list[0].size().width() or \
+                    img_a.size().height() > self.options_list[0].size().height():
+                img_a = img_a.scaled(self.options_list[0].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.options_list[1].size().width() or \
+                    img_b.size().height() > self.options_list[1].size().height():
+                img_b = img_b.scaled(self.options_list[1].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.options_list[2].size().width() or \
+                    img_c.size().height() > self.options_list[2].size().height():
+                img_c = img_c.scaled(self.options_list[2].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.options_list[3].size().width() or \
+                    img_d.size().height() > self.options_list[3].size().height():
+                img_d = img_d.scaled(self.options_list[3].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            self.options_list[0].setPixmap(img_a)
+            self.options_list[1].setPixmap(img_b)
+            self.options_list[2].setPixmap(img_c)
+            self.options_list[3].setPixmap(img_d)
+
+        else:
+            # 題目 & 選項都有圖片
+            q_img = QPixmap(question["Q"]["img"])
+            self.question_image.setPixmap(q_img)
+
+            img_a, img_b = QPixmap(options["A"]["img"]), QPixmap(options["B"]["img"])
+            img_c, img_d = QPixmap(options["C"]["img"]), QPixmap(options["D"]["img"])
+
+            # 讓圖片 Resize 成 QLabel 的大小
+            if img_a.size().width() > self.options_list[0].size().width() or \
+                    img_a.size().height() > self.options_list[0].size().height():
+                img_a = img_a.scaled(self.options_list[0].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_b.size().width() > self.options_list[1].size().width() or \
+                    img_b.size().height() > self.options_list[1].size().height():
+                img_b = img_b.scaled(self.options_list[1].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_c.size().width() > self.options_list[2].size().width() or \
+                    img_c.size().height() > self.options_list[2].size().height():
+                img_c = img_c.scaled(self.options_list[2].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            if img_d.size().width() > self.options_list[3].size().width() or \
+                    img_d.size().height() > self.options_list[3].size().height():
+                img_d = img_d.scaled(self.options_list[3].size(), aspectRatioMode=QtCore.Qt.KeepAspectRatio)
+
+            self.options_list[0].setPixmap(img_a)
+            self.options_list[1].setPixmap(img_b)
+            self.options_list[2].setPixmap(img_c)
+            self.options_list[3].setPixmap(img_d)
+
+        self.question_text.setText(q)
+
+    def _update_btn_state(self):
+        if self.current_question == 1:
+            self.previous_btn.setEnabled(False)
+        else:
+            self.previous_btn.setEnabled(True)
+
+        if self.current_question >= self.subject_index[-1] - 1:
+            self.next_btn.setEnabled(False)
+        else:
+            self.next_btn.setEnabled(True)
+
+    def _update_question_image_state(self):
+        # 更新題目圖片的狀態 question_image 的 state
+        key = self.current_question
+        question = self.total_questions[key]["Q"]
+        if question["img"] == '':
+            self.question_image.clear()
+
+    def _previous_question(self):
+        self.current_question -= 1
+
+        self._update_btn_state()
+        self._windows_setting()
+        self._questions_setting()
+        # self._restore_collection_mark()
+        self._update_question_image_state()
+
+    def _next_question(self):
+        self.current_question += 1
+
+        self._update_btn_state()
+        self._windows_setting()
+        self._questions_setting()
+        # self._restore_collection_mark()
+        self._update_question_image_state()
 
     def _handle_questions_data(self):
         q_files = {
@@ -1257,6 +1381,7 @@ class CollectionQWindows(QtWidgets.QWidget):
                 subject_index.append(currentNumber)
 
         self.subject_index = subject_index
+        print(self.total_questions)
 
     def _back_first_window(self):
         self.initWindow.show()
