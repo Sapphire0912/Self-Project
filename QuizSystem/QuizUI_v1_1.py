@@ -1096,7 +1096,7 @@ class CollectionQWindows(QtWidgets.QWidget):
 
             # - 儲存題目資訊的所有計算變數
             self.total_questions = dict()
-            self.total_answers = list()
+            self.total_answers = ["X"]
             self.subject_index = list()
             self.current_question = 1  # 存放當前顯示的題目
             # -----
