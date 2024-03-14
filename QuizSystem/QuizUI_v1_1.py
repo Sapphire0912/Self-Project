@@ -1102,8 +1102,9 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.back_btn = QtWidgets.QPushButton(self)
             self.exit_btn = QtWidgets.QPushButton(self)
 
-            # - 儲存所有題目的變數
+            # - 儲存題目資訊的所有計算變數
             self.total_questions = dict()
+            self.subject_index = list()
 
             self._handle_questions_data()
             self._windows_setting()
@@ -1231,7 +1232,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         questions = self.collection_questions
         subjects = questions.keys()
 
-        subject_index = list()  # 存放當前 subject 和 year 的題數(用累加的做法)
+        subject_index = self.subject_index  # 存放當前 subject 和 year 的題數(用累加的做法)
         currentNumber = 1
 
         for index, subject in enumerate(subjects):
@@ -1254,6 +1255,8 @@ class CollectionQWindows(QtWidgets.QWidget):
                     self.total_questions[currentNumber] = target_question[number]
                     currentNumber += 1
                 subject_index.append(currentNumber)
+
+        self.subject_index = subject_index
 
     def _back_first_window(self):
         self.initWindow.show()
