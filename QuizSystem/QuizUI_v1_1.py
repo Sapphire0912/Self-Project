@@ -943,9 +943,9 @@ class QuizWindows(QtWidgets.QWidget):
 
         self.collection_label.setPixmap(pixmap)
         self.collectionQ.sort()
-        self.save_collection_file_handle()
+        self._save_collection_file_handle()
 
-    def save_collection_file_handle(self):
+    def _save_collection_file_handle(self):
         # 一旦收藏有變動, 就儲存到收藏題目的 JSON 檔案裡
         subject = self.parameters["subject_info"]["subject"]
         year = self.parameters["test_year"]
@@ -1353,7 +1353,9 @@ class ResultWindows(QtWidgets.QWidget):
                 <font color="blue">{user_ans}</font>
                 <font color="red">{current_year_answer[index]}</font>'''
                 wrong_number.append(index + 1)
-                self.collectionQ.append(index + 1)
+
+                if index + 1 not in self.collectionQ:
+                    self.collectionQ.append(index + 1)
 
             else:
                 html_text_setting = f'''
@@ -1371,8 +1373,40 @@ class ResultWindows(QtWidgets.QWidget):
         self.accuracy_label.setText(f'正確題數/總共題數：{correct}/{len(user_answer)}\n正確率：{accuracy}%')
 
         # - 將錯誤題目儲存到收藏題目裡面
+        self._save_collection_file_handle()
 
-        pass
+    def _save_collection_file_handle(self):
+        subject = self.parameters["subject"]
+        year = self.year
+
+        if os.path.exists("./_collection_question.json"):
+            with open("./_collection_question.json", "r") as json_file:
+                collections = load(json_file)
+
+                # 判斷測驗科目是否的一致
+                if subject not in collections.keys():
+                    collections[subject] = {
+                        "測驗年份": [],
+                        "收藏題目": []
+                    }
+
+                if year not in collections[subject]["測驗年份"]:
+                    collections[subject]["測驗年份"].append(year)
+                    collections[subject]["收藏題目"].append(self.collectionQ)
+                else:
+                    years = collections[subject]["測驗年份"]
+                    index = years.index(year)
+                    collections[subject]["收藏題目"][index] = self.collectionQ
+
+            with open("./_collection_question.json", 'w') as json_file:
+                dump(collections, json_file)
+
+        else:
+            with open("./_collection_question.json", 'w') as json_file:
+                data = {
+                    subject: {"測驗年份": [year], "收藏題目": [self.collectionQ]}
+                }
+                dump(data, json_file)
 
     def _back_first_window(self):
         self.parameters["first_window"].show()
