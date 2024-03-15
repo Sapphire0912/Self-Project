@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPixmap, QPalette, QColor
 from json import load, dump
 from datetime import datetime
+from time import sleep
 import os
 import sys
 
@@ -1364,11 +1365,11 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         h = int(self.height * 0.05)
         if self.isCollect:
-            pixmap = QtGui.QPixmap('./image/icon_black_star.png')
             self.isCollect = 0
+            pixmap = QtGui.QPixmap('./image/icon_black_star.png')
         else:
-            pixmap = QtGui.QPixmap('./image/icon_yellow_star.png')
             self.isCollect = 1
+            pixmap = QtGui.QPixmap('./image/icon_yellow_star.png')
             self.remove_collection.remove([subject, year, number])
 
         pixmap = pixmap.scaled(h, h)
@@ -1397,6 +1398,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.current_question -= 1
 
         self._update_btn_state()
+        time.sleep()
         self._windows_setting()
         self._questions_setting()
         self._show_question_info()
