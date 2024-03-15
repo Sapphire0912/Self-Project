@@ -1099,6 +1099,7 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.total_answers = ["X"]
             self.subject_index = list()
             self.subject_name = list()
+            self.question_number = list()
             self.current_question = 1  # 存放當前顯示的題目
             # -----
 
@@ -1306,7 +1307,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.question_text.setText(q)
 
     def _show_question_info(self):
-        subject_name, subject_index = self.subject_name, self.subject_index
+        subject_name, subject_index, question_number = self.subject_name, self.subject_index, self.question_number
         current_question = self.current_question
         index = 0
 
@@ -1316,7 +1317,8 @@ class CollectionQWindows(QtWidgets.QWidget):
                 break
 
         subject, year = subject_name[index]
-        self.question_info.setText("科目：" + subject + "\n" + "題目年份：" + year)
+        number = question_number[current_question - 1]
+        self.question_info.setText("科目：" + subject + "\n" + "題目年份：" + year + "\n題號：" + str(number))
 
     def _update_btn_state(self):
         if self.current_question == 1:
@@ -1387,6 +1389,7 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         subject_index = self.subject_index  # 存放當前 subject 和 year 的題數(用累加的做法)
         subject_name = self.subject_name
+        question_number = self.question_number
         currentNumber = 1
 
         for index, subject in enumerate(subjects):
@@ -1418,11 +1421,9 @@ class CollectionQWindows(QtWidgets.QWidget):
                 for number in target_number:
                     self.total_questions[currentNumber] = target_question[number]
                     currentNumber += 1
+                    question_number.append(number)
                 subject_index.append(currentNumber)
 
-        self.subject_index = subject_index
-        self.subject_name = subject_name
-        # print(self.subject_index, self.subject_name)
 
     def _back_first_window(self):
         self.initWindow.show()
