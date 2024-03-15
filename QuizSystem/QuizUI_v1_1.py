@@ -1098,6 +1098,7 @@ class CollectionQWindows(QtWidgets.QWidget):
             self.total_questions = dict()
             self.total_answers = ["X"]
             self.subject_index = list()
+            self.subject_name = list()
             self.current_question = 1  # 存放當前顯示的題目
             # -----
 
@@ -1183,12 +1184,12 @@ class CollectionQWindows(QtWidgets.QWidget):
         q_info_w = int(width * 0.15)
         q_info_y = textA_y + int(page_btn_h * 1.2)
         self.question_info.setGeometry(page_btn_x, q_info_y, q_info_w, page_btn_h * 2)
-        self.question_info.setStyleSheet('''border: 1px solid black''')
+        self.question_info.setFont(QFont('細明體', self.parameters["font_size"]))
 
         # 6. 顯示正確答案按鈕, Label 位置
         self.answer_btn.setGeometry(page_btn_x, q_info_y + page_btn_h * 2 + 10, int(width * 0.1), page_btn_h)
+        self.answer_label.setFont(QFont('細明體', self.parameters["font_size"]))
         self.answer_label.setGeometry(page_btn_x, q_info_y + page_btn_h * 3 + 20, int(width * 0.1), page_btn_h)
-        self.answer_label.setStyleSheet('''border: 1px solid black''')
 
         # 7. 返回首頁/離開系統的按鈕位置
         back_w = int(width * 0.1)
@@ -1207,8 +1208,12 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.next_btn.setText('下一題')
         self.next_btn.clicked.connect(self._next_question)
 
+        # 顯示題目資訊文字
+        self._show_question_info()
+
         # 顯示正確答案按鈕文字
         self.answer_btn.setText("顯示正確答案")
+        self.answer_btn.clicked.connect(self._answers_display)
 
         # 返回首頁/離開系統的按鈕文字
         self.back_btn.setText('返回測驗首頁')
@@ -1300,6 +1305,19 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         self.question_text.setText(q)
 
+    def _show_question_info(self):
+        subject_name, subject_index = self.subject_name, self.subject_index
+        current_question = self.current_question
+        index = 0
+
+        for i, number_bound in enumerate(subject_index):
+            if current_question < number_bound:
+                index = i
+                break
+
+        subject, year = subject_name[index]
+        self.question_info.setText("科目：" + subject + "\n" + "題目年份：" + year)
+
     def _update_btn_state(self):
         if self.current_question == 1:
             self.previous_btn.setEnabled(False)
@@ -1324,8 +1342,10 @@ class CollectionQWindows(QtWidgets.QWidget):
         self._update_btn_state()
         self._windows_setting()
         self._questions_setting()
-        # self._restore_collection_mark()
+        self._show_question_info()
         self._update_question_image_state()
+        self._clear_answer_display()
+        # self._restore_collection_mark()
 
     def _next_question(self):
         self.current_question += 1
@@ -1333,8 +1353,17 @@ class CollectionQWindows(QtWidgets.QWidget):
         self._update_btn_state()
         self._windows_setting()
         self._questions_setting()
-        # self._restore_collection_mark()
+        self._show_question_info()
         self._update_question_image_state()
+        self._clear_answer_display()
+        # self._restore_collection_mark()
+
+    def _clear_answer_display(self):
+        self.answer_label.clear()
+
+    def _answers_display(self):
+        answer = self.total_answers[self.current_question]
+        self.answer_label.setText("正確答案： " + answer)
 
     def _handle_questions_data(self):
         q_files = {
@@ -1357,15 +1386,18 @@ class CollectionQWindows(QtWidgets.QWidget):
         subjects = questions.keys()
 
         subject_index = self.subject_index  # 存放當前 subject 和 year 的題數(用累加的做法)
+        subject_name = self.subject_name
         currentNumber = 1
 
         for index, subject in enumerate(subjects):
             year_list, questions_list = questions[subject]["測驗年份"], questions[subject]["收藏題目"]
 
-            # 處理答案
+            # 處理答案, 題目資訊
             answers_file = load(open(answers_path[subject]))
             for i, year in enumerate(year_list):
                 questions_list[i].sort()  # 預防出現題目 & 答案對不起來的問題
+                subject_name.append([subject, year])  # 顯示題目資訊需要
+
                 for number in questions_list[i]:
                     self.total_answers.append(answers_file[year][number - 1])
 
@@ -1389,6 +1421,8 @@ class CollectionQWindows(QtWidgets.QWidget):
                 subject_index.append(currentNumber)
 
         self.subject_index = subject_index
+        self.subject_name = subject_name
+        # print(self.subject_index, self.subject_name)
 
     def _back_first_window(self):
         self.initWindow.show()
