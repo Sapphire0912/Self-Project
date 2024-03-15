@@ -1398,7 +1398,6 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.current_question -= 1
 
         self._update_btn_state()
-        time.sleep()
         self._windows_setting()
         self._questions_setting()
         self._show_question_info()
