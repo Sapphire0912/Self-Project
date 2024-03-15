@@ -320,10 +320,11 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setReadOnly(True)  # Read Only
         self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選進入測驗的按鈕\n5. 再次確認考試資訊無誤後, 點選確認進入正式測驗\n\n版本說明：
-v1.1：新增課程教學與評量 108-1、108-2、109、110 年，學習者發展與適性輔導 110 年，新增教育理念與實務 110 年試卷 
-v1.0：處理選項和題目皆有圖片的問題
-beta v2.1：新增國文 112 年試卷，修正顯示圖片後沒有選項的問題
-beta v2.0：新增教育理念與實務、學習者發展與適性輔導、課程教學與評量 111、112 年試卷\n''')
+v1.2：\n新增題目收藏功能、首頁可查看已收藏題目。調整下拉式選單的選單內容為已做好的試卷\n
+v1.1：\n新增課程教學與評量 108-1、108-2、109、110 年，學習者發展與適性輔導 110 年，新增教育理念與實務 110 年試卷 \n
+v1.0：\n處理選項和題目皆有圖片的問題\n
+beta v2.1：\n新增國文 112 年試卷，修正顯示圖片後沒有選項的問題\n
+beta v2.0：\n新增教育理念與實務、學習者發展與適性輔導、課程教學與評量 111、112 年試卷\n''')
         pass
 
         # subject title text
@@ -1124,7 +1125,7 @@ class CollectionQWindows(QtWidgets.QWidget):
             exit_btn = QtWidgets.QPushButton(self)
             exit_btn.setText('離開測驗系統')
             exit_btn.setGeometry(self.width // 2 + 30, self.height // 2, 150, 60)
-            exit_btn.clicked.connect(self.close)
+            exit_btn.clicked.connect(self._exit_system)
 
     def _windows_setting(self):
         width, height = self.width, self.height
@@ -1480,7 +1481,37 @@ class CollectionQWindows(QtWidgets.QWidget):
                     question_number.append(number)
                 subject_index.append(currentNumber)
 
+    def _update_collection_question(self):
+        if os.path.exists("./_collection_question.json"):
+            remove_Q = self.remove_collection
+            with open("./_collection_question.json") as json_file:
+                data = load(json_file)
+
+            for q in remove_Q:
+                subject, year, number = q
+                index = data[subject]["測驗年份"].index(year)
+                data[subject]["收藏題目"][index].remove(number)
+
+                if len(data[subject]["收藏題目"][index]) == 0:
+                    data[subject]["收藏題目"].remove([])
+                    data[subject]["測驗年份"].remove(year)
+
+                if len(data[subject]["測驗年份"]) == 0:
+                    del data[subject]
+
+            # 將新的 data 寫到 JSON
+            if len(data) == 0:
+                os.remove("./_collection_question.json")
+            else:
+                with open("./_collection_question.json", 'w') as json_file:
+                    dump(data, json_file)
+
+    def _exit_system(self):
+        self._update_collection_question()
+        self.close()
+
     def _back_first_window(self):
+        self._update_collection_question()
         self.initWindow.show()
         self.close()
 
