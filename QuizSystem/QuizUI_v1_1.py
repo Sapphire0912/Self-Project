@@ -1082,6 +1082,8 @@ class CollectionQWindows(QtWidgets.QWidget):
 
             # 顯示收藏圖案的 Label
             self.collection_label = QtWidgets.QLabel(self)
+            self.remove_collection = list()
+            self.isCollect = 1
 
             # 顯示題目資訊的 Label
             self.question_info = QtWidgets.QLabel(self)
@@ -1209,6 +1211,11 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.next_btn.setText('下一題')
         self.next_btn.clicked.connect(self._next_question)
 
+        # 設定收藏標籤的 label event
+        self.collection_label.enterEvent = self._mouse_cursor_enter
+        self.collection_label.mousePressEvent = self._collection_clicked
+        self.collection_label.leaveEvent = self._mouse_cursor_leave
+
         # 顯示題目資訊文字
         self._show_question_info()
 
@@ -1222,6 +1229,12 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         self.exit_btn.setText('離開測驗系統')
         self.exit_btn.clicked.connect(self.close)
+
+    def _mouse_cursor_enter(self, event):
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+
+    def _mouse_cursor_leave(self, event):
+        self.setCursor(QtCore.Qt.ArrowCursor)
 
     def _questions_setting(self):
         key = self.current_question
@@ -1338,6 +1351,48 @@ class CollectionQWindows(QtWidgets.QWidget):
         if question["img"] == '':
             self.question_image.clear()
 
+    def _collection_clicked(self, event):
+        # 將已收藏的題目取消/或更改狀態, 但要在下次進入系統時再消除
+        text = self.question_info.text().split("\n")
+        subject, year, number = text
+        subject = subject.split("：")[-1]
+        year = year.split("：")[-1]
+        number = int(number.split("：")[-1])
+
+        if [subject, year, number] not in self.remove_collection:
+            self.remove_collection.append([subject, year, number])
+
+        h = int(self.height * 0.05)
+        if self.isCollect:
+            pixmap = QtGui.QPixmap('./image/icon_black_star.png')
+            self.isCollect = 0
+        else:
+            pixmap = QtGui.QPixmap('./image/icon_yellow_star.png')
+            self.isCollect = 1
+            self.remove_collection.remove([subject, year, number])
+
+        pixmap = pixmap.scaled(h, h)
+        self.collection_label.setPixmap(pixmap)
+
+    def _restore_collection_mark(self):
+        # 恢復收藏按鈕的標記
+        text = self.question_info.text().split("\n")
+        subject, year, number = text
+        subject = subject.split("：")[-1]
+        year = year.split("：")[-1]
+        number = int(number.split("：")[-1])
+
+        h = int(self.height * 0.05)
+        if [subject, year, number] in self.remove_collection:
+            self.isCollect = 0
+            pixmap = QtGui.QPixmap('./image/icon_black_star.png')
+        else:
+            self.isCollect = 1
+            pixmap = QtGui.QPixmap('./image/icon_yellow_star.png')
+
+        pixmap = pixmap.scaled(h, h)
+        self.collection_label.setPixmap(pixmap)
+
     def _previous_question(self):
         self.current_question -= 1
 
@@ -1345,9 +1400,9 @@ class CollectionQWindows(QtWidgets.QWidget):
         self._windows_setting()
         self._questions_setting()
         self._show_question_info()
+        self._restore_collection_mark()
         self._update_question_image_state()
         self._clear_answer_display()
-        # self._restore_collection_mark()
 
     def _next_question(self):
         self.current_question += 1
@@ -1356,9 +1411,9 @@ class CollectionQWindows(QtWidgets.QWidget):
         self._windows_setting()
         self._questions_setting()
         self._show_question_info()
+        self._restore_collection_mark()
         self._update_question_image_state()
         self._clear_answer_display()
-        # self._restore_collection_mark()
 
     def _clear_answer_display(self):
         self.answer_label.clear()
@@ -1423,7 +1478,6 @@ class CollectionQWindows(QtWidgets.QWidget):
                     currentNumber += 1
                     question_number.append(number)
                 subject_index.append(currentNumber)
-
 
     def _back_first_window(self):
         self.initWindow.show()
