@@ -320,11 +320,11 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setReadOnly(True)  # Read Only
         self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選進入測驗的按鈕\n5. 再次確認考試資訊無誤後, 點選確認進入正式測驗\n\n版本說明：
-v1.2：\n新增題目收藏功能、首頁可查看已收藏題目。調整下拉式選單的選單內容為已做好的試卷\n
-v1.1：\n新增課程教學與評量 108-1、108-2、109、110 年，學習者發展與適性輔導 110 年，新增教育理念與實務 110 年試卷 \n
-v1.0：\n處理選項和題目皆有圖片的問題\n
-beta v2.1：\n新增國文 112 年試卷，修正顯示圖片後沒有選項的問題\n
-beta v2.0：\n新增教育理念與實務、學習者發展與適性輔導、課程教學與評量 111、112 年試卷\n''')
+v1.2：\n－ 新增題目收藏功能、首頁可查看已收藏題目。\n－ 調整下拉式選單的選單內容為已做好的試卷\n
+v1.1：\n－ 新增課程教學與評量 108-1、108-2、109、110 年。\n－ 新增學習者發展與適性輔導 110 年\n－ 新增教育理念與實務 110 年試卷\n
+v1.0：\n－ 處理選項和題目皆有圖片的問題\n
+beta v2.1：\n－ 新增國文 112 年試卷，修正顯示圖片後沒有選項的問題\n
+beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導、課程教學與評量 111、112 年試卷\n''')
         pass
 
         # subject title text
@@ -1198,8 +1198,8 @@ class CollectionQWindows(QtWidgets.QWidget):
 
         # 7. 返回首頁/離開系統的按鈕位置
         back_w = int(width * 0.1)
-        self.back_btn.setGeometry(page_btn_x, q_info_y + int(page_btn_h * 5.5), back_w, page_btn_h)
-        self.exit_btn.setGeometry(page_btn_x + back_w + 20, q_info_y + int(page_btn_h * 5.5), back_w, page_btn_h)
+        self.back_btn.setGeometry(page_btn_x, q_info_y + int(page_btn_h * 5), back_w, page_btn_h)
+        self.exit_btn.setGeometry(page_btn_x + back_w + 20, q_info_y + int(page_btn_h * 5), back_w, page_btn_h)
 
     def ui(self):
         # 設定題目文字是唯讀的
@@ -1230,7 +1230,7 @@ class CollectionQWindows(QtWidgets.QWidget):
         self.back_btn.clicked.connect(self._back_first_window)
 
         self.exit_btn.setText('離開測驗系統')
-        self.exit_btn.clicked.connect(self.close)
+        self.exit_btn.clicked.connect(self._exit_system)
 
     def _mouse_cursor_enter(self, event):
         self.setCursor(QtCore.Qt.PointingHandCursor)
