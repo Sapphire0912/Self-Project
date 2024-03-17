@@ -416,7 +416,9 @@ beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導�
         elif select_id == 2:
             lst = [str(i) for i in range(112, 109, -1)]
         elif select_id == 3:
-            lst = [str(i) for i in range(112, 109, -1)]
+            lst = [str(i) for i in range(112, 106, -1)]
+            lst[lst.index('107')] = '108-1'
+            lst[lst.index('108')] = '108-2'
         elif select_id == 4:
             lst = [str(i) for i in range(112, 106, -1)]
             lst[lst.index('107')] = '108-1'
