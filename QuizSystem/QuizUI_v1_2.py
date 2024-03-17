@@ -320,7 +320,7 @@ class InitialWindow(QtWidgets.QWidget):
         self.description.setReadOnly(True)  # Read Only
         self.description.setPlainText('''介面說明：\n1. 下方選擇觀看合適的視窗大小\n2. 在測驗科目中, 選擇想測驗的科目\n\
 3. 在選擇範圍中, 選擇想測驗的試卷年份\n4. 確定選擇正確後, 點選進入測驗的按鈕\n5. 再次確認考試資訊無誤後, 點選確認進入正式測驗\n\n版本說明：
-v1.2：\n－ 新增題目收藏功能、首頁可查看已收藏題目。\n－ 調整下拉式選單的選單內容為已做好的試卷\n－ 新增學習者發展與適性輔導 108-1、108-2、109 年試卷\n
+v1.2：\n－ 新增題目收藏功能、首頁可查看已收藏題目。\n－ 調整下拉式選單的選單內容為已做好的試卷\n－ 新增學習者發展與適性輔導 108-1、108-2、109 年試卷\n－ 新增教育理念與實務 109 年試卷\n
 v1.1：\n－ 新增課程教學與評量 108-1、108-2、109、110 年。\n－ 新增學習者發展與適性輔導 110 年\n－ 新增教育理念與實務 110 年試卷\n
 v1.0：\n－ 處理選項和題目皆有圖片的問題\n
 beta v2.1：\n－ 新增國文 112 年試卷，修正顯示圖片後沒有選項的問題\n
@@ -333,6 +333,7 @@ beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導�
         # subjects select
         self.chinese_btn.setText('國語文能力測驗')
         self.math_btn.setText('數學能力測驗')
+        self.math_btn.setEnabled(False)
         self.espr_btn.setText('教育理念與實務')
         self.esdng_btn.setText('學習者發展與適性輔導')
         self.escnt_btn.setText('課程教學與評量')
@@ -414,7 +415,7 @@ beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導�
         elif select_id == 1:
             lst = [str(i) for i in range(112, 111, -1)]
         elif select_id == 2:
-            lst = [str(i) for i in range(112, 109, -1)]
+            lst = [str(i) for i in range(112, 108, -1)]
         elif select_id == 3:
             lst = [str(i) for i in range(112, 106, -1)]
             lst[lst.index('107')] = '108-1'
