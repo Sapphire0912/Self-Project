@@ -364,13 +364,6 @@ beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導�
     def _subject_select_event(self):
         select_id = self.subjects_group.checkedId()
 
-        # 設定選擇範圍下拉式選單的值, 數學僅從 103 年開始
-        # if select_id == 1:
-        #     lst = [str(i) for i in range(112, 102, -1)]
-        # else:
-        #     lst = [str(i) for i in range(112, 93, -1)]
-        #     # lst.append("103 ~ 112")
-
         # 先根據現有的考卷去設定下拉式選單
         if select_id == 0:
             lst = [str(i) for i in range(112, 111, -1)]
@@ -384,9 +377,6 @@ beta v2.0：\n－ 新增教育理念與實務、學習者發展與適性輔導�
             lst = []
 
         lst.insert(0, "請選擇年份")
-        # 去除 107 題目, 和區分 108 年兩份試卷
-        # lst[lst.index('107')] = '108-1'
-        # lst[lst.index('108')] = '108-2'
 
         self.years_menu.clear()  # 要清除先前的下拉式選單選項, 才不會一直疊加
         self.years_menu.addItems(lst)
