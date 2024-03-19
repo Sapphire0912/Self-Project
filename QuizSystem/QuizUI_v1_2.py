@@ -2,11 +2,9 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtGui import QFont, QPixmap, QPalette, QColor
 from json import load, dump
 from datetime import datetime
-from time import sleep
 import os
 import sys
 
-# 之後可以根據使用者選的選項之後, 再 import 特定的檔案和答案
 import Question.ChineseQ as chineseQ
 import Question.MathQ as mathQ
 import Question.EsprQ as esprQ
@@ -17,15 +15,6 @@ import Question.EscntQ as escntQ
 # 各年各科目的測驗題數(去除 107 年)
 # 去除作文
 Chinese = {
-    "94": {"ChooseQ": 35},
-    "95": {"ChooseQ": 35},
-    "96": {"ChooseQ": 35},
-    "97": {"ChooseQ": 35},
-    "98": {"ChooseQ": 35},
-    "99": {"ChooseQ": 30},
-    "100": {"ChooseQ": 30},
-    "101": {"ChooseQ": 30},
-    "102": {"ChooseQ": 30},
     "103": {"ChooseQ": 30},
     "104": {"ChooseQ": 30},
     "105": {"ChooseQ": 30},
@@ -52,15 +41,6 @@ Math = {
 }
 
 Espr = {
-    "94": {"ChooseQ": 40, "QA": 4},
-    "95": {"ChooseQ": 40, "QA": 4},
-    "96": {"ChooseQ": 40, "QA": 4},
-    "97": {"ChooseQ": 40, "QA": 4},
-    "98": {"ChooseQ": 40, "QA": 4},
-    "99": {"ChooseQ": 40, "QA": 4},
-    "100": {"ChooseQ": 40, "QA": 4},
-    "101": {"ChooseQ": 40, "QA": 4},
-    "102": {"ChooseQ": 40, "QA": 4},
     "103": {"ChooseQ": 40, "QA": 4},
     "104": {"ChooseQ": 40, "QA": 4},
     "105": {"ChooseQ": 40, "QA": 4},
@@ -74,15 +54,6 @@ Espr = {
 }
 
 Esdng = {
-    "94": {"ChooseQ": 50, "QA": 3},
-    "95": {"ChooseQ": 35, "QA": 3},
-    "96": {"ChooseQ": 35, "QA": 3},
-    "97": {"ChooseQ": 35, "QA": 3},
-    "98": {"ChooseQ": 35, "QA": 3},
-    "99": {"ChooseQ": 35, "QA": 3},
-    "100": {"ChooseQ": 35, "QA": 3},
-    "101": {"ChooseQ": 35, "QA": 3},
-    "102": {"ChooseQ": 35, "QA": 3},
     "103": {"ChooseQ": 30, "QA": 4},
     "104": {"ChooseQ": 30, "QA": 4},
     "105": {"ChooseQ": 30, "QA": 4},
@@ -96,15 +67,6 @@ Esdng = {
 }
 
 Escnt = {
-    "94": {"ChooseQ": 36, "QA": 4},
-    "95": {"ChooseQ": 36, "QA": 4},
-    "96": {"ChooseQ": 36, "QA": 4},
-    "97": {"ChooseQ": 36, "QA": 4},
-    "98": {"ChooseQ": 35, "QA": 3},
-    "99": {"ChooseQ": 35, "QA": 3},
-    "100": {"ChooseQ": 35, "QA": 3},
-    "101": {"ChooseQ": 35, "QA": 3},
-    "102": {"ChooseQ": 35, "QA": 3},
     "103": {"ChooseQ": 30, "QA": 4},
     "104": {"ChooseQ": 30, "QA": 4},
     "105": {"ChooseQ": 30, "QA": 4},
