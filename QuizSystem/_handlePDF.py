@@ -28,9 +28,9 @@ from PIL import Image
 #     jsonFile = open(subject + "Answers.json", 'w')
 #     json.dump(answerDict, jsonFile)
 
-targetPath = "O:/Question/教育理念與實務/109_教育原理與制度.pdf"
+targetPath = "F:/Question/教育理念與實務/108-1_教育原理與制度.pdf"
 pdf = pdfplumber.open(targetPath)
-for page in pdf.pages[1:8]:
+for page in pdf.pages[1:7]:
     text = page.extract_text_simple()
     print(text)
     pass
