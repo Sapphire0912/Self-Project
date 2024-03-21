@@ -1,0 +1,141 @@
+@font-face {
+  font-family: "nav-font";
+  src: url(../fonts/NotoSansTC-Medium.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+body {
+  header {
+    background-color: snow;
+    display: flex;
+    flex-wrap: wrap;
+    height: 10vh;
+    align-items: center;
+
+    section.title {
+      //   border: 2px solid red;
+      flex: 2 1 300px;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: flex-start;
+      align-items: center;
+      margin-left: 2rem;
+
+      div.rectangle {
+        width: 20px;
+        height: 20px;
+        background-color: rgba(0, 0, 255, 0.8);
+        border-radius: 6px;
+        margin: 0rem 0.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+    nav {
+      flex: 3 1 300px;
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        justify-content: flex-end;
+
+        li {
+          padding: 0rem 1.5rem;
+
+          a {
+            text-decoration: none;
+            color: black;
+            font-size: 1.25rem;
+            display: block;
+            font-family: "nav-font";
+            &:hover {
+              transition: all 0.5s ease-in;
+              color: mediumblue;
+            }
+          }
+          .active {
+            color: mediumblue;
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    div.window-bg {
+      display: flex;
+      height: 90vh;
+
+      div.window-left-bg {
+        background: rgba(71, 114, 194, 0.7);
+        width: 35vw;
+      }
+
+      div.window-right-bg {
+        background: rgba(230, 230, 250, 0.2);
+        width: 65vw;
+      }
+    }
+    div.self-information {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      height: 70%;
+      display: flex;
+
+      section.left-info {
+        background: rgba(100, 149, 237, 0.3);
+        width: 45%;
+        height: 100%;
+        box-shadow: 3px 3px 5px rgba(91, 91, 92, 0.6),
+          -5px -5px 5px rgba(91, 91, 92, 0.6);
+
+        div.contact-methods {
+          background-color: white;
+          p {
+            font-size: 1.25rem;
+          }
+          .github {
+            display: flex;
+            align-items: center;
+            a {
+              img {
+                width: 80%;
+                height: 80%;
+              }
+            }
+          }
+        }
+      }
+      section.right-info {
+        background: rgba(230, 230, 250, 0.5);
+        width: 55%;
+        height: 100%;
+        box-shadow: 2px 2px 1px rgba(91, 91, 92, 0.3),
+          2px -2px 1px rgba(91, 91, 92, 0.3);
+      }
+    }
+  }
+}
