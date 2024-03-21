@@ -27,7 +27,6 @@ body {
     align-items: center;
 
     section.title {
-      //   border: 2px solid red;
       flex: 2 1 300px;
       display: flex;
       flex-wrap: wrap;
@@ -46,9 +45,11 @@ body {
       h2 {
         font-size: 1.5rem;
         font-weight: bold;
+        // font-family: "nav-font";
       }
       h3 {
         font-size: 1.5rem;
+        // font-family: "nav-font";
       }
     }
     nav {
@@ -87,7 +88,7 @@ body {
       height: 90vh;
 
       div.window-left-bg {
-        background: rgba(71, 114, 194, 0.7);
+        background: rgba(71, 114, 194, 0.8);
         width: 35vw;
       }
 
@@ -102,31 +103,74 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
       width: 60%;
-      height: 70%;
+      height: 60%;
       display: flex;
 
       section.left-info {
-        background: rgba(100, 149, 237, 0.3);
+        background: rgb(100, 149, 237);
         width: 45%;
         height: 100%;
         box-shadow: 3px 3px 5px rgba(91, 91, 92, 0.6),
           -5px -5px 5px rgba(91, 91, 92, 0.6);
+        position: relative;
+
+        div.self-img {
+          display: flex;
+          justify-content: center;
+          margin: 1.75rem 0rem;
+          img {
+            width: 50%;
+            border-radius: 50%;
+          }
+        }
+
+        div.text-info {
+          text-align: center;
+          align-items: center;
+          h1 {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+            // font-weight: bold;
+            font-size: 3rem;
+          }
+          h2 {
+            display: flex;
+            justify-content: center;
+            font-size: 1.5rem;
+            // font-family: "nav-font";
+          }
+        }
 
         div.contact-methods {
           background-color: white;
-          p {
-            font-size: 1.25rem;
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          div.line,
+          div.phone,
+          div.gmail,
+          div.github {
+            padding: 0.5rem;
           }
-          .github {
-            display: flex;
-            align-items: center;
-            a {
-              img {
-                width: 80%;
-                height: 80%;
-              }
-            }
-          }
+          //   p {
+          //     font-size: 1.25rem;
+          //   }
+          //   .github {
+          //     display: flex;
+          //     align-items: center;
+          //     a {
+          //       img {
+          //         width: 80%;
+          //         height: 80%;
+          //       }
+          //     }
+          //   }
         }
       }
       section.right-info {
