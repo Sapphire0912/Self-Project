@@ -357,9 +357,9 @@ body {
           height: 100%;
 
           div.self-img {
-            margin: 0.75rem;
+            margin: 0.5rem 0.75rem;
             img {
-              width: 40%;
+              width: 30%;
             }
           }
           div.text-info {
@@ -368,7 +368,7 @@ body {
               font-size: 2rem;
             }
             h2 {
-              font-size: 1.15rem;
+              font-size: 1.25rem;
             }
           }
           div.contact-methods {
@@ -379,6 +379,12 @@ body {
             left: 85%;
             justify-content: space-evenly;
             align-items: center;
+            div.line,
+            div.phone,
+            div.gmail,
+            div.github {
+              padding: 0.25rem;
+            }
           }
         }
         section.right-info {
