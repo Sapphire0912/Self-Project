@@ -129,12 +129,11 @@ body header .side-nav ul li .active {
   color: mediumblue;
 }
 body main div.window-bg {
-  position: fixed;
+  position: absolute;
   top: 10;
   left: 0;
   display: flex;
-  height: 100%;
-  overflow: visible;
+  height: 90vh;
 }
 body main div.window-bg div.window-left-bg {
   background: rgba(71, 114, 194, 0.8);
@@ -286,10 +285,74 @@ body main div.self-information section.right-info div.quick-link a.quick-project
   body header nav {
     display: none;
   }
+  body main div.window-bg {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    overflow-x: hidden;
+  }
+  body main div.window-bg div.window-left-bg {
+    height: 60vh;
+    width: 100vw;
+  }
+  body main div.window-bg div.window-right-bg {
+    height: 40vh;
+    width: 100vw;
+  }
+  body main div.self-information {
+    position: fixed;
+    top: 50%;
+    left: 55%;
+    flex-direction: column;
+    width: 100%;
+  }
+  body main div.self-information section.left-info {
+    width: 90%;
+    height: 100%;
+  }
+  body main div.self-information section.left-info div.self-img {
+    margin: 0.75rem;
+  }
+  body main div.self-information section.left-info div.self-img img {
+    width: 40%;
+  }
+  body main div.self-information section.left-info div.text-info h1 {
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
+  body main div.self-information section.left-info div.text-info h2 {
+    font-size: 1.15rem;
+  }
+  body main div.self-information section.left-info div.contact-methods {
+    flex-direction: column;
+    width: 12%;
+    height: 100%;
+    bottom: 0;
+    left: 85%;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  body main div.self-information section.right-info {
+    width: 90%;
+    height: 100%;
+  }
+  body main div.self-information section.right-info h2 {
+    font-size: 2.5rem;
+    padding: 0.75rem 1rem;
+  }
+  body main div.self-information section.right-info h3 {
+    font-size: 1.75rem;
+  }
+  body main div.self-information section.right-info p {
+    padding: 1rem 0rem 1rem 1rem;
+  }
+  body main div.self-information section.right-info div.quick-link {
+    margin-bottom: 1rem;
+  }
 }
 @media screen and (max-width: 600px) {
   body header {
     height: 10vh;
+    box-shadow: none;
   }
   body header section.title {
     margin-left: 1rem;

@@ -143,12 +143,11 @@ body {
 
   main {
     div.window-bg {
-      position: fixed;
+      position: absolute;
       top: 10;
       left: 0;
       display: flex;
-      height: 100%;
-      overflow: visible;
+      height: 90vh;
 
       div.window-left-bg {
         background: rgba(71, 114, 194, 0.8);
@@ -330,6 +329,77 @@ body {
         display: none;
       }
     }
+    main {
+      div.window-bg {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+        overflow-x: hidden;
+
+        div.window-left-bg {
+          height: 60vh;
+          width: 100vw;
+        }
+        div.window-right-bg {
+          height: 40vh;
+          width: 100vw;
+        }
+      }
+
+      div.self-information {
+        position: fixed;
+        top: 50%;
+        left: 55%;
+        flex-direction: column;
+        width: 100%;
+
+        section.left-info {
+          width: 90%;
+          height: 100%;
+
+          div.self-img {
+            margin: 0.75rem;
+            img {
+              width: 40%;
+            }
+          }
+          div.text-info {
+            h1 {
+              margin-bottom: 0;
+              font-size: 2rem;
+            }
+            h2 {
+              font-size: 1.15rem;
+            }
+          }
+          div.contact-methods {
+            flex-direction: column;
+            width: 12%;
+            height: 100%;
+            bottom: 0;
+            left: 85%;
+            justify-content: space-evenly;
+            align-items: center;
+          }
+        }
+        section.right-info {
+          width: 90%;
+          height: 100%;
+          h2 {
+            font-size: 2.5rem;
+            padding: 0.75rem 1rem;
+          }
+          h3 {
+            font-size: 1.75rem;
+          }
+          p {
+            padding: 1rem 0rem 1rem 1rem;
+          }
+          div.quick-link {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -337,6 +407,7 @@ body {
   body {
     header {
       height: 10vh;
+      box-shadow: none;
       section.title {
         margin-left: 1rem;
         flex: 1 1 100px;
@@ -350,34 +421,3 @@ body {
     }
   }
 }
-
-// @media screen and (max-width: 800px) {
-//   body {
-//     main {
-//       div.window-bg {
-//         flex-direction: column-reverse;
-//         div.window-left-bg {
-//           width: 100vw;
-//           height: 60vh;
-//         }
-//         div.window-right-bg {
-//           width: 100vw;
-//           height: 40vh;
-//         }
-//       }
-//       div.self-information {
-//         flex-direction: column;
-//         top: 45%;
-//         left: 60%;
-//         section.left-info {
-//           width: 80%;
-//           height: 100vh;
-//         }
-//         section.right-info {
-//           width: 80%;
-//           height: 60%;
-//         }
-//       }
-//     }
-//   }
-// }
