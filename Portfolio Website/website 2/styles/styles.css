@@ -33,9 +33,7 @@ body header section.title {
   flex: 2 1 300px;
   display: flex;
   flex-wrap: wrap;
-  text-align: center;
   justify-content: flex-start;
-  align-items: center;
   margin-left: 2rem;
   font-family: "en-font";
 }
@@ -44,13 +42,17 @@ body header section.title div.rectangle {
   height: 20px;
   background-color: rgba(0, 0, 255, 0.8);
   border-radius: 6px;
-  margin: 0rem 0.5rem;
+  margin: 0.25rem 0.5rem;
 }
-body header section.title h2 {
+body header section.title .web-title {
+  display: flex;
+  text-align: left;
+}
+body header section.title .web-title h2 {
   font-size: 1.5rem;
   font-weight: bold;
 }
-body header section.title h3 {
+body header section.title .web-title h3 {
   font-size: 1.5rem;
 }
 body header nav {
@@ -77,6 +79,53 @@ body header nav ul li a:hover {
   color: mediumblue;
 }
 body header nav ul li .active {
+  color: mediumblue;
+}
+body header img {
+  display: none;
+}
+body header .side-nav {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgb(209, 234, 250);
+  animation-name: animate;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  padding-top: 60px;
+}
+body header .side-nav .close-btn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
+  font-family: "ui-font";
+  margin-left: 50px;
+  padding: 8px 8px 8px 32px;
+}
+body header .side-nav ul {
+  display: flex;
+  flex-direction: column;
+}
+body header .side-nav ul li a {
+  display: block;
+  padding: 40px 8px 40px 8px;
+  font-size: 25px;
+  font-family: "ui-font";
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+body header .side-nav ul li a:hover {
+  color: mediumblue;
+}
+body header .side-nav ul li .active {
   color: mediumblue;
 }
 body main div.window-bg {
@@ -137,7 +186,7 @@ body main div.self-information section.left-info div.contact-methods {
   background-color: white;
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 2%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -208,6 +257,14 @@ body main div.self-information section.right-info div.quick-link a.quick-project
   background: rgb(0, 80, 255);
 }
 
+@keyframes animate {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
 @media screen and (max-width: 1200px) {
   body main div.self-information {
     width: 70%;
@@ -219,28 +276,29 @@ body main div.self-information section.right-info div.quick-link a.quick-project
   }
 }
 @media screen and (max-width: 800px) {
-  body main div.window-bg {
-    flex-direction: column-reverse;
+  body header img {
+    display: block;
+    margin-right: 1.25rem;
   }
-  body main div.window-bg div.window-left-bg {
-    width: 100vw;
-    height: 60vh;
+  body header img:hover {
+    cursor: pointer;
   }
-  body main div.window-bg div.window-right-bg {
-    width: 100vw;
-    height: 40vh;
+  body header nav {
+    display: none;
   }
-  body main div.self-information {
+}
+@media screen and (max-width: 600px) {
+  body header {
+    height: 10vh;
+  }
+  body header section.title {
+    margin-left: 1rem;
+    flex: 1 1 100px;
+  }
+  body header section.title .web-title {
     flex-direction: column;
-    top: 45%;
-    left: 60%;
   }
-  body main div.self-information section.left-info {
-    width: 80%;
-    height: 100vh;
-  }
-  body main div.self-information section.right-info {
-    width: 80%;
-    height: 60%;
+  body header section.title .web-title h3 {
+    font-size: 1.25rem;
   }
 }/*# sourceMappingURL=styles.css.map */

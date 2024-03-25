@@ -36,9 +36,7 @@ body {
       flex: 2 1 300px;
       display: flex;
       flex-wrap: wrap;
-      text-align: center;
       justify-content: flex-start;
-      align-items: center;
       margin-left: 2rem;
       font-family: "en-font";
 
@@ -47,14 +45,18 @@ body {
         height: 20px;
         background-color: rgba(0, 0, 255, 0.8);
         border-radius: 6px;
-        margin: 0rem 0.5rem;
+        margin: 0.25rem 0.5rem;
       }
-      h2 {
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-      h3 {
-        font-size: 1.5rem;
+      .web-title {
+        display: flex;
+        text-align: left;
+        h2 {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+        h3 {
+          font-size: 1.5rem;
+        }
       }
     }
     nav {
@@ -76,6 +78,58 @@ body {
             font-family: "ui-font";
             &:hover {
               transition: all 0.3s ease-in;
+              color: mediumblue;
+            }
+          }
+          .active {
+            color: mediumblue;
+          }
+        }
+      }
+    }
+    img {
+      display: none;
+    }
+    .side-nav {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      width: 100%;
+      background-color: rgb(209, 234, 250);
+
+      animation-name: animate;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      padding-top: 60px;
+
+      .close-btn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        text-decoration: none;
+        color: black;
+        font-family: "ui-font";
+        margin-left: 50px;
+        padding: 8px 8px 8px 32px;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        li {
+          a {
+            display: block;
+            padding: 40px 8px 40px 8px;
+            font-size: 25px;
+            font-family: "ui-font";
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            &:hover {
               color: mediumblue;
             }
           }
@@ -154,7 +208,7 @@ body {
           background-color: white;
           width: 100%;
           position: absolute;
-          bottom: 0;
+          bottom: 2%;
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
@@ -233,6 +287,15 @@ body {
   }
 }
 
+@keyframes animate {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   body {
     main {
@@ -255,31 +318,66 @@ body {
 
 @media screen and (max-width: 800px) {
   body {
-    main {
-      div.window-bg {
-        flex-direction: column-reverse;
-        div.window-left-bg {
-          width: 100vw;
-          height: 60vh;
-        }
-        div.window-right-bg {
-          width: 100vw;
-          height: 40vh;
+    header {
+      img {
+        display: block;
+        margin-right: 1.25rem;
+        &:hover {
+          cursor: pointer;
         }
       }
-      div.self-information {
-        flex-direction: column;
-        top: 45%;
-        left: 60%;
-        section.left-info {
-          width: 80%;
-          height: 100vh;
-        }
-        section.right-info {
-          width: 80%;
-          height: 60%;
+      nav {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    header {
+      height: 10vh;
+      section.title {
+        margin-left: 1rem;
+        flex: 1 1 100px;
+        .web-title {
+          flex-direction: column;
+          h3 {
+            font-size: 1.25rem;
+          }
         }
       }
     }
   }
 }
+
+// @media screen and (max-width: 800px) {
+//   body {
+//     main {
+//       div.window-bg {
+//         flex-direction: column-reverse;
+//         div.window-left-bg {
+//           width: 100vw;
+//           height: 60vh;
+//         }
+//         div.window-right-bg {
+//           width: 100vw;
+//           height: 40vh;
+//         }
+//       }
+//       div.self-information {
+//         flex-direction: column;
+//         top: 45%;
+//         left: 60%;
+//         section.left-info {
+//           width: 80%;
+//           height: 100vh;
+//         }
+//         section.right-info {
+//           width: 80%;
+//           height: 60%;
+//         }
+//       }
+//     }
+//   }
+// }
