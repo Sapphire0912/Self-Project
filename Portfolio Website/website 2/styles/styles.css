@@ -27,6 +27,7 @@ body header {
   flex-wrap: wrap;
   height: 10vh;
   align-items: center;
+  box-shadow: 0 10px 6px -6px #777;
 }
 body header section.title {
   flex: 2 1 300px;
@@ -83,11 +84,11 @@ body main div.window-bg {
   top: 10;
   left: 0;
   display: flex;
-  height: 90vh;
+  height: 100%;
   overflow: visible;
 }
 body main div.window-bg div.window-left-bg {
-  background: rgba(80, 80, 255, 0.8);
+  background: rgba(71, 114, 194, 0.8);
   width: 35vw;
 }
 body main div.window-bg div.window-right-bg {
@@ -127,7 +128,7 @@ body main div.self-information section.left-info div.text-info {
 }
 body main div.self-information section.left-info div.text-info h1 {
   margin-bottom: 2rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 body main div.self-information section.left-info div.text-info h2 {
   font-size: 1.5rem;
@@ -155,7 +156,7 @@ body main div.self-information section.right-info {
   text-align: left;
 }
 body main div.self-information section.right-info h2 {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: bold;
   padding: 1rem;
 }
@@ -205,4 +206,15 @@ body main div.self-information section.right-info div.quick-link a.quick-project
   color: white;
   border: 1px solid rgb(0, 80, 255);
   background: rgb(0, 80, 255);
+}
+
+@media screen and (max-width: 1200px) {
+  body main div.self-information {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 1080px) {
+  body main div.self-information {
+    width: 80%;
+  }
 }/*# sourceMappingURL=styles.css.map */
