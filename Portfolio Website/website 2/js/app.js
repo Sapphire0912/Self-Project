@@ -19,7 +19,7 @@ window.addEventListener("resize", function () {
     title.children[1].innerHTML = "/ Portfolio Website";
   }
 
-  if (window.innerWidth <= 800) {
+  if (window.innerWidth <= 820) {
     text_info.children[1].innerHTML = "國立高雄科技大學 | 電子工程系 畢業";
   } else {
     text_info.children[1].innerHTML = "國立高雄科技大學 <br />電子工程系 畢業";
