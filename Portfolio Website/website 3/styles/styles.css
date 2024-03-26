@@ -242,6 +242,7 @@ body main .information .right-info .quick-links a:hover {
   }
   body header .web-title .title-text {
     flex-direction: column;
+    align-items: flex-start;
   }
   body main .information .left-info .self-img img {
     width: 300px;
