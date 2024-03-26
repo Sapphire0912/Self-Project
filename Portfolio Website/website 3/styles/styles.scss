@@ -1,0 +1,321 @@
+@font-face {
+  font-family: "ch-font";
+  src: url(../fonts/NotoSansTC-Medium.ttf);
+}
+
+@font-face {
+  font-family: "en-font";
+  src: url(../fonts/Roboto-Medium.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+body {
+  overflow-x: hidden;
+
+  header {
+    background-color: rgb(240, 235, 235);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 3px -6px #7e7c7c;
+
+    .web-title {
+      display: flex;
+      align-items: center;
+      padding: 0rem 1rem;
+      font-family: "en-font";
+
+      .circle {
+        background-color: rgba(0, 0, 255, 0.8);
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        margin-right: 0.75rem;
+      }
+      .title-text {
+        display: flex;
+        align-items: center;
+
+        h2 {
+          font-size: 1.75rem;
+          font-weight: bold;
+          padding-right: 1rem;
+        }
+        h3 {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .windows-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding: 1rem;
+
+      ul {
+        display: flex;
+        list-style-type: none;
+
+        .about-me,
+        .resume {
+          border-right: 1px solid black;
+        }
+
+        a {
+          text-decoration: none;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+          padding: 0rem 2rem;
+          font-size: 1.25rem;
+          font-family: "ch-font";
+
+          &:hover {
+            color: mediumblue;
+          }
+        }
+      }
+    }
+
+    p {
+      display: none;
+      font-size: 40px;
+      padding: 0.25rem 1.5rem;
+      color: rgb(77, 76, 76);
+    }
+
+    .side-nav {
+      display: none;
+      position: fixed;
+      z-index: 3;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(234, 237, 238);
+
+      animation: animate-open 0.5s forwards;
+      padding-top: 60px;
+
+      .close-btn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+
+        text-decoration: none;
+        color: black;
+        font-family: "ch-font";
+        margin-left: 50px;
+        padding: 8px 8px 8px 32px;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        li {
+          a {
+            display: block;
+            padding: 40px 8px 40px 8px;
+            font-size: 25px;
+            font-family: "ch-font";
+            color: black;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+              color: mediumblue;
+            }
+          }
+          .active {
+            color: mediumblue;
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+
+    .main-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background-color: rgb(244, 236, 230);
+      width: 100%;
+      height: 100%;
+    }
+
+    .information {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10%;
+
+      .left-info {
+        display: flex;
+        flex-direction: column;
+
+        .self-img {
+          img {
+            width: 500px;
+            border-radius: 50%;
+            padding: 1.25rem;
+          }
+        }
+        .contact-methods {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .line,
+          .phone,
+          .gmail,
+          .github {
+            padding: 0rem 0.75rem;
+          }
+        }
+      }
+
+      .right-info {
+        margin: 1rem;
+        font-family: "ch-font";
+        width: 530px;
+
+        h2 {
+          font-size: 2rem;
+          padding-bottom: 0.75rem;
+        }
+        h3 {
+          font-size: 1.5rem;
+          padding-bottom: 0.5rem;
+        }
+        p {
+          font-size: 1.15rem;
+          padding-bottom: 1.5rem;
+        }
+        .quick-links {
+          display: flex;
+          text-align: center;
+          .resume {
+            background-color: rgba(156, 247, 161, 0.8);
+          }
+          .project {
+            background-color: rgba(115, 234, 250, 0.8);
+          }
+
+          a {
+            text-decoration: none;
+            color: black;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 120px;
+            height: 60px;
+            padding: 1rem;
+            margin: 0rem 1rem;
+
+            font-size: 1.15rem;
+            border-radius: 48%;
+            border: 2px solid gray;
+
+            &:hover {
+              background-color: white;
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  body header {
+    .windows-nav {
+      display: none;
+    }
+    p {
+      display: block;
+    }
+  }
+
+  body main {
+    .information {
+      flex-direction: column-reverse;
+      .left-info {
+        flex-direction: column-reverse;
+      }
+      .right-info {
+        text-align: center;
+        .quick-links {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  body header {
+    .web-title {
+      .circle {
+        margin-bottom: 22px;
+      }
+      .title-text {
+        flex-direction: column;
+      }
+    }
+  }
+  body main {
+    .information {
+      .left-info {
+        .self-img {
+          img {
+            width: 300px;
+          }
+        }
+      }
+      .right-info {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@keyframes animate-open {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes animate-close {
+  from {
+    height: 100%;
+  }
+  to {
+    height: 0%;
+  }
+}
