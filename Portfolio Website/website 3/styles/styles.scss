@@ -72,7 +72,8 @@ body {
         list-style-type: none;
 
         .about-me,
-        .resume {
+        .resume,
+        .project {
           border-right: 1px solid black;
         }
 
@@ -97,6 +98,11 @@ body {
       font-size: 40px;
       padding: 0.25rem 1.5rem;
       color: rgb(77, 76, 76);
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
     }
 
     .side-nav {
@@ -106,10 +112,8 @@ body {
       top: 0;
       right: 0;
       width: 100%;
-      height: 100%;
+      height: 0%;
       background-color: rgb(234, 237, 238);
-
-      animation: animate-open 0.5s forwards;
       padding-top: 60px;
 
       .close-btn {
@@ -126,8 +130,7 @@ body {
       }
 
       ul {
-        display: flex;
-        flex-direction: column;
+        display: none;
         li {
           a {
             display: block;
@@ -220,7 +223,9 @@ body {
           .project {
             background-color: rgba(115, 234, 250, 0.8);
           }
-
+          .contact {
+            background-color: rgba(165, 42, 42, 0.6);
+          }
           a {
             text-decoration: none;
             color: black;
@@ -249,7 +254,7 @@ body {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 960px) {
   body header {
     .windows-nav {
       display: none;
