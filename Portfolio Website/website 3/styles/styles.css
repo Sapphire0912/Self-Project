@@ -83,6 +83,9 @@ body header .windows-nav ul a {
 body header .windows-nav ul a:hover {
   color: mediumblue;
 }
+body header .windows-nav .active {
+  color: mediumblue;
+}
 body header p {
   display: none;
   font-size: 40px;
