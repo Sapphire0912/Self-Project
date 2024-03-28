@@ -9,7 +9,7 @@ menu.addEventListener("click", function () {
   setTimeout(() => {
     side_nav_ul.style.display = "flex";
     side_nav_ul.style.flexDirection = "column";
-  }, 100);
+  }, 300);
 });
 
 close_btn.addEventListener("click", function () {

@@ -21,6 +21,15 @@ h6 {
   font-weight: normal;
 }
 
+#basic-info,
+#expertise,
+#autobiography,
+#side-project,
+#future-plan,
+#refresher-course {
+  margin-bottom: 5rem;
+}
+
 main {
   width: 100%;
   height: 100%;
@@ -30,14 +39,22 @@ main {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -3;
   background-color: rgb(244, 236, 230);
   width: 100%;
   height: 100%;
 }
 
+.content-background {
+  padding: 1rem 1rem 1rem 0.5rem;
+  font-size: 1.15rem;
+  text-align: left;
+  width: 90%;
+  background-color: white;
+  box-shadow: 2px 2px 3px #777;
+}
+
 .animate-fade-in {
-  text-align: center;
   opacity: 0;
   animation: fadeIn 2.5s forwards;
 }
@@ -159,6 +176,79 @@ body header .side-nav ul li a:hover {
 body header .side-nav ul li .active {
   color: mediumblue;
 }
+body main.resume-main {
+  font-family: "ch-font";
+  display: flex;
+  margin-top: 5%;
+}
+body main.resume-main .left-region {
+  width: 25%;
+  height: 100%;
+  margin: 0rem 2rem;
+  position: sticky;
+  top: 5%;
+  left: 0;
+}
+body main.resume-main .left-region h2 {
+  margin: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid black;
+}
+body main.resume-main .left-region .each-nav {
+  display: flex;
+  margin: 1rem 1rem 2rem 1rem;
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+body main.resume-main .left-region .each-nav:hover .button-nav {
+  transition: all 0.5s ease-in-out;
+  background-color: rgb(133, 132, 132);
+}
+body main.resume-main .left-region .each-nav:hover .button-nav::after {
+  transition: all 0.5s ease-in-out;
+  background-color: white;
+}
+body main.resume-main .left-region .button-nav {
+  position: relative;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgb(133, 132, 132);
+  border-radius: 10px;
+  cursor: pointer;
+}
+body main.resume-main .left-region .button-nav::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+body main.resume-main .left-region a {
+  text-decoration: none;
+  color: rgb(97, 97, 97);
+  display: block;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+}
+body main.resume-main .right-region {
+  width: 75%;
+  height: 100%;
+}
+body main.resume-main .right-region ul {
+  list-style-type: none;
+}
+body main.resume-main .right-region h2 {
+  margin: 0.5rem;
+  font-size: 2rem;
+}
+body main.resume-main .right-region p {
+  padding-left: 0.25rem;
+}
 body main.index-main .main-background {
   position: fixed;
   top: 0;
@@ -243,7 +333,7 @@ body main.index-main .information .right-info .quick-links a:hover {
   transform: scale(1.2);
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 980px) {
   body header .windows-nav {
     display: none;
   }
