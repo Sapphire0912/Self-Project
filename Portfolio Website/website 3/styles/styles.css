@@ -21,6 +21,27 @@ h6 {
   font-weight: normal;
 }
 
+main {
+  width: 100%;
+  height: 100%;
+}
+
+.main-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: rgb(244, 236, 230);
+  width: 100%;
+  height: 100%;
+}
+
+.animate-fade-in {
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 2.5s forwards;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -138,11 +159,7 @@ body header .side-nav ul li a:hover {
 body header .side-nav ul li .active {
   color: mediumblue;
 }
-body main {
-  width: 100%;
-  height: 100%;
-}
-body main .main-background {
+body main.index-main .main-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -151,63 +168,63 @@ body main .main-background {
   width: 100%;
   height: 100%;
 }
-body main .information {
+body main.index-main .information {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10%;
 }
-body main .information .left-info {
+body main.index-main .information .left-info {
   display: flex;
   flex-direction: column;
 }
-body main .information .left-info .self-img img {
+body main.index-main .information .left-info .self-img img {
   width: 500px;
   border-radius: 50%;
   padding: 1.25rem;
 }
-body main .information .left-info .contact-methods {
+body main.index-main .information .left-info .contact-methods {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-body main .information .left-info .contact-methods .line,
-body main .information .left-info .contact-methods .phone,
-body main .information .left-info .contact-methods .gmail,
-body main .information .left-info .contact-methods .github {
+body main.index-main .information .left-info .contact-methods .line,
+body main.index-main .information .left-info .contact-methods .phone,
+body main.index-main .information .left-info .contact-methods .gmail,
+body main.index-main .information .left-info .contact-methods .github {
   padding: 0rem 0.75rem;
 }
-body main .information .right-info {
+body main.index-main .information .right-info {
   margin: 1rem;
   font-family: "ch-font";
   width: 530px;
 }
-body main .information .right-info h2 {
+body main.index-main .information .right-info h2 {
   font-size: 2rem;
   padding-bottom: 0.75rem;
 }
-body main .information .right-info h3 {
+body main.index-main .information .right-info h3 {
   font-size: 1.5rem;
   padding-bottom: 0.5rem;
 }
-body main .information .right-info p {
+body main.index-main .information .right-info p {
   font-size: 1.15rem;
   padding-bottom: 1.5rem;
 }
-body main .information .right-info .quick-links {
+body main.index-main .information .right-info .quick-links {
   display: flex;
   text-align: center;
 }
-body main .information .right-info .quick-links .resume {
+body main.index-main .information .right-info .quick-links .resume {
   background-color: rgba(156, 247, 161, 0.8);
 }
-body main .information .right-info .quick-links .project {
+body main.index-main .information .right-info .quick-links .project {
   background-color: rgba(115, 234, 250, 0.8);
 }
-body main .information .right-info .quick-links .contact {
+body main.index-main .information .right-info .quick-links .contact {
   background-color: rgba(165, 42, 42, 0.6);
 }
-body main .information .right-info .quick-links a {
+body main.index-main .information .right-info .quick-links a {
   text-decoration: none;
   color: black;
   display: flex;
@@ -221,7 +238,7 @@ body main .information .right-info .quick-links a {
   border-radius: 48%;
   border: 2px solid gray;
 }
-body main .information .right-info .quick-links a:hover {
+body main.index-main .information .right-info .quick-links a:hover {
   background-color: white;
   transform: scale(1.2);
 }
@@ -233,16 +250,16 @@ body main .information .right-info .quick-links a:hover {
   body header p {
     display: block;
   }
-  body main .information {
+  body main.index-main .information {
     flex-direction: column-reverse;
   }
-  body main .information .left-info {
+  body main.index-main .information .left-info {
     flex-direction: column-reverse;
   }
-  body main .information .right-info {
+  body main.index-main .information .right-info {
     text-align: center;
   }
-  body main .information .right-info .quick-links {
+  body main.index-main .information .right-info .quick-links {
     justify-content: center;
   }
 }
@@ -254,11 +271,18 @@ body main .information .right-info .quick-links a:hover {
     flex-direction: column;
     align-items: flex-start;
   }
-  body main .information .left-info .self-img img {
+  body main.index-main .information .left-info .self-img img {
     width: 300px;
   }
-  body main .information .right-info {
+  body main.index-main .information .right-info {
     width: 300px;
+  }
+  body main.index-main .information .right-info .quick-links {
+    align-items: center;
+  }
+  body main.index-main .information .right-info .quick-links a {
+    margin: 0.25rem 0.5rem;
+    padding: 2.25rem 1rem;
   }
 }
 @keyframes animate-open {
@@ -275,5 +299,13 @@ body main .information .right-info .quick-links a:hover {
   }
   to {
     height: 0%;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }/*# sourceMappingURL=styles.css.map */
