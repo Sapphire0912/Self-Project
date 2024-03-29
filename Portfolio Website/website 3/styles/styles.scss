@@ -26,7 +26,7 @@ h6 {
 #expertise,
 #autobiography,
 #special-studies,
-#future-plan,
+#processing-things,
 #refresher-course {
   margin-bottom: 10rem;
 }
@@ -286,6 +286,7 @@ body {
         th {
           border-right: 1px solid black;
           text-align: center;
+          padding: 0.5rem;
         }
         td {
           padding: 0.75rem 1.5rem;
@@ -294,10 +295,11 @@ body {
           background-color: rgba(144, 238, 144, 0.5);
         }
       }
-
       h2 {
-        margin: 0.5rem;
+        width: 90%;
+        margin: 1rem 0rem;
         font-size: 2rem;
+        text-align: center;
       }
       h3 {
         font-size: 1.25rem;
@@ -306,7 +308,10 @@ body {
       p {
         padding-left: 0.25rem;
       }
-
+      img {
+        padding: 0.75rem 0.25rem;
+        width: 100%;
+      }
       #special-studies {
         ul {
           padding: 0rem 1.5rem;
@@ -319,6 +324,26 @@ body {
           text-indent: 2em;
           text-align: left;
           margin-bottom: 1rem;
+        }
+        img {
+          width: 100%;
+          padding-bottom: 0.5rem;
+        }
+        .special-links {
+          display: flex;
+          flex-wrap: wrap;
+
+          a {
+            display: block;
+            text-decoration: none;
+            color: purple;
+            margin: 1.25rem;
+
+            &:hover {
+              border-bottom: 1px solid rgb(38, 38, 247);
+              color: rgb(38, 38, 247);
+            }
+          }
         }
       }
     }

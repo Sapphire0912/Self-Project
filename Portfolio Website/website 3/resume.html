@@ -53,17 +53,16 @@
             <a href="#expertise">語言和專長</a>
           </div>
           <div class="each-nav">
-            <button title="自傳" type="button" class="button-nav"></button>
-            <a href="#autobiography">自傳</a>
-          </div>
-
-          <div class="each-nav">
             <button title="專案作品" type="button" class="button-nav"></button>
             <a href="#special-studies">專題作品</a>
           </div>
           <div class="each-nav">
+            <button title="自傳" type="button" class="button-nav"></button>
+            <a href="#autobiography">自傳</a>
+          </div>
+          <div class="each-nav">
             <button title="未來規劃" type="button" class="button-nav"></button>
-            <a href="#future-plan">未來規劃</a>
+            <a href="#processing-things">未來規劃</a>
           </div>
           <div class="each-nav">
             <button
@@ -87,7 +86,7 @@
                 </tr>
                 <tr>
                   <th>個人資訊</th>
-                  <td>男、23歲、役畢</td>
+                  <td>男、23歲、役畢(2024/01)</td>
                 </tr>
                 <tr>
                   <th>就業狀態</th>
@@ -154,7 +153,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <th>醫療影像辨識</th>
+                  <th>醫療<br />影像辨識</th>
                   <td>
                     <ul>
                       <li>利用 C、Python 開發系統及演算法</li>
@@ -165,6 +164,111 @@
                   </td>
                 </tr>
               </table>
+            </div>
+          </div>
+          <div id="special-studies">
+            <h2>專題作品</h2>
+            <div class="content-background">
+              <h3>題目：心臟超音波影像之肌肉語意區段偵測與腔室範圍估計改良</h3>
+              <h5>
+                &#x203B;
+                由於有病人個資問題，僅擺放允許展示的資料。詳細的內容請前往以下連結：
+              </h5>
+              <div class="special-links">
+                <a
+                  target="_blank"
+                  title="前往 youtube 觀看專題展影片"
+                  href="https://www.youtube.com/watch?v=iteGkPYy1z4"
+                  >專題影片連結</a
+                >
+                <a
+                  target="_blank"
+                  title="前往 GitHub 觀看專題 & 專案內容"
+                  href="https://github.com/Sapphire0912/LaboratoryProject"
+                  >專題 GitHub 連結</a
+                >
+                <a
+                  target="_blank"
+                  href="project data/專題報告書.pdf"
+                  title="前往觀看專題報告書"
+                  >專題報告書</a
+                >
+              </div>
+
+              <ul>
+                <li>摘要</li>
+                <p>
+                  根據世界衛生組織，心血管疾病是全球的第一大死因，估計每年奪去1790萬人的生命。近年來，超音波的技
+                  術有了極大的進步，可以對心臟結構和功能進行評估。心臟超音波的發展可以詳細的顯示人體在正常生理狀態和病
+                  理狀態的心臟結構、測量和功能的系列檢查，透過此項技術提高了診斷的準確性。<b>基於與醫生合作的經驗</b>，我們創
+                  建了這個醫療項目，使用超音波影像來描繪心肌、瓣膜、腔室，建立一個分析心臟結構測量的系統。這些計算方法，
+                  我們<b>基於規則的系統 (rule-based system)</b>
+                  對心臟每個部分進行分類並儲存測量值以供將來機器學習訓練。該系統用於支持連續患者的跟蹤、分析心臟超音波影像，診斷特定疾病降低誤判率，幫助醫生以做出最佳診斷，提高醫療
+                  品質。通過與醫生討論，我們列出了疾病及其症狀，<b>開發了一個系統來分析心臟的量測值，以檢測不同類型的疾病</b>。
+                </p>
+                <li>系統架構</li>
+                <p>
+                  主要流程分別分為醫院、醫生和系統。關於此系統，我們使用計算機視覺的演算法對心臟結構進行分類並分析測量結果。<b>與其他系統的不同之處</b>，在於我們並沒有使用來自其他資料庫的樣本，而是<b>從醫生獲取患者的心臟超音波影像，真實患者的超音波影像並不像其他資料庫的樣本清晰</b>，我們希望此系統能夠為患者帶來更低的成本，使得可以負擔起個人數據採集和跟蹤系統。
+                </p>
+                <img src="project data/工作流程圖.jpg" alt="工作流程圖" />
+                <p
+                  style="
+                    margin-bottom: 1rem;
+                    text-indent: 0;
+                    text-align: center;
+                  "
+                >
+                  圖(一) 工作流程圖
+                </p>
+                <li>實踐方法</li>
+                <p>
+                  抓出超音波影像中感興趣的區域後，
+                  使用<b>骨架化</b>的做法，初步定義影像中
+                  的心臟範圍。透過<b>動態閾值方法，區分腔室及肌肉區域</b>，進行<b>圖像分割演算法定義每個腔室的位置</b>，最後我們
+                  <b>利用基於規則的系統去預測二尖瓣的 位置</b>，以<b
+                    >供計算左心室射血分數(Left Ventricular Ejection Fraction)</b
+                  >以及<b>定義左心室肌肉區段語意分析使用</b>。
+                </p>
+                <li>成果展示</li>
+                <p>
+                  定義 Apical Four Chamber View 中的腔
+                  室名稱以及預測二尖瓣支點的位置，
+                  基於二尖瓣位置，進一步做左心室 (Left Ventricle)
+                  肌肉區段語意分析。
+                </p>
+                <img
+                  src="project data/定義瓣膜支點及腔室.gif"
+                  alt="定義瓣膜支點及腔室"
+                />
+                <p
+                  style="
+                    margin-bottom: 1rem;
+                    text-indent: 0;
+                    text-align: center;
+                  "
+                >
+                  圖(二)定義二尖瓣膜支點和腔室名稱
+                </p>
+                <img
+                  src="project data/肌肉區段語意分析.gif"
+                  alt="肌肉區段語意分析"
+                />
+                <p
+                  style="
+                    margin-bottom: 1rem;
+                    text-indent: 0;
+                    text-align: center;
+                  "
+                >
+                  圖(三)肌肉區段語意分析
+                </p>
+                <li>結論</li>
+                <p>
+                  我們正在構建一個全自動且可擴展的心臟超音波影像分析系統，其中包含圖像分割、辨識View和結構測量，
+                  分析包括心房、心室和心肌在內的心臟部分，以及彩色都卜勒診斷血液是否逆流。列出這些心臟結構的量測值，
+                  輔助醫生收集所有的症狀，例如：二尖瓣閉鎖不全、三尖瓣閉鎖不全、主動脈閉鎖不全、左心室舒張期受損等。
+                </p>
+              </ul>
             </div>
           </div>
           <div id="autobiography">
@@ -203,59 +307,72 @@
               </p>
               <p>
                 【 未來規劃，展現企圖心 】<br />
-                深信自己想要的應徵的工作職位，即便進入貴公司的團隊之後，自己也會持續的學習新的技術。適應團隊之後，打算會額外接軟體相關的案件，增進自己的專業技術外，也想累積自己和不同客戶洽談、合作的經驗。<br /><br />
+                深信自己想要的應徵的工作職位，即便進入貴公司的團隊之後，自己也會持續的學習新的技術。適應團隊之後，打算會持續完成
+                Side-Project，讓專業能力更上一層樓。<br /><br />
                 在未來的工作崗位上，我會以敬業、積極、負責任的態度面對迎來的挑戰，並努力將我所學的知識、技術付諸實踐。相信自己的技能和經驗能為貴公司的團隊帶來價值，期待在未來的合作中展現自己的專業。<br /><br />
                 感謝您百忙之中花時間看我的履歷，如果您對我的經歷和能力有興趣，期待與您聯繫，我很樂意進一步討論，希望有機會可以加入貴公司的團隊！<br /><br />
               </p>
             </div>
           </div>
-          <div id="special-studies">
-            <h2>專題作品</h2>
-            <div class="content-background">
-              <h3>題目：心臟超音波影像之肌肉語意區段偵測與腔室範圍估計改良</h3>
-              <ul>
-                <li>摘要</li>
-                <p>
-                  根據世界衛生組織，心血管疾病是全球的第一大死因，估計每年奪去1790萬人的生命。近年來，超音波的技
-                  術有了極大的進步，可以對心臟結構和功能進行評估。心臟超音波的發展可以詳細的顯示人體在正常生理狀態和病
-                  理狀態的心臟結構、測量和功能的系列檢查，透過此項技術提高了診斷的準確性。<b>基於與醫生合作的經驗</b>，我們創
-                  建了這個醫療項目，使用超音波影像來描繪心肌、瓣膜、腔室，建立一個分析心臟結構測量的系統。這些計算方法，
-                  我們<b>基於規則的系統 (rule-based system)</b>
-                  對心臟每個部分進行分類並儲存測量值以供將來機器學習訓練。該系統
-                  用於支持連續患者的跟蹤、分析心臟超音波影像，診斷特定疾病降低誤判率，幫助醫生以做出最佳診斷，提高醫療
-                  品質。通過與醫生討論，我們列出了疾病及其症狀，<b>開發了一個系統來分析心臟的量測值，以檢測不同類型的疾病</b>。
-                </p>
-                <li>系統架構</li>
-                <li>實踐方法</li>
-                <li>成果說明</li>
-                <li>成果展示</li>
-                <li>結論</li>
-              </ul>
-              <a
-                target="_blank"
-                href="https://www.youtube.com/watch?v=iteGkPYy1z4"
-                >專題影片連結</a
-              >
-              <a
-                target="_blank"
-                href="https://github.com/Sapphire0912/LaboratoryProject"
-                >專題 GitHub 連結</a
-              >
-              <a target="_blank" href="project data/專題報告書.pdf"
-                >專題報告書</a
-              >
-            </div>
-          </div>
-          <div id="future-plan">
+
+          <div id="processing-things">
             <h2>未來規劃</h2>
             <div class="content-background">
-              <p>這是未來規劃</p>
+              <table>
+                <tr>
+                  <th>短期目標</th>
+                  <td>
+                    <ol>
+                      <li>適應公司的流程、文化、環境以及同事之間的合作</li>
+                      <li>進修與貴公司技術相符的專業能力</li>
+                      <li>提高英文閱讀能力</li>
+                    </ol>
+                  </td>
+                </tr>
+                <tr>
+                  <th>中期目標</th>
+                  <td>
+                    <ol>
+                      <li>爭取貴公司中升遷、外派、出差的機會</li>
+                      <li>提高英文會話能力</li>
+                      <li>
+                        提高全端技術、影像辨識演算法的能力
+                        <h5>Django、Vue.js、React、Tensorflow</h5>
+                      </li>
+                    </ol>
+                  </td>
+                </tr>
+                <tr>
+                  <th>長期目標</th>
+                  <td>
+                    <ol>
+                      <li>累積專業技術的實務經驗(Side Project)</li>
+                      <li>擬定投資計畫</li>
+                    </ol>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <div id="refresher-course">
             <h2>進修課程</h2>
             <div class="content-background">
-              <p>這是進修課程</p>
+              <p>TibaMe --【AI醫學影像分析學程】第七期直播課頁</p>
+              <img
+                src="project data/【AI醫學影像分析學程】第七期直播課頁-何佳曄-certificate.jpg"
+                alt="結訓證書"
+              />
+              <p>
+                <b>課程內容： </b><br />Week 1: Python 資料處理 + 影像處理 +
+                醫學影像 DICOM 檔案存取<br />
+                Week 2: 機器學習 & 深度學習<br />
+                Week 3: 卷積神經網路辨識醫學影像<br />
+                Week 4: 知名 CNN 模型與遷移學習<br />
+                Week 5: 實務工具 & 成效指標<br />
+                Week 6: 語意切割於醫學影像<br />
+                Week 7: 物件偵測於醫學影像<br />
+                Week 8: 心電圖，3D醫學影像，總結
+              </p>
             </div>
           </div>
         </section>
