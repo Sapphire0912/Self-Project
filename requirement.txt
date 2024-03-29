@@ -1,3 +1,4 @@
+PyQt5==5.8
 absl-py==0.11.0
 altgraph==0.17
 asgiref==3.4.1
@@ -10,9 +11,6 @@ BasicHttpServer==1.0.0
 beautifulsoup4==4.9.3
 cached-property==1.5.2
 cachetools==4.2.0
-Cconv==0.1
-Cconv112==0.1
-Cconvolution==0.1
 certifi==2020.12.5
 cffi==1.14.4
 chardet==3.0.4
@@ -21,7 +19,6 @@ charts==0.4.6
 colorama==0.4.4
 Command==0.1.0
 comtypes==1.1.9
-convolution==0.1
 cryptography==3.3.1
 cvzone==1.5.0
 cycler==0.10.0
@@ -59,13 +56,9 @@ Js2Py==0.71
 Keras==2.4.3
 Keras-Preprocessing==1.1.2
 kiwisolver==1.3.1
-logging==0.4.9.6
-logging-py==0.3.17
-logging2==0.1.2
 lxml==4.6.3
 Markdown==3.3.3
 matplotlib==3.3.3
-mediapipe==0.8.7.2
 mpmath==1.2.1
 multiprocess==0.70.11.1
 networkx==2.5
@@ -88,11 +81,9 @@ protobuf==3.14.0
 py==1.10.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
-PyAudio==0.2.11
 pycparser==2.20
 pydicom==2.1.2
 pyinstaller==4.2
-pyinstaller-hooks-contrib==2020.11
 pyjsparser==2.7.1
 PyMySQL==1.0.2
 pymysql2==1.3.3
