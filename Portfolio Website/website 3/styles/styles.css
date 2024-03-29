@@ -201,6 +201,12 @@ body main.resume-main .left-region .each-nav {
   align-items: center;
   text-align: center;
 }
+body main.resume-main .left-region .each-nav .active {
+  background-color: rgb(133, 132, 132);
+}
+body main.resume-main .left-region .each-nav .active::after {
+  background-color: white;
+}
 body main.resume-main .left-region .each-nav:hover .button-nav {
   transition: all 0.5s ease-in-out;
   background-color: rgb(133, 132, 132);

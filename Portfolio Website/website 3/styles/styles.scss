@@ -212,12 +212,20 @@ body {
         padding-bottom: 0.5rem;
         border-bottom: 2px solid black;
       }
+
       .each-nav {
         display: flex;
         margin: 1rem 1rem 2rem 1rem;
         position: relative;
         align-items: center;
         text-align: center;
+
+        .active {
+          background-color: rgb(133, 132, 132);
+          &::after {
+            background-color: white;
+          }
+        }
 
         &:hover {
           .button-nav {
