@@ -25,7 +25,7 @@ h6 {
 #basic-info,
 #expertise,
 #autobiography,
-#Special-studies,
+#special-studies,
 #future-plan,
 #refresher-course {
   margin-bottom: 10rem;
@@ -261,6 +261,7 @@ body {
         margin-left: 0.5rem;
       }
     }
+
     .right-region {
       width: 75%;
       height: 100%;
@@ -298,8 +299,27 @@ body {
         margin: 0.5rem;
         font-size: 2rem;
       }
+      h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
       p {
         padding-left: 0.25rem;
+      }
+
+      #special-studies {
+        ul {
+          padding: 0rem 1.5rem;
+          li {
+            font-size: 1.2rem;
+            padding: 0.25rem 0.5rem;
+          }
+        }
+        p {
+          text-indent: 2em;
+          text-align: left;
+          margin-bottom: 1rem;
+        }
       }
     }
   }

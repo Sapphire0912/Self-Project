@@ -24,7 +24,7 @@ h6 {
 #basic-info,
 #expertise,
 #autobiography,
-#Special-studies,
+#special-studies,
 #future-plan,
 #refresher-course {
   margin-bottom: 10rem;
@@ -268,8 +268,24 @@ body main.resume-main .right-region h2 {
   margin: 0.5rem;
   font-size: 2rem;
 }
+body main.resume-main .right-region h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
 body main.resume-main .right-region p {
   padding-left: 0.25rem;
+}
+body main.resume-main .right-region #special-studies ul {
+  padding: 0rem 1.5rem;
+}
+body main.resume-main .right-region #special-studies ul li {
+  font-size: 1.2rem;
+  padding: 0.25rem 0.5rem;
+}
+body main.resume-main .right-region #special-studies p {
+  text-indent: 2em;
+  text-align: left;
+  margin-bottom: 1rem;
 }
 body main.index-main .main-background {
   position: fixed;
