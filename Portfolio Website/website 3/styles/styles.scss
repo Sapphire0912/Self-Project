@@ -52,7 +52,7 @@ main {
   text-align: left;
   width: 90%;
   background-color: white;
-  box-shadow: 2px 2px 3px #777;
+  box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
 }
 
 .animate-fade-in {
@@ -220,6 +220,13 @@ body {
         align-items: center;
         text-align: center;
 
+        a {
+          text-decoration: none;
+          color: rgb(97, 97, 97);
+          display: block;
+          font-size: 1.2rem;
+          margin-left: 0.5rem;
+        }
         .active {
           background-color: rgb(133, 132, 132);
           &::after {
@@ -246,7 +253,6 @@ body {
         height: 20px;
         border: 3px solid rgb(133, 132, 132);
         border-radius: 10px;
-        cursor: pointer;
 
         &::after {
           position: absolute;
@@ -259,14 +265,6 @@ body {
           height: 10px;
           border-radius: 5px;
         }
-      }
-
-      a {
-        text-decoration: none;
-        color: rgb(97, 97, 97);
-        display: block;
-        font-size: 1.2rem;
-        margin-left: 0.5rem;
       }
     }
 
@@ -283,6 +281,9 @@ body {
         }
         li {
           padding: 0.5rem 0rem;
+        }
+        a {
+          text-decoration: none;
         }
 
         th,
@@ -345,9 +346,11 @@ body {
             display: block;
             text-decoration: none;
             color: purple;
-            margin: 1.25rem;
+            margin: 0.25rem 0rem 1.25rem 1.25rem;
+            font-size: 1rem;
 
             &:hover {
+              font-size: 1.25rem;
               border-bottom: 1px solid rgb(38, 38, 247);
               color: rgb(38, 38, 247);
             }
