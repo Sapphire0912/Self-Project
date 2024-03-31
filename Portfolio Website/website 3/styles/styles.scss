@@ -198,6 +198,29 @@ body {
     display: flex;
     margin-top: 5%;
 
+    .side-left-region {
+      display: none;
+      .side-menu {
+        position: sticky;
+        top: 5%;
+        left: 0;
+        img {
+          padding: 0.5rem;
+          border: 1px solid gray;
+          border-left: none;
+          background-color: white;
+          border-bottom-right-radius: 50%;
+          border-top-right-radius: 50%;
+          box-shadow: 2px 2px 3px gray, -2px 2px 3px gray;
+        }
+        &:hover {
+          transition: all 0.3s ease-in;
+          transform: scale(1.2);
+          cursor: pointer;
+        }
+      }
+    }
+
     .left-region {
       width: 25%;
       height: 100%;
@@ -489,6 +512,23 @@ body {
     }
     p {
       display: block;
+    }
+  }
+
+  body main.resume-main {
+    .left-region {
+      display: none;
+    }
+    .side-left-region {
+      display: block;
+      width: 10%;
+      .nav-section {
+        display: none;
+      }
+    }
+    .right-region {
+      width: 90%;
+      padding-left: 1.5rem;
     }
   }
 
