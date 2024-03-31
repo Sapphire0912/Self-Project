@@ -48,7 +48,6 @@ main {
 .content-background {
   padding: 1rem 1rem 1rem 0.5rem;
   font-size: 1.15rem;
-  text-align: left;
   width: 90%;
   background-color: white;
   box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
@@ -286,10 +285,6 @@ body main.resume-main .right-region h3 {
 body main.resume-main .right-region p {
   padding-left: 0.25rem;
 }
-body main.resume-main .right-region img {
-  padding: 0.75rem 0.25rem;
-  width: 100%;
-}
 body main.resume-main .right-region #special-studies ul {
   padding: 0rem 1.5rem;
 }
@@ -303,8 +298,8 @@ body main.resume-main .right-region #special-studies p {
   margin-bottom: 1rem;
 }
 body main.resume-main .right-region #special-studies img {
-  width: 100%;
   padding-bottom: 0.5rem;
+  width: 100%;
 }
 body main.resume-main .right-region #special-studies .special-links {
   display: flex;
@@ -321,6 +316,19 @@ body main.resume-main .right-region #special-studies .special-links a:hover {
   font-size: 1.25rem;
   border-bottom: 1px solid rgb(38, 38, 247);
   color: rgb(38, 38, 247);
+}
+body main.resume-main .right-region .content-text {
+  padding: 0.75rem 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+body main.resume-main .right-region .content-text img {
+  flex: 1 1 300px;
+  width: 100%;
+  margin-right: 0.75rem;
+}
+body main.resume-main .right-region .content-text p {
+  flex: 2 1 300px;
 }
 body main.index-main .main-background {
   position: fixed;
@@ -406,6 +414,15 @@ body main.index-main .information .right-info .quick-links a:hover {
   transform: scale(1.2);
 }
 
+@media screen and (max-width: 1080px) {
+  body main.resume-main .right-region .content-text {
+    flex-direction: column;
+  }
+  body main.resume-main .right-region .content-text img {
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+}
 @media screen and (max-width: 980px) {
   body header .windows-nav {
     display: none;

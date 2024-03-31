@@ -49,7 +49,6 @@ main {
 .content-background {
   padding: 1rem 1rem 1rem 0.5rem;
   font-size: 1.15rem;
-  text-align: left;
   width: 90%;
   background-color: white;
   box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
@@ -317,10 +316,6 @@ body {
       p {
         padding-left: 0.25rem;
       }
-      img {
-        padding: 0.75rem 0.25rem;
-        width: 100%;
-      }
       #special-studies {
         ul {
           padding: 0rem 1.5rem;
@@ -335,8 +330,8 @@ body {
           margin-bottom: 1rem;
         }
         img {
-          width: 100%;
           padding-bottom: 0.5rem;
+          width: 100%;
         }
         .special-links {
           display: flex;
@@ -355,6 +350,19 @@ body {
               color: rgb(38, 38, 247);
             }
           }
+        }
+      }
+      .content-text {
+        padding: 0.75rem 0.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        img {
+          flex: 1 1 300px;
+          width: 100%;
+          margin-right: 0.75rem;
+        }
+        p {
+          flex: 2 1 300px;
         }
       }
     }
@@ -451,6 +459,22 @@ body {
               background-color: white;
               transform: scale(1.2);
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  body {
+    main.resume-main {
+      .right-region {
+        .content-text {
+          flex-direction: column;
+          img {
+            margin-right: 0;
+            margin-bottom: 0.75rem;
           }
         }
       }
