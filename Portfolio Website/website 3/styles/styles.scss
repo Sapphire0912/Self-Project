@@ -198,6 +198,12 @@ body {
     }
   }
 
+  main.contact-main {
+    font-family: "ch-font";
+    display: flex;
+    margin-top: 10%;
+  }
+
   main.resume-main {
     font-family: "ch-font";
     display: flex;
@@ -398,16 +404,6 @@ body {
   }
 
   main.index-main {
-    .main-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background-color: rgb(244, 236, 230);
-      width: 100%;
-      height: 100%;
-    }
-
     .information {
       display: flex;
       justify-content: center;
