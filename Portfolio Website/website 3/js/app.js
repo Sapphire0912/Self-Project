@@ -79,17 +79,19 @@ sectionNav.forEach((eachNav) => {
 
 /* 控制 back-top 的按鈕事件 */
 let backTop = document.getElementById("back-top");
-window.addEventListener("scroll", () => {
-  if (currentClicked == "opt1") {
-    backTop.style.display = "none";
-  } else {
-    backTop.style.display = "block";
-  }
-});
-
-backTop.addEventListener("click", (event) => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+if (backTop != null) {
+  window.addEventListener("scroll", () => {
+    if (currentClicked == "opt1") {
+      backTop.style.display = "none";
+    } else {
+      backTop.style.display = "block";
+    }
   });
-});
+
+  backTop.addEventListener("click", (event) => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+}

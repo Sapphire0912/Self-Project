@@ -58,6 +58,13 @@ main {
   color: blue;
 }
 
+.rectangle {
+  width: 24px;
+  height: 24px;
+  border-radius: 40%;
+  background-color: rgb(129, 89, 129);
+}
+
 .animate-fade-in {
   opacity: 0;
   animation: fadeIn 2.5s forwards;
@@ -184,6 +191,75 @@ body main.contact-main {
   font-family: "ch-font";
   display: flex;
   margin-top: 10%;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+body main.contact-main .left-region h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+body main.contact-main .left-region h3 {
+  font-size: 1.2rem;
+}
+body main.contact-main .left-region h4 {
+  font-size: 1.25rem;
+  padding-bottom: 0.75rem;
+}
+body main.contact-main .left-region div {
+  padding: 1rem;
+}
+body main.contact-main .left-region a {
+  text-decoration: none;
+}
+body main.project-main {
+  font-family: "ch-font";
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+body main.project-main .project-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body main.project-main .project-title h2 {
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+body main.project-main .lab-project {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border: 2px solid blue;
+  width: 80%;
+}
+body main.project-main .lab-project .project-content {
+  background-color: white;
+  margin-bottom: 3rem;
+}
+body main.project-main .lab-project .project-content h2 {
+  text-align: center;
+}
+body main.project-main .side-project {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border: 2px solid blue;
+  width: 80%;
+}
+body main.project-main .side-project .quiz-system,
+body main.project-main .side-project .portfolio-web,
+body main.project-main .side-project .snack-off {
+  background-color: white;
+  margin-bottom: 3rem;
+}
+body main.project-main .side-project .quiz-system h2,
+body main.project-main .side-project .portfolio-web h2,
+body main.project-main .side-project .snack-off h2 {
+  text-align: center;
 }
 body main.resume-main {
   font-family: "ch-font";
@@ -475,7 +551,7 @@ body main.index-main .information .right-info .quick-links a:hover {
     align-items: center;
   }
   body main.resume-main .right-region .back-top-img {
-    top: 70%;
+    top: 75%;
     right: 0;
   }
   body main.resume-main .right-region .back-top-img img {

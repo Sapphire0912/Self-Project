@@ -59,6 +59,13 @@ main {
   color: blue;
 }
 
+.rectangle {
+  width: 24px;
+  height: 24px;
+  border-radius: 40%;
+  background-color: rgb(129, 89, 129);
+}
+
 .animate-fade-in {
   opacity: 0;
   animation: fadeIn 2.5s forwards;
@@ -202,6 +209,84 @@ body {
     font-family: "ch-font";
     display: flex;
     margin-top: 10%;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+
+    .left-region {
+      h2 {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+      h4 {
+        font-size: 1.25rem;
+        padding-bottom: 0.75rem;
+      }
+      div {
+        padding: 1rem;
+      }
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  main.project-main {
+    font-family: "ch-font";
+    margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+
+    .project-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      h2 {
+        font-size: 2rem;
+        padding: 0.5rem;
+      }
+    }
+
+    .lab-project {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      border: 2px solid blue;
+      width: 80%;
+
+      .project-content {
+        background-color: white;
+        margin-bottom: 3rem;
+
+        h2 {
+          text-align: center;
+        }
+      }
+    }
+
+    .side-project {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      border: 2px solid blue;
+      width: 80%;
+
+      .quiz-system,
+      .portfolio-web,
+      .snack-off {
+        background-color: white;
+        margin-bottom: 3rem;
+        h2 {
+          text-align: center;
+        }
+      }
+    }
   }
 
   main.resume-main {
@@ -535,7 +620,7 @@ body {
         align-items: center;
       }
       .back-top-img {
-        top: 70%;
+        top: 75%;
         right: 0;
         img {
           width: 50px;
