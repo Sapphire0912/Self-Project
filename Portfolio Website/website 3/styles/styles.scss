@@ -278,7 +278,7 @@ body {
         align-items: center;
         justify-content: center;
         position: sticky;
-        top: 85%;
+        top: 80%;
         right: 2%;
 
         img {
@@ -534,6 +534,7 @@ body {
         align-items: center;
       }
       .back-top-img {
+        top: 70%;
         right: 0;
         img {
           width: 50px;
@@ -588,6 +589,22 @@ body {
             margin: 0.25rem 0.5rem;
             padding: 2.25rem 1rem;
           }
+        }
+      }
+    }
+  }
+
+  body main.resume-main {
+    .left-region {
+      width: 80%;
+    }
+    .right-region {
+      width: 90%;
+      .back-top-img {
+        top: 80%;
+        img {
+          width: 40px;
+          height: 40px;
         }
       }
     }
