@@ -76,3 +76,12 @@ sectionNav.forEach((eachNav) => {
     }
   });
 });
+
+/* 控制 back-top 的按鈕事件 */
+let backTop = document.getElementById("back-top");
+backTop.addEventListener("click", (event) => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});

@@ -198,31 +198,8 @@ body {
     display: flex;
     margin-top: 5%;
 
-    .side-left-region {
-      display: none;
-      .side-menu {
-        position: sticky;
-        top: 5%;
-        left: 0;
-        img {
-          padding: 0.5rem;
-          border: 1px solid gray;
-          border-left: none;
-          background-color: white;
-          border-bottom-right-radius: 50%;
-          border-top-right-radius: 50%;
-          box-shadow: 2px 2px 3px gray, -2px 2px 3px gray;
-        }
-        &:hover {
-          transition: all 0.3s ease-in;
-          transform: scale(1.2);
-          cursor: pointer;
-        }
-      }
-    }
-
     .left-region {
-      width: 25%;
+      width: 20%;
       height: 100%;
       margin: 0rem 2rem;
       position: sticky;
@@ -289,11 +266,35 @@ body {
         }
       }
     }
-
     .right-region {
-      width: 75%;
+      width: 70%;
       height: 100%;
+      display: flex;
 
+      .back-top-img {
+        width: 10%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 85%;
+        right: 2%;
+
+        img {
+          position: relative;
+          width: 60px;
+          height: 60px;
+          background-color: white;
+          padding: 0.75rem;
+          border-radius: 50%;
+          box-shadow: 2px 2px 5px #777, -2px 2px 5px #777, 2px -2px 5px #777;
+          &:hover {
+            cursor: pointer;
+            background-color: rgba(211, 211, 211, 0.7);
+          }
+        }
+      }
       table {
         border-collapse: collapse;
         width: 100%;
@@ -516,19 +517,25 @@ body {
   }
 
   body main.resume-main {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .left-region {
-      display: none;
-    }
-    .side-left-region {
-      display: block;
-      width: 10%;
-      .nav-section {
-        display: none;
-      }
+      position: static;
+      width: 50%;
     }
     .right-region {
+      border-top: 1px solid black;
       width: 90%;
-      padding-left: 1.5rem;
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+      }
+      .back-top-img {
+        right: 0;
+      }
     }
   }
 
