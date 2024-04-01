@@ -233,7 +233,6 @@ body main.project-main .lab-project {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  border: 2px solid blue;
   width: 80%;
 }
 body main.project-main .lab-project .project-content {
@@ -247,7 +246,6 @@ body main.project-main .side-project {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  border: 2px solid blue;
   width: 80%;
 }
 body main.project-main .side-project .quiz-system,
