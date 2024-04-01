@@ -30,7 +30,7 @@ close_btn.addEventListener("click", function () {
 */
 let sectionNav = document.querySelectorAll(".each-nav");
 let contentSection = document.querySelector(".content-section");
-let currentClicked = "";
+let currentClicked = "opt1";
 
 function removeBeforeStatus() {
   /* 消除先前 button 的狀態 */
@@ -79,6 +79,14 @@ sectionNav.forEach((eachNav) => {
 
 /* 控制 back-top 的按鈕事件 */
 let backTop = document.getElementById("back-top");
+window.addEventListener("scroll", () => {
+  if (currentClicked == "opt1") {
+    backTop.style.display = "none";
+  } else {
+    backTop.style.display = "block";
+  }
+});
+
 backTop.addEventListener("click", (event) => {
   window.scrollTo({
     top: 0,

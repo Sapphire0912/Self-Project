@@ -53,6 +53,11 @@ main {
   box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
 }
 
+.blue-text {
+  text-decoration: none;
+  color: blue;
+}
+
 .animate-fade-in {
   opacity: 0;
   animation: fadeIn 2.5s forwards;
