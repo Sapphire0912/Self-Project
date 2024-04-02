@@ -37,6 +37,7 @@
     </header>
     <main class="project-main">
       <div class="main-background"></div>
+
       <section class="lab-project">
         <div class="project-title">
           <div class="rectangle"></div>
@@ -84,177 +85,57 @@
               </tr>
               <tr>
                 <td>
-                  <ul>
-                    <li>
-                      2021
-                      <div class="table-ul">
-                        <ul>
-                          <li>
-                            2021.05
-                            <ol>
-                              <li>完成 dicom 檔轉成 .avi 和 .png 程式</li>
-                              <li>設計分類 9 種不同 view 的分類器</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.06
-                            <ol>
-                              <li>完成分類 9 種不同 view 的分類器</li>
-                              <li>優化分類器程式的執行時間</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.07
-                            <ol>
-                              <li>優化骨架化程式執行時間</li>
-                              <li>處理含有 Doppler 效應的資料集</li>
-                              <li>還原有 Doppler 效應的影像</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.08
-                            <ol>
-                              <li>
-                                利用 Matching 演算法處理 Parasternal Long Axis
-                                view
-                              </li>
-                              <li>完成抓取影像 ROI 區域程式</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.09
-                            <ol>
-                              <li>修正 Doppler 演算法、視覺化結果</li>
-                              <li>開發 Parasternal Long Axis M-Mode 演算法</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.11
-                            <ol>
-                              <li>完成 DCMToAVI.py 模組</li>
-                              <li>處理心臟週期</li>
-                              <li>設計 Multi Threshold 演算法</li>
-                              <li>
-                                設計 Apical Four Chamber view
-                                抓取二尖瓣位置的演算法
-                              </li>
-                            </ol>
-                          </li>
-                          <li>
-                            2021.12
-                            <ol>
-                              <li>
-                                優化 Multi Threshold 演算法(部分以C語言實現)
-                              </li>
-                              <li>
-                                調整 Multi Threshold 中 histogram 的計算方式
-                              </li>
-                              <li>完成 MultiThreshold.py 模組</li>
-                              <li>
-                                修正 Apical Four Chamber view 抓取二尖瓣位置中的
-                                K-means 的分群問題
-                              </li>
-                              <li>
-                                調整 Apical Four Chamber view
-                                預測腔室位置的演算法
-                              </li>
-                              <li>
-                                調整 Apical Four Chamber view
-                                抓取二尖瓣瓣膜的演算法
-                              </li>
-                              <li>
-                                整合 ROI 區域程式、骨架化程式為 Preprocessing.py
-                                模組
-                              </li>
-                              <li>
-                                新增基本輸入輸出模組 FileIO.py、控制流程及參數的
-                                ProcessesCtrl.py 模組
-                              </li>
-                              <li>完成系統架構 (v1.0)</li>
-                            </ol>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-
-                    <li>
-                      2022
-                      <div class="table-ul">
-                        <ul>
-                          <li>
-                            2022.01
-                            <ol>
-                              <li>
-                                設計 Apical Four Chamber view 肌肉區域的演算法
-                              </li>
-                              <li>調整 Multi Threshold 中的參數設定</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.02
-                            <ol>
-                              <li>
-                                利用 BFS 和 Connected component labeling 實現
-                                Apical Four Chamber view 肌肉區域的演算法
-                              </li>
-                              <li>
-                                基於 Apical Four Chamber view 的 K-means
-                                結果、標準模型的關係，實現定義肌肉特徵點
-                              </li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.03
-                            <ol>
-                              <li>完成 MuscleSampling.py 模組</li>
-                              <li>新增可調整 Multi Threshold 階數的參數</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.04
-                            <ol>
-                              <li>整理系統架構(v1.1)、進行單元測試</li>
-                              <li>開發 Global Longitudinal Strain 演算法</li>
-                              <li>利用 E/A Ratio 定義心臟週期</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.05
-                            <ol>
-                              <li>完成系統架構(v1.1) 的專案管理</li>
-                              <li>完成 A4CGLS.py 模組</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.06
-                            <ol>
-                              <li>統計 LVEF 醫生診斷資料</li>
-                              <li>完成 CalLVEF.py、IOU_LVEF.py 模組</li>
-                              <li>
-                                新增系統架構(v1.1) 專案管理中的測試數據及資料
-                              </li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.08
-                            <ol>
-                              <li>交接實驗室專案(v1.1)</li>
-                              <li>完成系統架構(v2.0) 的系統整合</li>
-                            </ol>
-                          </li>
-                          <li>
-                            2022.12
-                            <ol>
-                              <li>完成系統架構(v2.0) 的模組整合</li>
-                              <li>完成當前模組的單元測試</li>
-                              <li>完成 API 文件 v1.0</li>
-                              <li>交接實驗室專案 (v2.0)</li>
-                            </ol>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
+                  <div class="years">
+                    <p>&#9733; 內容中的 A4C 即為 Apical Four Chamber</p>
+                    <ul>
+                      <li>
+                        2021.05 ~ 2021.08
+                        <p>- 優化分類器程式的執行時間</p>
+                        <p>- 優化骨架化程式執行時間</p>
+                        <p>- 完成抓取影像 ROI 區域程式</p>
+                      </li>
+                      <li>
+                        2021.09 ~ 2021.11
+                        <p>- 完成 DCMToAVI.py 模組</p>
+                        <p>- 設計 Multi Threshold 演算法</p>
+                        <p>- 設計 A4C view 抓取二尖瓣位置的演算法</p>
+                      </li>
+                      <li>
+                        2021.12 ~ 2022.01
+                        <p>- 優化 Multi Threshold 演算法(部分以C語言實現)</p>
+                        <p>- 完成 MultiThreshold.py 模組</p>
+                        <p>
+                          - 修正、調整 A4C View 預測腔室及二尖瓣位置的演算法
+                        </p>
+                        <p>
+                          - 整合 ROI 區域程式、骨架化程式為 Preprocessing.py
+                          模組
+                        </p>
+                        <p>- 完成系統架構 (v1.0)</p>
+                      </li>
+                      <li>
+                        2022.02 ~ 2022.05
+                        <p>
+                          - 利用 BFS 和 Connected component labeling 實現 A4C
+                          view 肌肉區域的演算法
+                        </p>
+                        <p>
+                          - 基於 A4C 的 K-means
+                          結果、標準模型的關係，實現定義肌肉特徵點
+                        </p>
+                        <p>- 進行單元測試</p>
+                        <p>- 開發 Global Longitudinal Strain 演算法</p>
+                      </li>
+                      <li>
+                        2022.06 ~ 2022.12
+                        <p>- 統計 LVEF 醫生診斷資料</p>
+                        <p>- 新增專案管理中的測試數據及資料</p>
+                        <p>- 完成 API 文件 v1.0</p>
+                        <p>- 完成系統架構(v2.0) 的系統整合</p>
+                        <p>- 交接實驗室專案 (v2.0)</p>
+                      </li>
+                    </ul>
+                  </div>
                 </td>
               </tr>
             </table>
@@ -267,17 +148,50 @@
           <div class="rectangle"></div>
           <h2>Side Project</h2>
         </div>
-        <div class="quiz-system">
+        <div class="project-content">
           <h2>教師資格考試歷屆試題測驗系統 － 國民小學</h2>
-          <div class="project-text"></div>
-        </div>
-        <div class="portfolio-web">
-          <h2>個人簡歷網站</h2>
-          <div class="project-text"></div>
-        </div>
-        <div class="snack-off">
-          <h2>貪食蛇遊戲</h2>
-          <div class="project-text"></div>
+          <div class="project-text">
+            <table>
+              <tr>
+                <th>專案目標</th>
+              </tr>
+              <tr>
+                <td>
+                  <ul>
+                    <li>提供教檢考生，整合歷屆試題的選擇題題庫</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th>使用環境和工具</th>
+              </tr>
+              <tr>
+                <td>
+                  <ul>
+                    <li>PyCharm Community Edition 2023.3.5</li>
+                    <li>Python、PyQt5</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <th>系統介面</th>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="project data/Quiz-system 封面.PNG"
+                    alt="Quiz-system"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>專案進度統整</th>
+              </tr>
+              <tr>
+                <td></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </section>
     </main>

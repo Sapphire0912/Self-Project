@@ -81,6 +81,10 @@ if (contentSection != null) {
 
 /* 控制 back-top 的按鈕事件 */
 let backTop = document.getElementById("back-top");
+if (currentClicked == "opt1" && backTop != null) {
+  backTop.style.display = "none";
+}
+
 if (backTop != null) {
   window.addEventListener("scroll", () => {
     if (currentClicked == "opt1") {

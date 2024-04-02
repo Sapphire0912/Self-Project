@@ -224,77 +224,69 @@ body main.project-main .project-title {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 body main.project-main .project-title h2 {
   font-size: 2rem;
   padding: 0.5rem;
 }
-body main.project-main .lab-project {
+body main.project-main table {
+  border-collapse: collapse;
+  margin: 0.3rem;
+}
+body main.project-main table th {
+  border: 1px solid black;
+  font-size: 1.5rem;
+  padding: 0.75rem;
+}
+body main.project-main table td {
+  border: 1px solid black;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+body main.project-main table img {
+  width: 100%;
+}
+body main.project-main table img:hover {
+  border: 2px solid black;
+  transition: all 0.3s ease-out;
+  transform: scale(1.2);
+}
+body main.project-main table ul {
+  margin-left: 1rem;
+}
+body main.project-main table ul li {
+  padding: 0.25rem;
+}
+body main.project-main table p {
+  font-size: 1.15rem;
+  padding: 0.5rem 0;
+}
+body main.project-main table tr:hover {
+  background-color: rgba(144, 238, 144, 0.5);
+}
+body main.project-main .lab-project,
+body main.project-main .side-project {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   width: 80%;
   justify-content: center;
 }
-body main.project-main .lab-project .project-content {
+body main.project-main .lab-project .project-content,
+body main.project-main .side-project .project-content {
   background-color: white;
   margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
 }
-body main.project-main .lab-project .project-content h2 {
+body main.project-main .lab-project .project-content h2,
+body main.project-main .side-project .project-content h2 {
   text-align: center;
   padding: 1rem;
   font-size: 1.5rem;
-}
-body main.project-main .lab-project .project-content table {
-  border-collapse: collapse;
-  margin: 0.3rem;
-}
-body main.project-main .lab-project .project-content table th {
-  border: 1px solid black;
-  font-size: 1.5rem;
-  padding: 0.75rem;
-}
-body main.project-main .lab-project .project-content table td {
-  border: 1px solid black;
-  font-size: 1.25rem;
-  padding: 0.5rem;
-}
-body main.project-main .lab-project .project-content table img {
-  width: 100%;
-}
-body main.project-main .lab-project .project-content table ul,
-body main.project-main .lab-project .project-content table ol {
-  margin-left: 1rem;
-}
-body main.project-main .lab-project .project-content table ul li,
-body main.project-main .lab-project .project-content table ol li {
-  padding: 0.25rem;
-}
-body main.project-main .lab-project .project-content table ol {
-  font-size: 1.15rem;
-}
-body main.project-main .lab-project .project-content table tr:hover {
-  background-color: rgba(144, 238, 144, 0.5);
-}
-body main.project-main .side-project {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 80%;
-}
-body main.project-main .side-project .quiz-system,
-body main.project-main .side-project .portfolio-web,
-body main.project-main .side-project .snack-off {
-  background-color: white;
-  margin-bottom: 3rem;
-}
-body main.project-main .side-project .quiz-system h2,
-body main.project-main .side-project .portfolio-web h2,
-body main.project-main .side-project .snack-off h2 {
-  text-align: center;
 }
 body main.resume-main {
   font-family: "ch-font";
@@ -566,6 +558,9 @@ body main.index-main .information .right-info .quick-links a:hover {
   body header p {
     display: block;
   }
+  body header .side-nav {
+    overflow-y: scroll;
+  }
   body main.resume-main {
     flex-direction: column;
     justify-content: center;
@@ -614,6 +609,9 @@ body main.index-main .information .right-info .quick-links a:hover {
     flex-direction: column;
     align-items: flex-start;
   }
+  body header .side-nav {
+    overflow-y: scroll;
+  }
   body main.index-main .information .left-info .self-img img {
     width: 300px;
   }
@@ -647,19 +645,17 @@ body main.index-main .information .right-info .quick-links a:hover {
   body main.project-main .project-title h2 {
     font-size: 1.25rem;
   }
-  body main.project-main .lab-project .project-content h2 {
+  body main.project-main .lab-project .project-content h2,
+  body main.project-main .side-project .project-content h2 {
     font-size: 1.25rem;
   }
-  body main.project-main .lab-project .project-content table th {
+  body main.project-main .lab-project .project-content table th,
+  body main.project-main .side-project .project-content table th {
     font-size: 1.25rem;
   }
-  body main.project-main .lab-project .project-content table td {
+  body main.project-main .lab-project .project-content table td,
+  body main.project-main .side-project .project-content table td {
     font-size: 1rem;
-  }
-  body main.project-main .side-project .quiz-system h2,
-  body main.project-main .side-project .portfolio-web h2,
-  body main.project-main .side-project .snack-off h2 {
-    font-size: 1.25rem;
   }
 }
 @keyframes animate-open {

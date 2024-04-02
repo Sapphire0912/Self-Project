@@ -42,6 +42,7 @@ main {
   left: 0;
   z-index: -3;
   background-color: rgb(244, 236, 230);
+  // background-color: rgb(67, 67, 250);
   width: 100%;
   height: 100%;
 }
@@ -242,10 +243,14 @@ body {
     flex-direction: column;
     align-items: center;
 
+    .back-top-img {
+    }
+
     .project-title {
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
 
       h2 {
         font-size: 2rem;
@@ -253,7 +258,44 @@ body {
       }
     }
 
-    .lab-project {
+    table {
+      border-collapse: collapse;
+      margin: 0.3rem;
+      th {
+        border: 1px solid black;
+        font-size: 1.5rem;
+        padding: 0.75rem;
+      }
+      td {
+        border: 1px solid black;
+        font-size: 1.25rem;
+        padding: 0.5rem;
+      }
+      img {
+        width: 100%;
+        &:hover {
+          border: 2px solid black;
+          transition: all 0.3s ease-out;
+          transform: scale(1.2);
+        }
+      }
+      ul {
+        margin-left: 1rem;
+        li {
+          padding: 0.25rem;
+        }
+      }
+      p {
+        font-size: 1.15rem;
+        padding: 0.5rem 0;
+      }
+      tr:hover {
+        background-color: rgba(144, 238, 144, 0.5);
+      }
+    }
+
+    .lab-project,
+    .side-project {
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
@@ -266,58 +308,12 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
+        box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
 
         h2 {
           text-align: center;
           padding: 1rem;
           font-size: 1.5rem;
-        }
-        table {
-          border-collapse: collapse;
-          margin: 0.3rem;
-          th {
-            border: 1px solid black;
-            font-size: 1.5rem;
-            padding: 0.75rem;
-          }
-          td {
-            border: 1px solid black;
-            font-size: 1.25rem;
-            padding: 0.5rem;
-          }
-          img {
-            width: 100%;
-          }
-          ul,
-          ol {
-            margin-left: 1rem;
-            li {
-              padding: 0.25rem;
-            }
-          }
-          ol {
-            font-size: 1.15rem;
-          }
-          tr:hover {
-            background-color: rgba(144, 238, 144, 0.5);
-          }
-        }
-      }
-    }
-
-    .side-project {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      width: 80%;
-
-      .quiz-system,
-      .portfolio-web,
-      .snack-off {
-        background-color: white;
-        margin-bottom: 3rem;
-        h2 {
-          text-align: center;
         }
       }
     }
@@ -634,6 +630,9 @@ body {
     p {
       display: block;
     }
+    .side-nav {
+      overflow-y: scroll;
+    }
   }
 
   body main.resume-main {
@@ -691,6 +690,9 @@ body {
         align-items: flex-start;
       }
     }
+    .side-nav {
+      overflow-y: scroll;
+    }
   }
   body main.index-main {
     .information {
@@ -740,7 +742,8 @@ body {
         font-size: 1.25rem;
       }
     }
-    .lab-project {
+    .lab-project,
+    .side-project {
       .project-content {
         h2 {
           font-size: 1.25rem;
@@ -752,15 +755,6 @@ body {
           td {
             font-size: 1rem;
           }
-        }
-      }
-    }
-    .side-project {
-      .quiz-system,
-      .portfolio-web,
-      .snack-off {
-        h2 {
-          font-size: 1.25rem;
         }
       }
     }
