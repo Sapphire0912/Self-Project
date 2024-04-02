@@ -234,13 +234,50 @@ body main.project-main .lab-project {
   flex-wrap: wrap;
   flex-direction: column;
   width: 80%;
+  justify-content: center;
 }
 body main.project-main .lab-project .project-content {
   background-color: white;
   margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 body main.project-main .lab-project .project-content h2 {
   text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+body main.project-main .lab-project .project-content table {
+  border-collapse: collapse;
+  margin: 0.3rem;
+}
+body main.project-main .lab-project .project-content table th {
+  border: 1px solid black;
+  font-size: 1.5rem;
+  padding: 0.75rem;
+}
+body main.project-main .lab-project .project-content table td {
+  border: 1px solid black;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+body main.project-main .lab-project .project-content table img {
+  width: 100%;
+}
+body main.project-main .lab-project .project-content table ul,
+body main.project-main .lab-project .project-content table ol {
+  margin-left: 1rem;
+}
+body main.project-main .lab-project .project-content table ul li,
+body main.project-main .lab-project .project-content table ol li {
+  padding: 0.25rem;
+}
+body main.project-main .lab-project .project-content table ol {
+  font-size: 1.15rem;
+}
+body main.project-main .lab-project .project-content table tr:hover {
+  background-color: rgba(144, 238, 144, 0.5);
 }
 body main.project-main .side-project {
   display: flex;
@@ -602,6 +639,27 @@ body main.index-main .information .right-info .quick-links a:hover {
   body main.resume-main .right-region .back-top-img img {
     width: 40px;
     height: 40px;
+  }
+  body main.project-main .project-title .rectangle {
+    width: 16px;
+    height: 16px;
+  }
+  body main.project-main .project-title h2 {
+    font-size: 1.25rem;
+  }
+  body main.project-main .lab-project .project-content h2 {
+    font-size: 1.25rem;
+  }
+  body main.project-main .lab-project .project-content table th {
+    font-size: 1.25rem;
+  }
+  body main.project-main .lab-project .project-content table td {
+    font-size: 1rem;
+  }
+  body main.project-main .side-project .quiz-system h2,
+  body main.project-main .side-project .portfolio-web h2,
+  body main.project-main .side-project .snack-off h2 {
+    font-size: 1.25rem;
   }
 }
 @keyframes animate-open {

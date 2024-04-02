@@ -41,41 +41,43 @@ function removeBeforeStatus() {
   });
 }
 
-window.addEventListener("scroll", () => {
-  let eachIdElement = contentSection.querySelectorAll("[id]");
-  let windowHeight = window.innerHeight;
-  let currentContentId;
+if (contentSection != null) {
+  window.addEventListener("scroll", () => {
+    let eachIdElement = contentSection.querySelectorAll("[id]");
+    let windowHeight = window.innerHeight;
+    let currentContentId;
 
-  eachIdElement.forEach((content) => {
-    let position = content.getBoundingClientRect();
-    let centerY = windowHeight / 2;
-    if (centerY >= position.top && centerY <= position.bottom) {
-      currentContentId = content.id;
-    }
-  });
-  currentContentId = "#" + currentContentId;
-  sectionNav.forEach((eachNav) => {
-    let href = eachNav.children[1].getAttribute("href");
-    if (href == currentContentId && eachNav.classList[1] != currentClicked) {
-      removeBeforeStatus();
-      currentClicked = eachNav.classList[1];
-      eachNav.children[0].classList.add("active");
-    }
-  });
-});
-
-sectionNav.forEach((eachNav) => {
-  eachNav.addEventListener("click", (event) => {
-    if (event.target.tagName == "A") {
-      let parent = event.target.parentNode.classList[1];
-      if (currentClicked != parent) {
-        removeBeforeStatus();
-        currentClicked = parent;
-        event.target.parentNode.children[0].classList.add("active");
+    eachIdElement.forEach((content) => {
+      let position = content.getBoundingClientRect();
+      let centerY = windowHeight / 2;
+      if (centerY >= position.top && centerY <= position.bottom) {
+        currentContentId = content.id;
       }
-    }
+    });
+    currentContentId = "#" + currentContentId;
+    sectionNav.forEach((eachNav) => {
+      let href = eachNav.children[1].getAttribute("href");
+      if (href == currentContentId && eachNav.classList[1] != currentClicked) {
+        removeBeforeStatus();
+        currentClicked = eachNav.classList[1];
+        eachNav.children[0].classList.add("active");
+      }
+    });
   });
-});
+
+  sectionNav.forEach((eachNav) => {
+    eachNav.addEventListener("click", (event) => {
+      if (event.target.tagName == "A") {
+        let parent = event.target.parentNode.classList[1];
+        if (currentClicked != parent) {
+          removeBeforeStatus();
+          currentClicked = parent;
+          event.target.parentNode.children[0].classList.add("active");
+        }
+      }
+    });
+  });
+}
 
 /* 控制 back-top 的按鈕事件 */
 let backTop = document.getElementById("back-top");
