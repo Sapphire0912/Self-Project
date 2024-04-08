@@ -64,6 +64,43 @@
           </h4>
         </div>
       </section>
+
+      <section class="right-region animate-fade-in">
+        <form id="contact-form" action="" method="POST">
+          <label for="contact-name">姓名(稱謂)</label><br />
+          <input
+            type="text"
+            name="contact-name"
+            id="contact-name"
+            placeholder="請輸入您的姓名(稱謂)"
+            required
+          /><br />
+          <label for="contact-phone">聯絡方式</label><br />
+          <input
+            type="text"
+            name="contact-phone"
+            id="contact-phone"
+            placeholder="請輸入您的聯絡方式"
+            required
+          /><br />
+          <label for="contact-email">信箱</label><br />
+          <input
+            type="email"
+            name="contact-email"
+            id="contact-email"
+            placeholder="請輸入您的信箱"
+            required
+          /><br />
+          <label for="contact-message">您想留的訊息</label><br />
+          <textarea
+            name="message"
+            id="contact-message"
+            placeholder="請輸入您想留的訊息"
+          ></textarea
+          ><br />
+          <button type="submit">送出</button>
+        </form>
+      </section>
     </main>
     <script src="js/app.js"></script>
   </body>

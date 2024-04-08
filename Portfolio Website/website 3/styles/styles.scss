@@ -211,9 +211,9 @@ body {
     margin-top: 10%;
     justify-content: space-evenly;
     align-items: center;
-    text-align: center;
 
     .left-region {
+      border: 2px solid blue;
       h2 {
         font-size: 2rem;
         font-weight: bold;
@@ -230,6 +230,15 @@ body {
       }
       a {
         text-decoration: none;
+      }
+    }
+    .right-region {
+      border: 2px solid purple;
+      display: flex;
+      flex-wrap: wrap;
+
+      label {
+        font-size: 1.25rem;
       }
     }
   }

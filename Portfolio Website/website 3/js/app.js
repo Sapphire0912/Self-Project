@@ -105,17 +105,6 @@ if (backTop != null) {
 /* 控制 Project-html back-top 的按鈕事件 */
 let backTop2 = document.getElementById("back-top2");
 if (backTop2 != null) {
-  // window.addEventListener("scroll", () => {
-  //   let getHeader = document.querySelector("header");
-  //   let position = getHeader.getBoundingClientRect();
-  //   let centerY = window.innerHeight / 2;
-  //   if (Math.abs(position.top) >= centerY) {
-  //     backTop2.style.display = "block";
-  //   } else {
-  //     backTop2.style.display = "none";
-  //   }
-  // });
-
   backTop2.addEventListener("click", () => {
     window.scrollTo({
       top: 0,

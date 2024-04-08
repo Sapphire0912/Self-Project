@@ -193,7 +193,9 @@ body main.contact-main {
   margin-top: 10%;
   justify-content: space-evenly;
   align-items: center;
-  text-align: center;
+}
+body main.contact-main .left-region {
+  border: 2px solid blue;
 }
 body main.contact-main .left-region h2 {
   font-size: 2rem;
@@ -211,6 +213,14 @@ body main.contact-main .left-region div {
 }
 body main.contact-main .left-region a {
   text-decoration: none;
+}
+body main.contact-main .right-region {
+  border: 2px solid purple;
+  display: flex;
+  flex-wrap: wrap;
+}
+body main.contact-main .right-region label {
+  font-size: 1.25rem;
 }
 body main.project-main {
   font-family: "ch-font";
