@@ -42,7 +42,6 @@ main {
   left: 0;
   z-index: -3;
   background-color: rgb(244, 236, 230);
-  // background-color: rgb(67, 67, 250);
   width: 100%;
   height: 100%;
 }
@@ -243,12 +242,31 @@ body {
     flex-direction: column;
     align-items: center;
 
-    .back-top-img {
+    .back-top-img2 {
+      width: 10%;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        background-color: white;
+        padding: 0.75rem;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px #777, -2px 2px 5px #777, 2px -2px 5px #777;
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(211, 211, 211, 0.7);
+        }
+      }
     }
 
     .project-title {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: center;
       text-align: center;
 
@@ -272,11 +290,11 @@ body {
         padding: 0.5rem;
       }
       img {
-        width: 100%;
+        width: 90%;
         &:hover {
           border: 2px solid black;
           transition: all 0.3s ease-out;
-          transform: scale(1.2);
+          transform: scale(1.1);
         }
       }
       ul {
@@ -304,16 +322,31 @@ body {
 
       .project-content {
         background-color: white;
-        margin-bottom: 3rem;
+        margin: 0rem 0rem 3rem 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
         box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
 
+        .img-content {
+          display: flex;
+          justify-content: center;
+        }
+
         h2 {
           text-align: center;
           padding: 1rem;
           font-size: 1.5rem;
+        }
+        h4 {
+          font-size: 1.05rem;
+        }
+        a {
+          text-decoration: none;
+          &:hover {
+            cursor: pointer;
+            color: rgba(240, 128, 128);
+          }
         }
       }
     }
@@ -634,6 +667,15 @@ body {
       overflow-y: scroll;
     }
   }
+  body main.project-main {
+    .back-top-img2 {
+      img {
+        width: 50px;
+        height: 50px;
+        padding: 0.7rem;
+      }
+    }
+  }
 
   body main.resume-main {
     flex-direction: column;
@@ -653,7 +695,7 @@ body {
         align-items: center;
       }
       .back-top-img {
-        top: 75%;
+        top: 65%;
         right: 0;
         img {
           width: 50px;

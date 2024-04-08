@@ -220,9 +220,29 @@ body main.project-main {
   flex-direction: column;
   align-items: center;
 }
-body main.project-main .project-title {
+body main.project-main .back-top-img2 {
+  width: 10%;
+  height: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+body main.project-main .back-top-img2 img {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px #777, -2px 2px 5px #777, 2px -2px 5px #777;
+}
+body main.project-main .back-top-img2 img:hover {
+  cursor: pointer;
+  background-color: rgba(211, 211, 211, 0.7);
+}
+body main.project-main .project-title {
+  display: flex;
+  align-items: baseline;
   justify-content: center;
   text-align: center;
 }
@@ -245,12 +265,12 @@ body main.project-main table td {
   padding: 0.5rem;
 }
 body main.project-main table img {
-  width: 100%;
+  width: 90%;
 }
 body main.project-main table img:hover {
   border: 2px solid black;
   transition: all 0.3s ease-out;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 body main.project-main table ul {
   margin-left: 1rem;
@@ -276,17 +296,35 @@ body main.project-main .side-project {
 body main.project-main .lab-project .project-content,
 body main.project-main .side-project .project-content {
   background-color: white;
-  margin-bottom: 3rem;
+  margin: 0rem 0rem 3rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 2px 2px 3px #777, -2px 2px 3px #777, 2px -2px 3px #777;
+}
+body main.project-main .lab-project .project-content .img-content,
+body main.project-main .side-project .project-content .img-content {
+  display: flex;
+  justify-content: center;
 }
 body main.project-main .lab-project .project-content h2,
 body main.project-main .side-project .project-content h2 {
   text-align: center;
   padding: 1rem;
   font-size: 1.5rem;
+}
+body main.project-main .lab-project .project-content h4,
+body main.project-main .side-project .project-content h4 {
+  font-size: 1.05rem;
+}
+body main.project-main .lab-project .project-content a,
+body main.project-main .side-project .project-content a {
+  text-decoration: none;
+}
+body main.project-main .lab-project .project-content a:hover,
+body main.project-main .side-project .project-content a:hover {
+  cursor: pointer;
+  color: rgb(240, 128, 128);
 }
 body main.resume-main {
   font-family: "ch-font";
@@ -561,6 +599,11 @@ body main.index-main .information .right-info .quick-links a:hover {
   body header .side-nav {
     overflow-y: scroll;
   }
+  body main.project-main .back-top-img2 img {
+    width: 50px;
+    height: 50px;
+    padding: 0.7rem;
+  }
   body main.resume-main {
     flex-direction: column;
     justify-content: center;
@@ -581,7 +624,7 @@ body main.index-main .information .right-info .quick-links a:hover {
     align-items: center;
   }
   body main.resume-main .right-region .back-top-img {
-    top: 75%;
+    top: 65%;
     right: 0;
   }
   body main.resume-main .right-region .back-top-img img {
