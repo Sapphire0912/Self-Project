@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/QuizSystem.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QuizSystem.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Question/EsprQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/EsprQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QuizUI_v1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_v1_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_handlePDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handlePDF.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +34,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -44,7 +51,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.EsprQ.executor": "Run",
     "Python.QuizUI_v1_2 (1).executor": "Run",
+    "Python._handlePDF (1).executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "last_opened_file_path": "E:/MyProgramming/Programming/Python/Practice",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
@@ -214,9 +223,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.QuizUI_v1_2 (1)" />
-        <item itemvalue="Python.Class_inheritance" />
-        <item itemvalue="Python.EsprQ" />
         <item itemvalue="Python._handlePDF (1)" />
+        <item itemvalue="Python.EsprQ" />
+        <item itemvalue="Python.Class_inheritance" />
         <item itemvalue="Python.QuizUI_v1_2" />
       </list>
     </recent_temporary>
