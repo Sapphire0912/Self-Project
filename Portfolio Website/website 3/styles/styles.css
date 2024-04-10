@@ -190,12 +190,13 @@ body header .side-nav ul li .active {
 body main.contact-main {
   font-family: "ch-font";
   display: flex;
+  flex-wrap: wrap;
   margin-top: 10%;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
 }
 body main.contact-main .left-region {
-  border: 2px solid blue;
+  padding: 2rem 0rem;
 }
 body main.contact-main .left-region h2 {
   font-size: 2rem;
@@ -215,12 +216,44 @@ body main.contact-main .left-region a {
   text-decoration: none;
 }
 body main.contact-main .right-region {
-  border: 2px solid purple;
   display: flex;
   flex-wrap: wrap;
+  padding: 0rem 2rem;
+  text-align: center;
 }
 body main.contact-main .right-region label {
+  text-align: left;
+  font-size: 1.35rem;
+  display: block;
+  padding: 1rem 0rem 0.5rem 0rem;
+}
+body main.contact-main .right-region input,
+body main.contact-main .right-region textarea {
+  border: 2px solid black;
+  font-size: 1.15rem;
+  width: 300px;
+  height: 50px;
+}
+body main.contact-main .right-region textarea {
+  height: 150px;
+}
+body main.contact-main .right-region button {
+  margin-top: 1.25rem;
+  padding: 0.8rem 1.5rem;
   font-size: 1.25rem;
+  font-weight: bold;
+  border: 2px solid rgb(75, 75, 212);
+  border-radius: 50%;
+  background-color: rgb(122, 122, 253);
+  color: white;
+  transition: all 0.2s ease-in;
+}
+body main.contact-main .right-region button:hover {
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  transform: scale(1.1);
 }
 body main.project-main {
   font-family: "ch-font";
@@ -584,6 +617,7 @@ body main.index-main .information .right-info .quick-links a {
   font-size: 1.15rem;
   border-radius: 48%;
   border: 2px solid gray;
+  transition: all 0.2s ease-in;
 }
 body main.index-main .information .right-info .quick-links a:hover {
   background-color: white;
@@ -608,6 +642,13 @@ body main.index-main .information .right-info .quick-links a:hover {
   }
   body header .side-nav {
     overflow-y: scroll;
+  }
+  body main.contact-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  body main.contact-main .left-region {
+    text-align: center;
   }
   body main.project-main .back-top-img2 img {
     width: 50px;
