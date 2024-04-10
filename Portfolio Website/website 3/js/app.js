@@ -73,7 +73,7 @@ if (contentSection != null) {
 
   sectionNav.forEach((eachNav) => {
     eachNav.addEventListener("click", (event) => {
-      if (event.target.tagName == "A") {
+      if (event.target.tagName == "A" || event.target.tagName == "BUTTON") {
         let parent = event.target.parentNode.classList[1];
         if (currentClicked != parent) {
           removeBeforeStatus();

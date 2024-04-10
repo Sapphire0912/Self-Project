@@ -422,6 +422,9 @@ body main.resume-main .left-region .button-nav {
   border: 3px solid rgb(133, 132, 132);
   border-radius: 10px;
 }
+body main.resume-main .left-region .button-nav:hover {
+  cursor: pointer;
+}
 body main.resume-main .left-region .button-nav::after {
   position: absolute;
   top: 50%;

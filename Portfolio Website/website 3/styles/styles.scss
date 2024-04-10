@@ -456,6 +456,10 @@ body {
         border: 3px solid rgb(133, 132, 132);
         border-radius: 10px;
 
+        &:hover {
+          cursor: pointer;
+        }
+
         &::after {
           position: absolute;
           top: 50%;
