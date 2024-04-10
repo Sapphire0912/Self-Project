@@ -140,10 +140,9 @@ body header p {
   font-size: 40px;
   padding: 0.25rem 1.5rem;
   color: rgb(77, 76, 76);
-  transition: all 0.3s;
 }
 body header p:hover {
-  transform: scale(1.2);
+  animation: rotateText 0.8s linear 1;
   cursor: pointer;
 }
 body header .side-nav {
@@ -640,9 +639,6 @@ body main.index-main .information .right-info .quick-links a:hover {
   body header p {
     display: block;
   }
-  body header .side-nav {
-    overflow-y: scroll;
-  }
   body main.contact-main {
     flex-direction: column;
     align-items: center;
@@ -702,9 +698,6 @@ body main.index-main .information .right-info .quick-links a:hover {
   body header .web-title .title-text {
     flex-direction: column;
     align-items: flex-start;
-  }
-  body header .side-nav {
-    overflow-y: scroll;
   }
   body main.index-main .information .left-info .self-img img {
     width: 300px;
@@ -766,6 +759,14 @@ body main.index-main .information .right-info .quick-links a:hover {
   }
   to {
     height: 0%;
+  }
+}
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
   }
 }
 @keyframes fadeIn {

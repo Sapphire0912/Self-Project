@@ -150,9 +150,8 @@ body {
       font-size: 40px;
       padding: 0.25rem 1.5rem;
       color: rgb(77, 76, 76);
-      transition: all 0.3s;
       &:hover {
-        transform: scale(1.2);
+        animation: rotateText 0.8s linear 1;
         cursor: pointer;
       }
     }
@@ -709,9 +708,9 @@ body {
     p {
       display: block;
     }
-    .side-nav {
-      overflow-y: scroll;
-    }
+    // .side-nav {
+    //   overflow-y: scroll;
+    // }
   }
 
   body main.contact-main {
@@ -787,9 +786,9 @@ body {
         align-items: flex-start;
       }
     }
-    .side-nav {
-      overflow-y: scroll;
-    }
+    // .side-nav {
+    //   overflow-y: scroll;
+    // }
   }
   body main.index-main {
     .information {
@@ -873,6 +872,15 @@ body {
   }
   to {
     height: 0%;
+  }
+}
+
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
   }
 }
 

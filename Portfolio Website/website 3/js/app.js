@@ -4,6 +4,12 @@ let side_nav = document.querySelector(".side-nav");
 let side_nav_ul = document.querySelector(".side-nav ul");
 let close_btn = document.querySelector(".close-btn");
 
+if (window.innerHeight <= 480) {
+  side_nav.style.overflow = "scroll";
+} else {
+  side_nav.style.overflow = "hidden";
+}
+
 menu.addEventListener("click", function () {
   side_nav.style.display = "block";
   side_nav.style.animation = "animate-open 0.5s forwards";
