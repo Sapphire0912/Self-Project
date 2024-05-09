@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ab1a612-300b-4266-9173-6e42e743517f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Question/EsprQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Question/EsprQ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizUI_v1_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizUI_v1_2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_handlePDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/_handlePDF.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,16 +46,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.EsprQ.executor": "Run",
-    "Python.QuizUI_v1_2 (1).executor": "Run",
-    "Python._handlePDF (1).executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "last_opened_file_path": "E:/MyProgramming/Programming/Python/Practice",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.EsprQ.executor&quot;: &quot;Run&quot;,
+    &quot;Python.QuizUI_v1_2 (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python._handlePDF (1).executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/MyProgramming/Programming/Python/Practice&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\MyProgramming\Self-Project\QuizSystem\Question\課程教學與評量" />
