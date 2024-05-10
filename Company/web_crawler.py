@@ -1,18 +1,17 @@
-import json
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 from datetime import datetime
+import json
 import time
 import os
 
 url = "http://www.jnc-tec.com:11223/?key=SkVBATYwMzc5OTc4amVh&openExternalBrowser=1"
 
 firefox_options = Options()
-firefox_options.headless = True
+firefox_options.add_argument('--headless')
 
 driver = webdriver.Firefox(options=firefox_options)
 driver.get(url)
