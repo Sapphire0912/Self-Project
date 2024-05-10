@@ -45,14 +45,17 @@ for info in divTags:
     label = eachData[0].text
     value = eachData[1].text
     unit = eachData[2].text
-    dataDict[label] = value + unit
+    dataDict[label] = {'value': value, 'unit': unit}
+
+# EC > 750 要傳送到 LINE 群組警示
+isSendAlarm = True if float(dataDict["EC"]["value"]) >= 750.0 else False
+# send to Group or not
+print(isSendAlarm)
 
 # 新增當前時間資訊 (先按照電腦時間為基準)
 current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 jsonData = dict()
 jsonData[current_datetime] = dataDict
-
-# EC > 750 要傳送到 LINE 群組警示
 
 # 儲存成 JSON
 path = "E:\\MyProgramming\\Self-Project\\Company\\datas\\Data.json"
@@ -70,4 +73,3 @@ else:
         json.dump(jsonData, file, indent=4)
 
 driver.quit()
-
